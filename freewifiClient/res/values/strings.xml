@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">freewifi</string>
+
+    <string-array name="aty_list">
+        <item>Wifi</item>
+        <item>Login</item>
+    </string-array>
 </resources>

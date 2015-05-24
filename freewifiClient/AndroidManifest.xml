@@ -3,15 +3,18 @@
           package="cn.edu.sjtu.dclab.freewifi"
           android:versionCode="1"
           android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="19"/>
+    <uses-sdk android:minSdkVersion="17"/>
     <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
         <activity android:name="MainActivity"
                   android:label="@string/app_name">
+        </activity>
+        <activity android:name=".MainListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".login.MyWebView" />
         <activity android:name=".wxapi.WXEntryActivity" android:exported="true"/>
         <activity android:name=".test.WXLogin"/>
         <activity android:name=".test.WifiActivity"/>
