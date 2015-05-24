@@ -1,4 +1,4 @@
-package cn.edu.sjtu.dclab.freewifi.login;
+package cn.edu.sjtu.dclab.freewifi.web;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -25,7 +25,7 @@ import cn.edu.sjtu.dclab.freewifi.R;
 public class MyWebView extends Activity{
 //	private static final String TAG = "MyWebView";
 	
-	private static final String URL = "file:///android_asset/index.html";
+	private static final String URL = "file:///android_asset/register-info.html";
 	private WebView webView = null;
 	private ProgressDialog pd = null;
 	

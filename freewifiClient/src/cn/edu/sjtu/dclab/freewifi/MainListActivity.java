@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import cn.edu.sjtu.dclab.freewifi.login.MyWebView;
+import cn.edu.sjtu.dclab.freewifi.web.MyWebView;
 import cn.edu.sjtu.dclab.freewifi.test.WifiActivity;
 
 /**MainListActivity extends ListActivity

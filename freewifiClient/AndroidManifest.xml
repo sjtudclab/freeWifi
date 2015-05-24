@@ -14,7 +14,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".login.MyWebView" />
+        <activity android:name=".web.MyWebView" />
         <activity android:name=".wxapi.WXEntryActivity" android:exported="true"/>
         <activity android:name=".test.WXLogin"/>
         <activity android:name=".test.WifiActivity"/>
