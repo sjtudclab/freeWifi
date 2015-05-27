@@ -32,18 +32,18 @@ public class MyWebView extends Activity{
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 	    public void handleMessage(Message msg) {
-	        if (!Thread.currentThread().isInterrupted()){  
-	            switch (msg.what) {  
-	            case 0:  
-	                pd.show();//显示进度对话框  
-	                break;  
-	            case 1:
-	            	//隐藏进度对话框，不可使用dismiss()与cancel()，否则再次调用show()时显示的对话框小圆圈不会动 
-	                pd.hide();
-	                break;  
-	            }  
-	        }  
-	        super.handleMessage(msg);  
+//	        if (!Thread.currentThread().isInterrupted()){
+//	            switch (msg.what) {
+//	            case 0:
+//	                pd.show();//显示进度对话框
+//	                break;
+//	            case 1:
+//	            	//隐藏进度对话框，不可使用dismiss()与cancel()，否则再次调用show()时显示的对话框小圆圈不会动
+//	                pd.hide();
+//	                break;
+//	            }
+//	        }
+//	        super.handleMessage(msg);
 	    }  
 	};
 	
