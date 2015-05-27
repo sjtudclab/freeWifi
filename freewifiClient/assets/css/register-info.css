@@ -9,7 +9,11 @@ body {
   padding: 15px;
   margin: 0 auto;
 }
-.form-reginfo .form-reginfo-heading,
+.form-reginfo .form-reginfo-heading{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .form-reginfo .checkbox {
   margin-bottom: 10px;
 }

@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import cn.edu.sjtu.dclab.freewifi.geo.BDLocating;
 import cn.edu.sjtu.dclab.freewifi.web.MyWebView;
 import cn.edu.sjtu.dclab.freewifi.test.WifiActivity;
 
@@ -36,6 +37,9 @@ public class MainListActivity extends ListActivity{
 					break;
 				case 1:
 					startActivity(new Intent(getApplicationContext(), MyWebView.class));
+					break;
+				case 2:
+					startActivity(new Intent(getApplicationContext(), BDLocating.class));
 					break;
 				default:
 					break;
