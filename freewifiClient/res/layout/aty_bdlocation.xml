@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent" >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+  		android:layout_height="wrap_content"
+  		android:orientation="vertical">
+        <TextView android:id="@+id/tv_geoinfo"
+		      android:layout_width="wrap_content"
+		      android:layout_height="wrap_content"
+		      android:text="@string/tv_helloworld" />
+        <Button android:id="@+id/btn_locate"
+		      android:layout_width="match_parent"
+		      android:layout_height="wrap_content"
+		      android:text="@string/btn_locate"
+			  android:onClick="onClickProcess" />
+		<TextView android:id="@+id/tv_distance"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/tv_helloworld" />
+		<Button android:id="@+id/btn_changeloc"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/btn_changeloc"
+			android:onClick="onClickProcess" />
+		<Button android:id="@+id/btn3"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/btn_clickme"
+			android:onClick="onClickProcess"
+			android:visibility="gone" />
+    </LinearLayout>
+    
+</ScrollView>

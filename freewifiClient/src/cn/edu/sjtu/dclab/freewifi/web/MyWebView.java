@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import cn.edu.sjtu.dclab.freewifi.R;
 
-
 /**MyWebView extends Activity
  * Web App效果测试；
  * @author Eugene
@@ -27,7 +26,7 @@ public class MyWebView extends Activity{
 	
 	private static final String URL = "file:///android_asset/register-info.html";
 	private WebView webView = null;
-	private ProgressDialog pd = null;
+//	private ProgressDialog pd = null;
 	
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -54,8 +53,8 @@ public class MyWebView extends Activity{
 		setContentView(R.layout.aty_mywebview);
 
 		//ProgressDialog最好于网页加载前初始化，建议show()使用handler机制调用（避免加载过程中空指针问题）
-		pd = new ProgressDialog(getApplicationContext());
-		pd.setMessage("Loading...");
+//		pd = new ProgressDialog(getApplicationContext());
+//		pd.setMessage("Loading...");
 		
 		webView = (WebView) findViewById(R.id.webview);
 		webView.setScrollBarStyle(0);//滚动条风格，为0指滚动条不占用空间，直接覆盖在网页上
