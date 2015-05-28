@@ -26,3 +26,5 @@ proguard/
 *.log
 
 out/
+
+server/target

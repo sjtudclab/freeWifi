@@ -1,0 +1,10 @@
+---
+applications:
+- name: freewifiserver
+  memory: 512
+  instances: 1
+  host: freewifiserver
+  domain: mybluemix.net
+  path: target/freewifiserver.war
+  services:{
+    }
