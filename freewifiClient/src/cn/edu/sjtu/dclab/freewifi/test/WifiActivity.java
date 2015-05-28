@@ -2,6 +2,7 @@ package cn.edu.sjtu.dclab.freewifi.test;
 
 import android.app.Activity;
 import android.net.wifi.ScanResult;
+import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ public class WifiActivity extends Activity {
     private Button start;
     private Button stop;
     private Button status;
+    private Button connect;
     private TextView textView;
     private WifiAdmin wifiAdmin;
 
@@ -40,12 +42,14 @@ public class WifiActivity extends Activity {
         start = (Button) findViewById(R.id.start);
         stop = (Button) findViewById(R.id.stop);
         status = (Button) findViewById(R.id.status);
+        connect = (Button) findViewById(R.id.connect);
         textView = (TextView) findViewById(R.id.textView);
         MyListener listener = new MyListener();
         scan.setOnClickListener(listener);
         start.setOnClickListener(listener);
         stop.setOnClickListener(listener);
         status.setOnClickListener(listener);
+        connect.setOnClickListener(listener);
     }
 
     private class MyListener implements View.OnClickListener {
@@ -66,6 +70,20 @@ public class WifiActivity extends Activity {
                 case R.id.status:
                     Toast.makeText(WifiActivity.this, "当前wifi状态" + wifiAdmin.getWifiState(), Toast.LENGTH_SHORT).show();
                     break;
+                case R.id.connect:
+                    List<WifiConfiguration> wificfgList = wifiAdmin.getWifiCfgList();
+                    wifiAdmin.cleanAll();
+                    wificfgList = wifiAdmin.getWifiCfgList();
+                    boolean iscon = false;
+                    for (ScanResult res:list){
+                        if (res.SSID.equals("5306")){
+                            WifiConfiguration cfg = wifiAdmin.createWifiCfg(res,"1234567890");
+                            iscon = wifiAdmin.addConnection(cfg);
+                            wificfgList = wifiAdmin.getWifiCfgList();
+                            break;
+                        }
+                    }
+                    break;
                 default:
                     break;
             }
@@ -77,7 +95,7 @@ public class WifiActivity extends Activity {
             sb=new StringBuffer();
         }
         wifiAdmin.wifiScan();
-        list=wifiAdmin.getWifiList();
+        list=wifiAdmin.getWifiScanResList();
         if(list!=null){
             for(int i=0;i<list.size();i++){
                 result =list.get(i);

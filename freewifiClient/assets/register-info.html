@@ -13,19 +13,14 @@
     <link href="bs/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/register-info.css" rel="stylesheet">
-    <script src="js/register-info.js"></script>
   </head>
 
   <body>
-  	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bs/js/bootstrap.min.js"></script>
-    
     <div class="container">
 
       <form class="form-reginfo">
         <h2 class="form-reginfo-heading">用户信息填写</h2>
+        <br />
         <!--昵称-->
         <div class="input-group">
         	<span class="input-group-addon">昵称</span>
@@ -61,10 +56,10 @@
         <div class="input-group">
         	<span class="input-group-addon"> 教育水平</span>
         	<div class="dropdown">
-			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuEducation" data-toggle="dropdown" aria-expanded="true">
+			  <button id='btn_education' class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuEducation" data-toggle="dropdown" aria-expanded="true">
 			    	研究生及以上&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span>
 			  </button>
-			  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuEducation">
+			  <ul id="ul_education" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuEducation">
 			    <li role="presentation"><a role="menuitem" tabindex="0" href="#">高中以下</a></li>
 			    <li role="presentation"><a role="menuitem" tabindex="1" href="#">高中</a></li>
 			    <li role="presentation"><a role="menuitem" tabindex="2" href="#">大专</a></li>
@@ -78,10 +73,10 @@
 		<div class="input-group">
         	<span class="input-group-addon"> 收入水平</span>
         	<div class="dropdown">
-			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuIncome" data-toggle="dropdown" aria-expanded="true">
+			  <button id="btn_income" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuIncome" data-toggle="dropdown" aria-expanded="true">
 			    	7000-10000元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span>
 			  </button>
-			  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuIncome">
+			  <ul id="ul_income" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuIncome">
 			    <li role="presentation"><a role="menuitem" tabindex="0" href="#">3000元以下</a></li>
 			    <li role="presentation"><a role="menuitem" tabindex="1" href="#">3000-7000元</a></li>
 			    <li role="presentation"><a role="menuitem" tabindex="2" href="#">7000-10000元</a></li>
@@ -98,4 +93,9 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
   </body>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery-1.11.3.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="bs/js/bootstrap.min.js"></script>
+<script src="js/register-info.js"></script>
 </html>

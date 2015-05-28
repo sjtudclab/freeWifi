@@ -24,9 +24,18 @@
             android:layout_height="wrap_content"
             android:text="Status"
             android:id="@+id/status"/>
-    <TextView
+    <Button
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="New Text"
-            android:id="@+id/textView"/>
+            android:layout_height="wrap_content"
+            android:text="Connect"
+            android:id="@+id/connect"/>
+
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="New Text"
+                android:id="@+id/textView"/>
+    </ScrollView>
+
 </LinearLayout>
