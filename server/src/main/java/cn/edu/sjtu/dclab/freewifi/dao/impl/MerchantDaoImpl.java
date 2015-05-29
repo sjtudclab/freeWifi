@@ -14,6 +14,7 @@ import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
 public class MerchantDaoImpl implements IMerchantDao{
 	@Resource(name = "baseDao")
 	private IBaseDao<Merchant> baseDao;
+	
 	@Override
 	public Merchant getMerchantByLoginName(String loginname) {
 		List<Merchant> merchants = baseDao.queryByProperty(Merchant.class, "loginname", loginname);
@@ -21,6 +22,16 @@ public class MerchantDaoImpl implements IMerchantDao{
 			return null;
 		}
 		return merchants.get(0);
+	}
+	@Override
+	public boolean addMerchant(Merchant merchant) {
+		baseDao.save(merchant);
+		return true;
+	}
+	@Override
+	public boolean updateMerchant(Merchant merchant) {
+		baseDao.update(merchant);
+		return true;
 	}
 
 }

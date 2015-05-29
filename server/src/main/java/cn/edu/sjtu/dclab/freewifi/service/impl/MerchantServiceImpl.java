@@ -24,5 +24,17 @@ public class MerchantServiceImpl implements IMerchantService {
 			return null;
 		}
 	}
+	@Override
+	public boolean addMerchant(Merchant merchant) {
+		return dao.addMerchant(merchant);
+	}
+	@Override
+	public boolean checkLoginName(String loginName) {
+		return dao.getMerchantByLoginName(loginName) == null ? true : false;
+	}
+	@Override
+	public boolean updateMerchant(Merchant merchant) {
+		return dao.updateMerchant(merchant);
+	}
 
 }

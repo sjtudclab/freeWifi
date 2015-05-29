@@ -74,6 +74,11 @@ public class BaseDaoImpl<T extends Serializable> implements IBaseDao<T> {
     public T queryById(Class<T> clazz, int id) {
         return (T) getSession().get(clazz, id);
     }
+    
+    @SuppressWarnings("unchecked")
+    public T queryById(Class<T> clazz, long id) {
+        return (T) getSession().get(clazz, id);
+    }
 
     @SuppressWarnings("unchecked")
     public List<T> queryByProperty(Class<T> clazz, String property, String value) {

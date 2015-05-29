@@ -12,6 +12,7 @@ import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
 import cn.edu.sjtu.dclab.freewifi.service.IMerchantService;
 
 @Controller
+@RequestMapping(value = "/merchant")
 public class LoginController {
 	@Resource(name = "merchantService")
 	IMerchantService merchantService;
