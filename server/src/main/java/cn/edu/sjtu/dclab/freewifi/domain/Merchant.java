@@ -31,12 +31,6 @@ public class Merchant implements Serializable {
 	private String name;
 	@Column(nullable = true)
 	private String address;
-	//经度
-	@Column(nullable = true)
-	private double longitude;
-	//纬度
-	@Column(nullable = true)
-	private double latitude;
 	@Column(nullable = true)
 	private String tel;
 
@@ -80,22 +74,6 @@ public class Merchant implements Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-
-	public double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
 	}
 
 	public String getTel() {
