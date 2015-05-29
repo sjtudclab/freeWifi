@@ -22,6 +22,8 @@ public interface IBaseDao<T extends Serializable> {
     // query according to id
     public T queryById(Class<T> clazz, int id);
     
+    public T queryById(Class<T> clazz, long id);
+    
     // query according to property(seems only to support String)
     public List<T> queryByProperty(Class<T> clazz, String property,String value);
     
