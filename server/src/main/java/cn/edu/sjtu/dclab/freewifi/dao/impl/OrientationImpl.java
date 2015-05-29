@@ -9,6 +9,7 @@ import cn.edu.sjtu.dclab.freewifi.dao.IOrientationDao;
 import cn.edu.sjtu.dclab.freewifi.domain.Orientation;
 @Repository("orientationDao")
 public class OrientationImpl implements IOrientationDao {
+
 	@Resource(name = "baseDao")
 	private IBaseDao<Orientation> baseDao;
 	@Override

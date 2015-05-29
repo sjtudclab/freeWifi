@@ -10,6 +10,7 @@ import cn.edu.sjtu.dclab.freewifi.dao.IBaseDao;
 import cn.edu.sjtu.dclab.freewifi.dao.IWIFIDao;
 import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
 import cn.edu.sjtu.dclab.freewifi.domain.WIFI;
+
 @Repository("wifiDao")
 public class WIFIDaoImpl implements IWIFIDao {
 	@Resource(name = "baseDao")
@@ -28,7 +29,6 @@ public class WIFIDaoImpl implements IWIFIDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public boolean addWifi(WIFI wifi) {
 		baseDao.save(wifi);

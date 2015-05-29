@@ -21,4 +21,5 @@ public class UserDaoImpl implements IUserDao {
 		return baseDao.queryById(User.class, id);
 	}
 
+
 }
