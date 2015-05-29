@@ -1,3 +1,20 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">freewifi</string>
+    <string name="tv_helloworld">Hello world</string>
+    <string name="btn_clickme">Click me</string>
+    <string name="btn_locate">Locate</string>
+    <string name="btn_changeloc">ChangLoc</string>
+
+    <string-array name="aty_list">
+        <item>Wifi</item>
+        <item>Login</item>
+        <item>Locating</item>
+        <item>JsonTest</item>
+    </string-array>
+</resources>
+=======
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">freewifi</string>
@@ -12,3 +29,4 @@
         <item>Locating</item>
     </string-array>
 </resources>
+>>>>>>> ae5c3b9537856d45590da70c239a35fb582fe88b
