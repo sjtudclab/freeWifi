@@ -43,7 +43,7 @@ $('#start').click(function() {
         console.log('done');
     }).fail(function(){
         console.log('error');
-    })
+    });
     
     
 });
