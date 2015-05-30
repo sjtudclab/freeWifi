@@ -1,4 +1,4 @@
-package cn.edu.sjtu.dclab.freewifi.constants;
+package cn.edu.sjtu.dclab.freewifi.enums;
 
 public enum AdType {
 	DIANPING("大众点评",0),SELF("自制",1);

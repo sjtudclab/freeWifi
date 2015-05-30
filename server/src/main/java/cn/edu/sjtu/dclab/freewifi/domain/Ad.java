@@ -18,8 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import cn.edu.sjtu.dclab.freewifi.constants.AdState;
-import cn.edu.sjtu.dclab.freewifi.constants.AdType;
+import cn.edu.sjtu.dclab.freewifi.enums.AdState;
+import cn.edu.sjtu.dclab.freewifi.enums.AdType;
 
 @Entity
 @Table(name = "ad")
@@ -30,12 +30,12 @@ public class Ad implements Serializable {
 	private static final long serialVersionUID = 440788003715274206L;
 	
 	@ManyToOne(cascade = { CascadeType.REFRESH })
-	@JoinColumn(name = "merchantid")
+	@JoinColumn(name = "merchant_id")
 	private Merchant merchant;
 	
 	
 	@Temporal(TemporalType.DATE)
-	@Column(nullable = true)
+	@Column(nullable = true,name="add_date")
 	private Date addDate;
 	
 	@Id
@@ -43,7 +43,7 @@ public class Ad implements Serializable {
 	private long id;
 	
 	@Enumerated(EnumType.ORDINAL)
-	@Column(nullable = true)
+	@Column(nullable = true,name="ad_type")
 	private AdType adType;
 	
 	@Lob
@@ -51,20 +51,20 @@ public class Ad implements Serializable {
 	private String content;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(nullable = true)
+	@Column(nullable = true,name="start_date")
 	private Date startDate;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(nullable = true)
+	@Column(nullable = true,name="end_date")
 	private Date endDate;
 	
-	@Column(nullable = true)
+	@Column(nullable = true,name="start_hour")
 	private int startHour;
 	
-	@Column(nullable = true)
-	private int name;
+	@Column(nullable = true,name="name")
+	private String name;
 	
-	@Column(nullable = true)
+	@Column(nullable = true,name="end_hour")
 	private int endHour;
 	
 	@Enumerated(EnumType.ORDINAL)
@@ -135,11 +135,11 @@ public class Ad implements Serializable {
 		this.startHour = startHour;
 	}
 
-	public int getName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setName(int name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

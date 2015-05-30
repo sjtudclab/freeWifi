@@ -1,4 +1,4 @@
-package cn.edu.sjtu.dclab.freewifi.constants;
+package cn.edu.sjtu.dclab.freewifi.enums;
 
 public enum AdState {
 	AUDIT("待审核",0),READY("就绪",1),LAUNCHING("投放",2),DELETE("删除",3);
