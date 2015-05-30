@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">freewifi</string>
+    <string name="app_name">FreeWifi</string>
     <string name="tv_helloworld">Hello world</string>
     <string name="btn_clickme">Click me</string>
     <string name="btn_locate">Locate</string>
@@ -10,5 +10,6 @@
         <item>Wifi</item>
         <item>Login</item>
         <item>Locating</item>
+        <item>PushTest</item>
     </string-array>
 </resources>

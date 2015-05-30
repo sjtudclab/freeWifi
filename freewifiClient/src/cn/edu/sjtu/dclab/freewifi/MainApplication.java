@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.TextView;
 
+import cn.jpush.android.api.JPushInterface;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -23,6 +24,7 @@ public class MainApplication extends Application {
 
     public LocationClient mLocationClient;
     public MyLocationListener mMyLocationListener;
+
     //地理围栏
 //	public GeofenceClient mGeofenceClient;
 
@@ -33,6 +35,10 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //用于JPush的推送功能
+        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);     		// 初始化 JPush
 
         //注意：实现GetInstance()，此行代码易漏写
         mBDApplicationInstance = this;

@@ -1,4 +1,4 @@
-package cn.edu.sjtu.dclab.freewifi.tool;
+package cn.edu.sjtu.dclab.freewifi.wifi;
 
 import android.content.Context;
 import android.net.wifi.ScanResult;
@@ -8,7 +8,6 @@ import android.net.wifi.WifiManager;
 import android.util.Log;
 
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**

@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.sjtu.dclab.freewifi.R;
-import cn.edu.sjtu.dclab.freewifi.tool.WifiAdmin;
+import cn.edu.sjtu.dclab.freewifi.wifi.WifiAdmin;
 
 import java.util.List;
 
