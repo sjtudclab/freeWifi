@@ -1,0 +1,62 @@
+商户登录：
+login
+POST
+参数：
+	username：String
+	password：String
+商户注册
+register
+POST
+参数：
+	loginname：String  //登录名
+	tel：String
+	password：String
+	name：String //真实姓名
+	address：String 
+	longitude：double //经度
+	latitude：double //纬度
+	ssid: //wifi的ssid
+    wifiPassword: //wifi密码
+返回： json
+{
+code：0/-1  -- 0表示成功
+error_msg:
+}
+
+广告：
+添加(添加广告时，可以选择自制或者从大众点评导入)
+---自制类广告：
+/ad/add
+参数：
+content：富媒体存储的内容
+起始日期startDate：string
+终止日期endDate：string
+起始时刻startHour int 不填写时为-1
+终止时刻endHour: int 不填写时为-1
+name：String
+
+广告添加成功后，进入广告管理页面：
+获取所有广告
+/ad/get
+返回： json
+{
+code：0/-1  -- 0表示成功
+size:
+data: adlist， 
+}
+AD的具体字段参考
+https://github.com/sjtudclab/freeWifi/blob/master/server/src/main/java/cn/edu/sjtu/dclab/freewifi/domain/Ad.java
+广告管理包括：删除、下线、投放、手机端预览、pc端预览、编辑
+删除-GET：/ad/delete/{id}——>返回： json {code：0/-1}
+下线-GET：/ad/unpublish/{id}——>返回： json {code：0/-1}
+投放-GET：/ad/publish/{id}——>返回： json {code：0/-1}
+手机端预览-GET：/ad/mobile/{id}
+Pc段预览-GET：/ad/pc/{id}
+编辑-GET：/ad/edit/{id}跳转至编辑页面
+返回： json
+{
+code：0/-1  -- 0表示成功
+data: ad 
+}
+编辑-POST：/ad/edit/{id}参数，同添加广告
+
