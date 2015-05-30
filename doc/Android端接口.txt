@@ -1,0 +1,36 @@
+注册新用户：
+user/register
+POST
+参数：
+	device_id：String
+	tel：String
+	education：int
+	gender：int gender,
+	birthdate：String birthdate,
+	income：int
+其中的int为枚举值，具体参考
+https://github.com/sjtudclab/freeWifi/tree/master/server/src/main/java/cn/edu/sjtu/dclab/freewifi/constants
+返回：json
+{ code：0/-1   0表示成功 }
+
+wifi连接成功后，通知服务器：
+user/notification
+POST
+参数：
+device_id：String
+wifi_id：String
+返回：json
+{ code：0/-1   0表示成功 }
+
+获取wifi列表：
+wifi/get
+GET
+longitude
+latitude
+
+返回：json
+{
+code：0/-1
+size:
+data: wifilist
+}
