@@ -14,9 +14,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import cn.edu.sjtu.dclab.freewifi.constants.Education;
-import cn.edu.sjtu.dclab.freewifi.constants.Gender;
-import cn.edu.sjtu.dclab.freewifi.constants.IncomeType;
+import cn.edu.sjtu.dclab.freewifi.enums.Education;
+import cn.edu.sjtu.dclab.freewifi.enums.Gender;
+import cn.edu.sjtu.dclab.freewifi.enums.IncomeType;
 @Entity
 @Table(name = "user")
 public class User implements Serializable{
@@ -45,7 +45,7 @@ public class User implements Serializable{
 	
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = true)
-	private Date birtdate;
+	private Date birthdate;
 	
 	//高中以下、高中、大专、本科、研究生及以上
 	@Enumerated(EnumType.ORDINAL)
@@ -81,11 +81,12 @@ public class User implements Serializable{
 	public void setSex(Gender sex) {
 		this.sex = sex;
 	}
-	public Date getBirtdate() {
-		return birtdate;
+
+	public Date getBirthdate() {
+		return birthdate;
 	}
-	public void setBirtdate(Date birtdate) {
-		this.birtdate = birtdate;
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
 	}
 	public Education getEducation() {
 		return education;
@@ -97,6 +98,16 @@ public class User implements Serializable{
 		return income;
 	}
 	public void setIncome(IncomeType income) {
+		this.income = income;
+	}
+	public User(String deviceId, Gender sex, String tel, Date birthdate,
+			Education education, IncomeType income) {
+		super();
+		this.deviceId = deviceId;
+		this.sex = sex;
+		this.tel = tel;
+		this.birthdate = birthdate;
+		this.education = education;
 		this.income = income;
 	}
 

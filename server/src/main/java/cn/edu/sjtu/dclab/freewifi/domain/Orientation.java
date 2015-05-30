@@ -5,6 +5,9 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -16,6 +19,9 @@ public class Orientation implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -8921290423032449348L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 	@Column(nullable = true)
 	private String sex;
 	// 18岁以下，20-35，35-50，50以上
@@ -59,6 +65,12 @@ public class Orientation implements Serializable {
 	}
 	public void setAd(Ad ad) {
 		this.ad = ad;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 

@@ -31,7 +31,7 @@ public class WIFI implements Serializable {
 	private String password;
 
 	@ManyToOne(cascade = { CascadeType.REFRESH })
-	@JoinColumn(name = "merchantid")
+	@JoinColumn(name = "merchant_id")
 	private Merchant merchant;
 
 	// 经度
