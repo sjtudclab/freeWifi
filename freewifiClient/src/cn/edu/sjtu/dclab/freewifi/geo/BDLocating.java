@@ -92,7 +92,7 @@ public class BDLocating extends Activity {
 
             isOutBound = distance > (double)radius;
             if (isOutBound) {//超出限定区域
-                Toast.makeText(getApplicationContext(), "超出范围：" + isOutBound + " !", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "超出范围：" + isOutBound + " !", Toast.LENGTH_SHORT).show();
                 HTTPTool.SendRequestForWifiList(getApplicationContext(),
                         String.valueOf(mCurLocation.getLongitude()), String.valueOf(mCurLocation.getLatitude()));
             }

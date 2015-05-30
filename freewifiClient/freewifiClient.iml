@@ -17,5 +17,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="libammsdk" level="project" />
     <orderEntry type="library" name="armeabi" level="project" />
+    <orderEntry type="library" name="jpush-sdk-release1.7.4" level="project" />
   </component>
 </module>

@@ -22,8 +22,8 @@ public class HTTPTool {
 
     /**发送注册信息(POST)
      */
-    public static void SendRegisterInfo(final Context context, String imei, String gender, String birthday, String tel,
-                                  String education, String income){
+    public static void SendRegisterInfo(final Context context, String imei, String gender,
+                                        String birthday, String tel, String education, String income){
         RequestParams params = new RequestParams();
         params.put(SharedDataTool.IMEI, imei);
         params.put(SharedDataTool.GENDER, gender);
@@ -32,6 +32,7 @@ public class HTTPTool {
         params.put(SharedDataTool.EDUCATION, education);
         params.put(SharedDataTool.INCOME, income);
 
+        Toast.makeText(context, "Sending Register Info...", Toast.LENGTH_LONG).show();
         SyncHttpClient client = new SyncHttpClient();//创建客户端对象
         client.post(URL_REG, params, new JsonHttpResponseHandler() {
             @Override//返回JSONArray对象 | JSONObject对象
@@ -55,6 +56,7 @@ public class HTTPTool {
         params.put(SharedDataTool.IMEI, imei);
         params.put(SharedDataTool.WIFIID, wifiID);
 
+        Toast.makeText(context, "Sending Connected Info...", Toast.LENGTH_LONG).show();
         SyncHttpClient client = new SyncHttpClient();//创建客户端对象
         client.post(URL_NOTIFY, params, new JsonHttpResponseHandler() {
             @Override//返回JSONArray对象 | JSONObject对象
@@ -78,6 +80,7 @@ public class HTTPTool {
         params.put(SharedDataTool.LONGITUDE, longitude);
         params.put(SharedDataTool.LATITUDE, latitude);
 
+        Toast.makeText(context, "Sending Request For WifiList...", Toast.LENGTH_LONG).show();
         SyncHttpClient client = new SyncHttpClient();//创建客户端对象
         client.get(URL_GETWIFILIST, params, new JsonHttpResponseHandler() {
             @Override//返回JSONArray对象 | JSONObject对象
