@@ -1,4 +1,4 @@
-package cn.edu.sjtu.dclab.freewifi.tool;
+package cn.edu.sjtu.dclab.freewifi.wifi;
 
 import android.content.Context;
 import android.net.wifi.ScanResult;
