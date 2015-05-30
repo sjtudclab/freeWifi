@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
+import cn.edu.sjtu.dclab.freewifi.domain.WIFI;
 import cn.edu.sjtu.dclab.freewifi.service.IMerchantService;
+import cn.edu.sjtu.dclab.freewifi.service.IWIFIService;
 import cn.edu.sjtu.dclab.freewifi.util.Constants;
 
 @Controller
 public class LoginController {
 	@Resource(name = "merchantService")
 	IMerchantService merchantService;
+	
+	@Resource(name = "wifiService")
+	IWIFIService wifiService;
 
 	@RequestMapping(value = {"/login","/logout"}, method = RequestMethod.GET)
 	public ModelAndView loginView() {
@@ -47,12 +52,31 @@ public class LoginController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String registerView(){
-		return null;
+		return "register";
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String registerSubmit(Merchant merchant){
-		return null;
+	public ModelAndView registerSubmit(String loginname, //登录名
+			String tel, String password, String name, //真实姓名
+			String address,	double longitude, //经度
+			double latitude, String ssid, String wifiPassword){
+		System.out.println(longitude+"."+latitude);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("login");
+		Merchant merchant = new Merchant(loginname, password, name, address, tel);
+		boolean result = merchantService.addMerchant(merchant);
+		if (result) {
+			WIFI wifi = new WIFI(ssid, wifiPassword, merchant, longitude, latitude);
+			boolean wifiAddResult = wifiService.addWIFI(wifi);
+			if (!wifiAddResult) {
+				merchantService.deleteMerchant(merchant);
+			}else {
+				mav.addObject(Constants.ERROR_MSG, "Add wifi error");
+			}
+		}else {
+			mav.addObject(Constants.ERROR_MSG, "Add merchant error");
+		}
+		return mav;
 	}
 
 	

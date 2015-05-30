@@ -73,4 +73,34 @@ public class WIFI implements Serializable {
 		this.password = password;
 	}
 
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public WIFI(String ssid, String password, Merchant merchant,
+			double longitude, double latitude) {
+		super();
+		this.ssid = ssid;
+		this.password = password;
+		this.merchant = merchant;
+		this.longitude = longitude;
+		this.latitude = latitude;
+	}
+
+	public WIFI() {
+		super();
+	}
+
 }

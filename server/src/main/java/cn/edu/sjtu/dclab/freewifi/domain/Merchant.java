@@ -88,5 +88,14 @@ public class Merchant implements Serializable {
 		super();
 	}
 
+	public Merchant(String loginname, String password, String name,
+			String address, String tel) {
+		super();
+		this.loginname = loginname;
+		this.password = password;
+		this.name = name;
+		this.address = address;
+		this.tel = tel;
+	}
 	
 }

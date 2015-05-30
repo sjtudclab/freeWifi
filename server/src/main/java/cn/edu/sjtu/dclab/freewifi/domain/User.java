@@ -40,6 +40,9 @@ public class User implements Serializable{
 	private Gender sex;
 	//private String username;
 	
+	public User() {
+		super();
+	}
 	@Column(nullable = true)
 	private String tel;
 	

@@ -158,5 +158,25 @@ public class Ad implements Serializable {
 	public void setState(AdState state) {
 		this.state = state;
 	}
+
+	public Ad(Merchant merchant, Date addDate, AdType adType, String content,
+			Date startDate, Date endDate, int startHour, String name,
+			int endHour, AdState state) {
+		super();
+		this.merchant = merchant;
+		this.addDate = addDate;
+		this.adType = adType;
+		this.content = content;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.startHour = startHour;
+		this.name = name;
+		this.endHour = endHour;
+		this.state = state;
+	}
+
+	public Ad() {
+		super();
+	}
 	
 }

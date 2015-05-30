@@ -36,6 +36,19 @@ public class Orientation implements Serializable {
 	@ManyToOne(cascade = { CascadeType.REFRESH })
 	@JoinColumn(name = "ad_id")
 	private Ad ad;
+	
+	public Orientation() {
+		super();
+	}
+	public Orientation(String sex, String birtdate, String education,
+			String income, Ad ad) {
+		super();
+		this.sex = sex;
+		this.birtdate = birtdate;
+		this.education = education;
+		this.income = income;
+		this.ad = ad;
+	}
 	public String getSex() {
 		return sex;
 	}

@@ -33,5 +33,10 @@ public class MerchantDaoImpl implements IMerchantDao{
 		baseDao.update(merchant);
 		return true;
 	}
+	@Override
+	public boolean deleteMerchant(Merchant merchant) {
+		baseDao.delete(merchant);
+		return true;
+	}
 
 }

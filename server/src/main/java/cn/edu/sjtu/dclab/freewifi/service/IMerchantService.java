@@ -10,4 +10,6 @@ public interface IMerchantService {
 	public boolean checkLoginName(String loginName);
 	
 	public boolean updateMerchant(Merchant merchant);
+	
+	public boolean deleteMerchant(Merchant merchant);
 }

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en" class="nojs pending">
 
@@ -11,18 +13,18 @@
             Get Started with Desk.com | Desk.com
         </title>
 
-        <script src="./js/jquery.min.js"
+        <script src="./resources/js/jquery.min.js"
         type="text/javascript">
         </script>
         <!-- Bootstrap core -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
-        <link rel="stylesheet" href="./css/font-awesome.css">
+        <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./resources/css/font-awesome.css">
         <!-- modernizer -->
-        <script type="text/javascript" src="./js/modernizr.custom.32032.js">
+        <script type="text/javascript" src="./resources/js/modernizr.custom.32032.js">
         </script>
         <!-- typekit -->
-        <script type="text/javascript" src="./js/jgm1qhs.js">
+        <script type="text/javascript" src="./resources/js/jgm1qhs.js">
         </script>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media
         queries -->
@@ -191,32 +193,29 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="user_site_attributes_contact_phone" class="placeholder">
-                                        Mac Address
+                                        Tel
                                     </label>
-                                    <input type="text" class="form-control input-lg" id="user_site_attributes_contact_phone"
+                                    <input type="text" class="form-control input-lg" id="tel"
                                     name="user[site_attributes][contact_phone]"
                                     maxlength="30" value=""
-                                    placeholder="Mac Address"
+                                    placeholder="Tel"
                                     data-placement="top" data-title="Enter your phone number." data-error-title="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="company_name" class="placeholder">
-                                        Wifi Verification
+                                    <label for="user_site_attributes_contact_phone" class="placeholder">
+                                      ssid
                                     </label>
-                                    <select class="form-control">
-                                      <option value="one">Wifi
-                                      Verification</option>
-                                      <option value="five">One</option>
-                                      <option value="two">Two</option>
-                                      <option value="three">Three</option>
-                                      <option value="four">Four</option>
-                                    </select>
+                                    <input type="text" class="form-control input-lg" id="ssid"
+                                    name="ssid"
+                                    maxlength="30" value=""
+                                    placeholder="ssid"
+                                    data-placement="top" data-title="Enter your phone number." data-error-title="">
                                 </div>
                                 <div class="form-group">
                                     <label for="user_site_attributes_contact_phone" class="placeholder">
                                         Wifi Password
                                     </label>
-                                    <input type="text" class="form-control input-lg" id="user_site_attributes_contact_phone"
+                                    <input type="password" class="form-control input-lg" id="wifiPassword"
                                     name="user[site_attributes][contact_phone]"
                                     maxlength="30" value=""
                                     placeholder="Wifi Password"
@@ -224,14 +223,27 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="user_site_attributes_contact_phone" class="placeholder">
+                                      Name
+                                    </label>
+                                    <input id="name" type="text" class="form-control input-lg" id="user_site_attributes_contact_phone"
+                                    name="user[site_attributes][contact_phone]"
+                                    maxlength="30" value=""
+                                    placeholder="Name"
+                                    data-placement="top" data-title="Enter your phone number." data-error-title="">
+                                </div>
+                                <div >
+                                    <label for="user_site_attributes_contact_phone" class="placeholder">
                                       Location
                                     </label>
                                     <input id="location" type="text" class="form-control input-lg" id="user_site_attributes_contact_phone"
                                     name="user[site_attributes][contact_phone]"
                                     maxlength="30" value=""
                                     placeholder="Location"
-                                    data-placement="top" data-title="Enter your phone number." data-error-title="">
+                                    data-placement="top"
+                                    data-title="Enter your phone
+                                    number." data-error-title="">
                                 </div>
+<div id="error-url" style="display: none;">Please input more specific location</div>
                                 <div class="submit-group" id='start'>
                                     <a href="#step2" class="btn btn-primary btn-lg next" id="form_register_step1">
                                         Start your cheap Ad.
@@ -267,26 +279,11 @@
         <!-- #regform -->
         <!-- #all -->
         <!-- JS -->
-        <script src="./js/bootstrap.min.js"
+        <script src="./resources/js/bootstrap.min.js"
         type="text/javascript">
         </script>
-        <script type="text/javascript">
-            $('#start').click(function() {
-                var address = $('#location').val();
-                var url = 'http://api.map.baidu.com/geocoder/v2/?address=' + address
-                          + '&output=json&ak=fr2k1GxnZbBxXalKYdcQUNBM';
-                $.ajax({
-                    url: url,
-                    dataType: 'jsonp',
-                    success: function(data) {
-                        address = data.result.location;
-                        console.log(address.lng + "  " + address.lat);
-                    }
-                });
+        <script src="./resources/js/login.js"></script>
 
-
-            });
-        </script>
     </body>
 
 </html>
