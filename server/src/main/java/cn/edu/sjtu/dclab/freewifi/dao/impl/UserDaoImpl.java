@@ -1,5 +1,7 @@
 package cn.edu.sjtu.dclab.freewifi.dao.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Repository;
@@ -19,6 +21,15 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public User getUserById(long id) {
 		return baseDao.queryById(User.class, id);
+	}
+	@Override
+	public User getUserByDeviceId(String deviceId) {
+		List<User> users = baseDao.queryByProperty(User.class, "deviceId", deviceId);
+		if (users != null && users.size() > 0) {
+			return users.get(0);
+		}else {
+			return null;
+		}
 	}
 
 

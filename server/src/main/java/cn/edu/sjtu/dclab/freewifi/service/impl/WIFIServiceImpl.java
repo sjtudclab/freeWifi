@@ -25,4 +25,9 @@ public class WIFIServiceImpl implements IWIFIService {
 		return dao.addWifi(wifi);
 	}
 
+	@Override
+	public WIFI getWifiById(long id) {
+		return dao.getWifiById(id);
+	}
+
 }

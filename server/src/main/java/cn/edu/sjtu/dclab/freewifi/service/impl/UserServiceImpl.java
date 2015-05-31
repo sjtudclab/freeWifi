@@ -23,4 +23,9 @@ public class UserServiceImpl implements IUserService {
 		return dao.getUserById(id);
 	}
 
+	@Override
+	public User getUserByDeviceId(String deviceId) {
+		return dao.getUserByDeviceId(deviceId);
+	}
+
 }

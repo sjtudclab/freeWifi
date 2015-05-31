@@ -59,10 +59,16 @@ public class WIFIDaoImpl implements IWIFIDao {
 		criteria.add(Restrictions.gt("latitude", latitude-latiDelta));
 		return criteria.list();
 	}
+	
 	@Override
 	public boolean addWifi(WIFI wifi) {
 		baseDao.save(wifi);
 		return true;
+	}
+	
+	@Override
+	public WIFI getWifiById(long id) {
+		return baseDao.queryById(WIFI.class, id);
 	}
 
 }
