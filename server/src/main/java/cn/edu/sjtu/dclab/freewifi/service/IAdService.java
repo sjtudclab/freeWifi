@@ -7,15 +7,18 @@ import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
 import cn.edu.sjtu.dclab.freewifi.domain.User;
 
 public interface IAdService {
-public boolean addAd(Ad ad);
-public List<Ad> getAdListByMerchant(Merchant merchant);
+    public boolean addAd(Ad ad);
 
-public boolean updateAd(Ad ad);
-/**
- * 根据用户的商家信息进行广告推送
- * @param merchant
- * @param user
- * @return
- */
-public boolean getAdListByMerchantAndUser(Merchant merchant,User user);
+    public List<Ad> getAdListByMerchant(Merchant merchant);
+
+    public boolean updateAd(Ad ad);
+
+    /**
+     * 根据用户的商家信息进行广告推送
+     *
+     * @param merchant
+     * @param user
+     * @return
+     */
+    public List<Ad> getAdListByMerchantAndUser(Merchant merchant, User user);
 }

@@ -33,9 +33,9 @@ public class AdServiceImpl implements IAdService {
 	}
 
 	@Override
-	public boolean getAdListByMerchantAndUser(Merchant merchant, User user) {
+	public List<Ad> getAdListByMerchantAndUser(Merchant merchant, User user) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 }
