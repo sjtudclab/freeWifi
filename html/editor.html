@@ -11,13 +11,16 @@
     <link href="./css/prettify.css" rel="stylesheet">
     <link href="./css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
     <link href="./css/bootstrap-responsive.min.css" rel="stylesheet">
-		<link href="./css/font-awesome.css" rel="stylesheet">
+    <link href="./css/font-awesome.css" rel="stylesheet">
+    <link href="./css/bootstrap2.min.css" rel="stylesheet">
+    <link href="./css/bootstrap-multiselect.css" rel="stylesheet">
     <script src="./js/jquery.min.js"></script>
 		<script src="js/jquery.hotkeys.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/prettify.js"></script>
     <script src="./js/bootstrap-datetimepicker.min.js"></script>
     <script src="./js/editor.js"></script>
+    <script src="./js/bootstrap-multiselect.js"></script>
     <link href="./css/index.css" rel="stylesheet">
     <link href="./css/editor.css" rel="stylesheet">
     <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet">
@@ -130,25 +133,66 @@
         <h4 class="modal-title">Ad Save</h4>
       </div>
       <div class="modal-body" id='modal-body'>
-        <div class="well">
           <div class="form-group">
             <input id="adName" type="text" class="form-control input-lg required" id="user-name" name="user[name]" maxlength="50" value="" placeholder="Ad Name" data-placement="top" data-title="Enter your first and last name." data-error-title="You must enter your full name.">
           </div>
           <div class="input-append date" id="datetimepicker1">
-            <input id="startDateTime" placeholder="Start Date & Time" data-format="dd/MM/yyyy hh:mm:ss" type="text">
+            <input id="startDate" placeholder="Start Date" data-format="yyyy-MM-dd" type="text">
             <span class="add-on">
               <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar">
               </i>
             </span>
           </div>
           <div class="input-append date" id="datetimepicker2">
-            <input id="endDateTime" placeholder="End Date & Time" data-format="dd/MM/yyyy hh:mm:ss" type="text">
+            <input id="endDate" placeholder="End Date" data-format="yyyy-MM-dd" type="text">
             <span class="add-on">
               <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar">
               </i>
             </span>
           </div>
-        </div>
+          <div class="input-append date" id="datetimepicker3">
+            <input id="startTime" placeholder="Start Time" data-format="hh:mm:ss" type="text">
+            <span class="add-on">
+              <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar">
+              </i>
+            </span>
+          </div>
+          <div class="input-append date" id="datetimepicker4">
+            <input id="endTime" placeholder="Start Date" data-format="hh:mm:ss" type="text">
+            <span class="add-on">
+              <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar">
+              </i>
+            </span>
+          </div>
+          <div style="padding-top: 5px;">
+            <select id="sex" multiple="multiple">
+              <option value="0">Male</option>
+              <option value="1">Female</option>
+            </select>
+            <select id="age" multiple="multiple">
+              <option value="0" >< 8</option>
+              <option value="1">20-35</option>
+              <option value="2">35-50</option>
+              <option value="3">> 50</option>
+            </select>
+            <select id="edu" multiple="multiple">
+              <option value="0" > < High School</option>
+              <option value="1">High School</option>
+              <option value="2">junior college</option>
+              <option value="3">Bachelor</option>
+              <option value="4"> > master</option>
+            </select>
+            <select id="income" multiple="multiple">
+              <option value="0" >< 3000</option>
+              <option value="1">3000-7000</option>
+              <option value="2">7000-10000</option>
+              <option value="3">> 10000</option>
+            </select>
+
+          </div>
+          <div class="radio" style="padding-top: 5px;">
+            <label><input type="radio" name="optradio" id="isLaunch">isLaunch</label>
+          </div>
       </div>
       <div class="modal-footer">
         <button id="adSave" type="button" class="btn btn-default" data-dismiss="modal">save</button>
@@ -198,7 +242,10 @@
     initToolbarBootstrapBindings();
 	$('#editor').wysiwyg({ fileUploadError: showErrorAlert} );
     window.prettyPrint && prettyPrint();
+
+
   });
 </script>
+
   </body>
 </html>
