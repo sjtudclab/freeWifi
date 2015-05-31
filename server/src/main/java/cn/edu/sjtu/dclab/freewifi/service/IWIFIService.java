@@ -6,6 +6,9 @@ import cn.edu.sjtu.dclab.freewifi.domain.WIFI;
 
 
 public interface IWIFIService {
-public List<WIFI> getWifiListByLocation(double longitude, double latitude);
-public boolean addWIFI(WIFI wifi);
+    public List<WIFI> getWifiListByLocation(double longitude, double latitude);
+
+    public boolean addWIFI(WIFI wifi);
+
+    public WIFI getWifiById(long id);
 }

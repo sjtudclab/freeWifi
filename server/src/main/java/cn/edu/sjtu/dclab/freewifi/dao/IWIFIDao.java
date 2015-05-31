@@ -11,4 +11,5 @@ public interface IWIFIDao {
 	public List<WIFI> getWifiListByLocation(double longitude, double latitude);
 	
 	public boolean addWifi(WIFI wifi);
+	public WIFI getWifiById(long id);
 }

@@ -29,5 +29,4 @@ public class UserServiceImpl implements IUserService {
     public User getUserByDeviceId(String deviceId) {
         return dao.getUserByDeviceId(deviceId);
     }
-
 }

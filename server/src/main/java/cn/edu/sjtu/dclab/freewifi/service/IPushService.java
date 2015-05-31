@@ -7,5 +7,5 @@ import cn.edu.sjtu.dclab.freewifi.domain.User;
  * Created by Yang on 2015/5/31.
  */
 public interface IPushService {
-    public void pushAdByMerchanAndUser(Merchant merchant, User user);
+    public void pushAdByMerchantAndUser(Merchant merchant, User user);
 }

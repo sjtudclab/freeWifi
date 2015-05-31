@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
+import cn.edu.sjtu.dclab.freewifi.service.IPushService;
+import cn.edu.sjtu.dclab.freewifi.service.IWIFIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,10 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
+    @Autowired
+    private IWIFIService wifiService;
+    @Autowired
+    private IPushService pushService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
@@ -54,9 +60,9 @@ public class UserController {
             @RequestParam(value = "device_id") String deviceId,
             @RequestParam(value = "wifi_id") String wifiId) {
 
-        //TODO push advertisements
-        Merchant merchant = null;
-        User uer = userService.getUserById(deviceId);
+        Merchant merchant = wifiService.getWifiById(Integer.parseInt(wifiId)).getMerchant();
+        User user = userService.getUserByDeviceId(deviceId);
+        pushService.pushAdByMerchantAndUser(merchant, user);
 
         boolean result = true;
         Map<String, Object> map = new HashMap<String, Object>();
