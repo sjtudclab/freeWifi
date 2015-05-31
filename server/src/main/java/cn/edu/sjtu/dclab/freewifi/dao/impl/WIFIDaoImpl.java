@@ -49,16 +49,15 @@ public class WIFIDaoImpl implements IWIFIDao {
 	@Override
 	public List<WIFI> getWifiListByLocation(double longitude, double latitude) {
 		Criteria criteria = getSession().createCriteria(WIFI.class);
-		Criteria distanceCriteria = criteria.createCriteria("distance");
 		double longi = DistanceUtils.getLongitude(longitude, latitude, Constants.WIFI_SEARCH_DISTANCE);
 		double lati = DistanceUtils.getLatitude(longitude, latitude, Constants.WIFI_SEARCH_DISTANCE);
 		double longiDelta = Math.abs(longi - longitude);
 		double latiDelta = Math.abs(lati - latitude);
-		distanceCriteria.add(Restrictions.lt("longitude", longitude + longiDelta));
-		distanceCriteria.add(Restrictions.gt("longitude", longitude - longiDelta));
-		distanceCriteria.add(Restrictions.lt("latitude", latitude+latiDelta));
-		distanceCriteria.add(Restrictions.gt("latitude", latitude-latiDelta));
-		return distanceCriteria.list();
+		criteria.add(Restrictions.lt("longitude", longitude + longiDelta));
+		criteria.add(Restrictions.gt("longitude", longitude - longiDelta));
+		criteria.add(Restrictions.lt("latitude", latitude+latiDelta));
+		criteria.add(Restrictions.gt("latitude", latitude-latiDelta));
+		return criteria.list();
 	}
 	@Override
 	public boolean addWifi(WIFI wifi) {

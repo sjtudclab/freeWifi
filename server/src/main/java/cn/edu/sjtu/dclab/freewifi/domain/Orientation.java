@@ -2,14 +2,11 @@ package cn.edu.sjtu.dclab.freewifi.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,28 +23,24 @@ public class Orientation implements Serializable {
 	private String sex;
 	// 18岁以下，20-35，35-50，50以上
 	@Column(nullable = true)
-	private String birtdate;
+	private String age;
 	// 高中以下、高中、大专、本科、研究生及以上
 	@Column(nullable = true)
 	private String education;
 	// 3000元以下、3000-7000元、7000-10000元、10000元以上
 	@Column(nullable = true)
 	private String income;
-	@ManyToOne(cascade = { CascadeType.REFRESH })
-	@JoinColumn(name = "ad_id")
-	private Ad ad;
 	
 	public Orientation() {
 		super();
 	}
-	public Orientation(String sex, String birtdate, String education,
-			String income, Ad ad) {
+	public Orientation(String sex, String age, String education,
+			String income) {
 		super();
 		this.sex = sex;
-		this.birtdate = birtdate;
+		this.age = age;
 		this.education = education;
 		this.income = income;
-		this.ad = ad;
 	}
 	public String getSex() {
 		return sex;
@@ -55,11 +48,12 @@ public class Orientation implements Serializable {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public String getBirtdate() {
-		return birtdate;
+	
+	public String getAge() {
+		return age;
 	}
-	public void setBirtdate(String birtdate) {
-		this.birtdate = birtdate;
+	public void setAge(String age) {
+		this.age = age;
 	}
 	public String getEducation() {
 		return education;
@@ -72,12 +66,6 @@ public class Orientation implements Serializable {
 	}
 	public void setIncome(String income) {
 		this.income = income;
-	}
-	public Ad getAd() {
-		return ad;
-	}
-	public void setAd(Ad ad) {
-		this.ad = ad;
 	}
 	public long getId() {
 		return id;

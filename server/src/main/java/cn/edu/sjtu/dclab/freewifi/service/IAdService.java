@@ -17,5 +17,11 @@ public boolean updateAd(Ad ad);
  * @param user
  * @return
  */
-public boolean getAdListByMerchantAndUser(Merchant merchant,User user);
+public List<Ad> getAdListByMerchantAndUser(Merchant merchant,User user);
+
+public boolean deleteAd(Ad ad);
+
+public boolean lauchAd(Ad ad);
+
+public boolean unlauchAd(Ad ad);
 }

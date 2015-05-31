@@ -11,6 +11,7 @@ import cn.edu.sjtu.dclab.freewifi.dao.IAdDao;
 import cn.edu.sjtu.dclab.freewifi.domain.Ad;
 import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
 import cn.edu.sjtu.dclab.freewifi.domain.User;
+import cn.edu.sjtu.dclab.freewifi.enums.AdState;
 import cn.edu.sjtu.dclab.freewifi.service.IAdService;
 @Service("adService")
 @Transactional
@@ -33,9 +34,26 @@ public class AdServiceImpl implements IAdService {
 	}
 
 	@Override
-	public boolean getAdListByMerchantAndUser(Merchant merchant, User user) {
-		// TODO Auto-generated method stub
-		return false;
+	public List<Ad> getAdListByMerchantAndUser(Merchant merchant, User user) {
+		return dao.getLaunchingAdByMerchantAndUser(merchant, user);
+	}
+
+	@Override
+	public boolean deleteAd(Ad ad) {
+		ad.setState(AdState.DELETE);
+		return dao.updateAd(ad);
+	}
+
+	@Override
+	public boolean lauchAd(Ad ad) {
+		ad.setState(AdState.LAUNCHING);
+		return dao.updateAd(ad);
+	}
+
+	@Override
+	public boolean unlauchAd(Ad ad) {
+		ad.setState(AdState.READY);
+		return dao.updateAd(ad);
 	}
 
 }

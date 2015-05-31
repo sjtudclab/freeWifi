@@ -71,6 +71,18 @@ public class Ad implements Serializable {
 	@Column(nullable = true)
 	private AdState state;
 
+	@ManyToOne(cascade = { CascadeType.REFRESH })
+	@JoinColumn(name = "orientation_id")
+	private Orientation orientation;
+	
+	public Orientation getOrientation() {
+		return orientation;
+	}
+
+	public void setOrientation(Orientation orientation) {
+		this.orientation = orientation;
+	}
+
 	public Merchant getMerchant() {
 		return merchant;
 	}
@@ -159,9 +171,10 @@ public class Ad implements Serializable {
 		this.state = state;
 	}
 
+	
 	public Ad(Merchant merchant, Date addDate, AdType adType, String content,
 			Date startDate, Date endDate, int startHour, String name,
-			int endHour, AdState state) {
+			int endHour, AdState state, Orientation orientation) {
 		super();
 		this.merchant = merchant;
 		this.addDate = addDate;
@@ -173,6 +186,7 @@ public class Ad implements Serializable {
 		this.name = name;
 		this.endHour = endHour;
 		this.state = state;
+		this.orientation = orientation;
 	}
 
 	public Ad() {
