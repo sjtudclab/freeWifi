@@ -10,4 +10,6 @@ public interface IMerchantDao {
 	public boolean updateMerchant(Merchant merchant);
 	
 	public boolean deleteMerchant(Merchant merchant);
+	
+	public Merchant getMerchant(long id);
 }

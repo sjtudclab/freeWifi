@@ -242,7 +242,21 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<repositories>
+	<!-- <profiles>
+		<profile>
+			<id>bluemix</id>
+			<properties>
+				<env>bluemix</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>cloud</id>
+			<properties>
+				<env>cloud</env>
+			</properties>
+		</profile>
+	</profiles>-->
+	<repositories> 
 		<!-- For testing against latest Spring snapshots -->
 		<repository>
 			<id>org.springframework.maven.snapshot</id>

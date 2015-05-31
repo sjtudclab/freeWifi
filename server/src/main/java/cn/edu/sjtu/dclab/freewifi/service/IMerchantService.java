@@ -12,4 +12,6 @@ public interface IMerchantService {
 	public boolean updateMerchant(Merchant merchant);
 	
 	public boolean deleteMerchant(Merchant merchant);
+	
+	public Merchant getMerchantById(long id);
 }

@@ -48,8 +48,8 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<!-- end of Transaction support -->
 	<!-- AspectJ annotation autoproxy support -->
-	<beans profile="default">
-		<!-- Data Source Bean -->
+	<!-- <beans profile="bluemix">
+		Data Source Bean -->
 		<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 			destroy-method="close">
 			<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
@@ -63,9 +63,9 @@
 			<property name="initialPoolSize" value="1"></property>
 			<property name="maxIdleTime" value="60"></property>
 		</bean>
-	</beans>
-	<beans profile="bluemix">
-		<!-- Data Source Bean -->
+	<!-- </beans>
+	<beans profile="default"> 
+		Data Source Bean
 		<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 			destroy-method="close">
 			<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
@@ -78,10 +78,10 @@
 			<property name="minPoolSize" value="1"></property>
 			<property name="initialPoolSize" value="1"></property>
 			<property name="maxIdleTime" value="60"></property>
-		</bean>
-	</beans>
-	<beans profile="cloud">
-		<!-- Data Source Bean -->
+		</bean> -->
+	<!-- </beans> -->
+	<!-- <beans profile="cloud">
+		Data Source Bean
 		<cloud:data-source id="dataSource"/>
-	</beans>
+	</beans> -->
 </beans>

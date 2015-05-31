@@ -38,5 +38,9 @@ public class MerchantDaoImpl implements IMerchantDao{
 		baseDao.delete(merchant);
 		return true;
 	}
+	@Override
+	public Merchant getMerchant(long id) {
+		return baseDao.queryById(Merchant.class, id);
+	}
 
 }

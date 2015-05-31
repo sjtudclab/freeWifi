@@ -40,5 +40,9 @@ public class MerchantServiceImpl implements IMerchantService {
 	public boolean deleteMerchant(Merchant merchant) {
 		return dao.deleteMerchant(merchant);
 	}
+	@Override
+	public Merchant getMerchantById(long id) {
+		return dao.getMerchant(id);
+	}
 
 }

@@ -1,5 +1,8 @@
 package cn.edu.sjtu.dclab.freewifi.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -56,13 +59,11 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView registerSubmit(String loginname, //登录名
+	public Map<String, Object> registerSubmit(String loginname, //登录名
 			String tel, String password, String name, //真实姓名
 			String address,	double longitude, //经度
 			double latitude, String ssid, String wifiPassword){
-		System.out.println(longitude+"."+latitude);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("login");
+		Map<String, Object> map = new HashMap<String, Object>();
 		Merchant merchant = new Merchant(loginname, password, name, address, tel);
 		boolean result = merchantService.addMerchant(merchant);
 		if (result) {
@@ -71,12 +72,15 @@ public class LoginController {
 			if (!wifiAddResult) {
 				merchantService.deleteMerchant(merchant);
 			}else {
-				mav.addObject(Constants.ERROR_MSG, "Add wifi error");
+				map.put(Constants.CODE, -2);
+				map.put(Constants.ERROR_MSG, "Add wifi error");
 			}
 		}else {
-			mav.addObject(Constants.ERROR_MSG, "Add merchant error");
+			map.put(Constants.CODE, -1);
+			map.put(Constants.ERROR_MSG, "Add merchant error");
 		}
-		return mav;
+		map.put(Constants.CODE, 0);
+		return map;
 	}
 
 	
