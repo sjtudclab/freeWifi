@@ -1,10 +1,12 @@
 ---
 applications:
 - name: freewifiserver
-  memory: 512
-  instances: 1
-  host: freewifiserver
+  memory: 512M
+  host: dclab
   domain: mybluemix.net
   path: target/freewifiserver.war
-  services:{
+  instances: 1
+  env: {
+    }
+  services: {
     }
