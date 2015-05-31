@@ -12,7 +12,7 @@ POST
 	tel：String
 	password：String
 	name：String //真实姓名
-	address：String 
+	address：String
 	longitude：double //经度
 	latitude：double //纬度
 	ssid: //wifi的ssid
@@ -29,18 +29,19 @@ error_msg:
 /ad/add
 参数：
 content：富媒体存储的内容
-起始日期startDate：string  yyyy-MM-dd 
+起始日期startDate：string  yyyy-MM-dd
 终止日期endDate：string    yyyy-MM-dd
 起始时刻startHour int 不填写时为-1  HH:mm:ss
 终止时刻endHour: int 不填写时为-1   HH:mm:ss
 name：String
 
 添加广告后，弹出框，选择广告投放定向：(每一项多选)
+index from 0
 sex：String-男、女
 age：String-8岁以下，20-35，35-50，50以上
 education：String-高中以下、高中、大专、本科、研究生及以上
 income：String-3000元以下、3000-7000元、7000-10000元、10000元以上
-isLauch:是否立即投放
+isLaunch:是否立即投放
 
 
 广告添加成功后，进入广告管理页面：
@@ -50,7 +51,7 @@ isLauch:是否立即投放
 {
 code：0/-1  -- 0表示成功
 size:
-data: adlist， 
+data: adlist，
 }
 AD的具体字段参考
 https://github.com/sjtudclab/freeWifi/blob/master/server/src/main/java/cn/edu/sjtu/dclab/freewifi/domain/Ad.java
@@ -64,7 +65,6 @@ Pc段预览-GET：/ad/pc/{id}
 返回： json
 {
 code：0/-1  -- 0表示成功
-data: ad 
+data: ad
 }
 编辑-POST：/ad/edit/{id}参数，同添加广告
-

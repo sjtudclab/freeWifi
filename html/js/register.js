@@ -40,8 +40,9 @@ $('#start').click(function() {
         method: 'post',
         data: data
     }).done(function(data) {
-        console.log('done');
+        document.location.href = document.domain + '/merchant/login'
     }).fail(function(){
+        document.location.href = document.domain + '/merchant/login'
         console.log('error');
     });
     
