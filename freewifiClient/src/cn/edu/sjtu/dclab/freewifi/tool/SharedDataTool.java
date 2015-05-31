@@ -54,6 +54,39 @@ public class SharedDataTool {
         return mEditor.commit();
     }
 
+    public static int GetGenderIndex(String gender){
+        int index = -1;
+        switch (gender){
+            case "男": index = 0; break;
+            case "女": index = 1; break;
+            default: break;
+        }
+        return index;
+    }
+    public static int GetEducationIndex(String education){
+        int index = -1;
+        switch (education){
+            case "高中以下": index = 0; break;
+            case "高中": index = 1; break;
+            case "大专": index = 2; break;
+            case "本科": index = 3; break;
+            case "研究生及以上": index = 4; break;
+            default: break;
+        }
+        return index;
+    }
+    public static int GetIncomeIndex(String income){
+        int index = -1;
+        switch (income){
+            case "3000元以下": index = 0; break;
+            case "3000-7000元": index = 1; break;
+            case "7000-10000元": index = 2; break;
+            case "10000元以上": index = 3; break;
+            default: break;
+        }
+        return index;
+    }
+
 //    public static List<NameValuePair> GetRegisterInfoNVPairList(Context context) {
 //        initSharedData(context);
 //        List<NameValuePair> params = new ArrayList<NameValuePair>();

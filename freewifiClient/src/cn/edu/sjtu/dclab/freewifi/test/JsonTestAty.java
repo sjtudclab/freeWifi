@@ -7,7 +7,9 @@ import android.widget.TextView;
 import org.json.JSONObject;
 
 import cn.edu.sjtu.dclab.freewifi.R;
+import cn.edu.sjtu.dclab.freewifi.tool.HTTPTool;
 import cn.edu.sjtu.dclab.freewifi.tool.JsonTool;
+import cn.edu.sjtu.dclab.freewifi.tool.SharedDataTool;
 
 /**JsonTestAty extends Activity
  * Created by Ernest on 2015/5/29.
@@ -25,10 +27,13 @@ public class JsonTestAty extends Activity {
         tvStatusCode = (TextView) findViewById(R.id.tv_statuscode);
         tvWifiList = (TextView) findViewById(R.id.tv_wifilist);
 
+        //测试
+        HTTPTool.SendConnectedInfo(getApplicationContext(), SharedDataTool.GetIMEI(getApplication()), "1");
+
         JSONObject statusJson = JsonTool.CreateStatusJson();
         int code = JsonTool.ParseStatusCodeJson(statusJson);
         tvStatusCode.setText("Original Json: " + statusJson.toString() +
-                "\n\nParsing result: code = " + code + "\n\n\n");
+                "\n\nParsing result: code = " + code + "\n\n\n--------------------------------");
 
         JSONObject wifilistJson = JsonTool.CreateWifiListJson();
         String s = JsonTool.ParseWifiListJson(wifilistJson);

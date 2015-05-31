@@ -1,11 +1,12 @@
 package cn.edu.sjtu.dclab.freewifi.tool;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.SyncHttpClient;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
@@ -16,9 +17,9 @@ import org.json.JSONObject;
 public class HTTPTool {
     static final String TAG = "HTTPTool";
 
-    private static final String URL_REG = "user/register";
-    private static final String URL_NOTIFY = "user/notification";
-    private static final String URL_GETWIFILIST = "wifi/get";
+    private static final String URL_REG = "http://dclab.mybluemix.net/freewifiserver/user/register";
+    private static final String URL_NOTIFY = "http://dclab.mybluemix.net/freewifiserver/user/notification";
+    private static final String URL_GETWIFILIST = "http://dclab.mybluemix.net/freewifiserver/wifi/get";
 
     /**发送注册信息(POST)
      */
@@ -26,22 +27,32 @@ public class HTTPTool {
                                         String birthday, String tel, String education, String income){
         RequestParams params = new RequestParams();
         params.put(SharedDataTool.IMEI, imei);
-        params.put(SharedDataTool.GENDER, gender);
+        params.put(SharedDataTool.GENDER, SharedDataTool.GetGenderIndex(gender));
         params.put(SharedDataTool.BIRTHDAY, birthday);
         params.put(SharedDataTool.TEL, tel);
-        params.put(SharedDataTool.EDUCATION, education);
-        params.put(SharedDataTool.INCOME, income);
+        params.put(SharedDataTool.EDUCATION, SharedDataTool.GetGenderIndex(education));
+        params.put(SharedDataTool.INCOME, SharedDataTool.GetGenderIndex(income));
 
-        Toast.makeText(context, "Sending Register Info...", Toast.LENGTH_LONG).show();
-        SyncHttpClient client = new SyncHttpClient();//创建客户端对象
+        Toast.makeText(context, "Sending Register Info...", Toast.LENGTH_SHORT).show();
+        AsyncHttpClient client = new AsyncHttpClient();//创建客户端对象
         client.post(URL_REG, params, new JsonHttpResponseHandler() {
             @Override//返回JSONArray对象 | JSONObject对象
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 if (statusCode == 200) {
                     int status = JsonTool.ParseStatusCodeJson(response);
-                    Toast.makeText(context, "status: " + status, Toast.LENGTH_LONG);
+                    Log.i(TAG, "Received status: " + status);
                 }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.i(TAG, "onFailure statusCode: " + statusCode);
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.i(TAG, "onFailure statusCode: " + statusCode);
             }
         });
     }
@@ -56,16 +67,26 @@ public class HTTPTool {
         params.put(SharedDataTool.IMEI, imei);
         params.put(SharedDataTool.WIFIID, wifiID);
 
-        Toast.makeText(context, "Sending Connected Info...", Toast.LENGTH_LONG).show();
-        SyncHttpClient client = new SyncHttpClient();//创建客户端对象
+        Toast.makeText(context, "Sending Connected Info...", Toast.LENGTH_SHORT).show();
+        AsyncHttpClient client = new AsyncHttpClient();//创建客户端对象
         client.post(URL_NOTIFY, params, new JsonHttpResponseHandler() {
             @Override//返回JSONArray对象 | JSONObject对象
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 if (statusCode == 200) {
                     int status = JsonTool.ParseStatusCodeJson(response);
-                    Toast.makeText(context, "status: " + status, Toast.LENGTH_LONG);
+                    Log.i(TAG, "Received status: " + status);
                 }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.i(TAG, "onFailure statusCode: " + statusCode);
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.i(TAG, "onFailure statusCode: " + statusCode);
             }
         });
     }
@@ -80,16 +101,26 @@ public class HTTPTool {
         params.put(SharedDataTool.LONGITUDE, longitude);
         params.put(SharedDataTool.LATITUDE, latitude);
 
-        Toast.makeText(context, "Sending Request For WifiList...", Toast.LENGTH_LONG).show();
-        SyncHttpClient client = new SyncHttpClient();//创建客户端对象
+        Toast.makeText(context, "Sending Request For WifiList...", Toast.LENGTH_SHORT).show();
+        AsyncHttpClient client = new AsyncHttpClient();//创建客户端对象
         client.get(URL_GETWIFILIST, params, new JsonHttpResponseHandler() {
             @Override//返回JSONArray对象 | JSONObject对象
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 if (statusCode == 200) {
                     String result = JsonTool.ParseWifiListJson(response);
-                    Toast.makeText(context, "Result: " + result, Toast.LENGTH_LONG);
+                    Log.i(TAG, "Received results: " + result);
                 }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.i(TAG, "onFailure statusCode: " + statusCode);
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.i(TAG, "onFailure statusCode: " + statusCode);
             }
         });
     }

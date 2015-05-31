@@ -8,7 +8,7 @@
 
     <string-array name="aty_list">
         <item>Wifi</item> <!--Wifi测试页-->
-        <item>Login</item> <!--注册测试页-->
+        <item>SendUserInfo</item> <!--注册测试页-->
         <item>Locating</item> <!--定位测试页-->
         <item>JsonTest</item> <!--Json测试页-->
         <item>PushTest</item> <!--Push测试页-->
