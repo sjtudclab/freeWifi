@@ -6,7 +6,7 @@ POST
 	tel：String
 	education：int
 	gender：int gender,
-	birthdate：String birthdate,
+	birthdate：String birthdate -->格式：1991-01-11
 	income：int
 其中的int为枚举值，具体参考
 https://github.com/sjtudclab/freeWifi/tree/master/server/src/main/java/cn/edu/sjtu/dclab/freewifi/constants

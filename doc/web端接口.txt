@@ -29,11 +29,19 @@ error_msg:
 /ad/add
 参数：
 content：富媒体存储的内容
-起始日期startDate：string
-终止日期endDate：string
-起始时刻startHour int 不填写时为-1
-终止时刻endHour: int 不填写时为-1
+起始日期startDate：string  yyyy-MM-dd 
+终止日期endDate：string    yyyy-MM-dd
+起始时刻startHour int 不填写时为-1  HH:mm:ss
+终止时刻endHour: int 不填写时为-1   HH:mm:ss
 name：String
+
+添加广告后，弹出框，选择广告投放定向：(每一项多选)
+sex：String-男、女
+age：String-8岁以下，20-35，35-50，50以上
+education：String-高中以下、高中、大专、本科、研究生及以上
+income：String-3000元以下、3000-7000元、7000-10000元、10000元以上
+isLauch:是否立即投放
+
 
 广告添加成功后，进入广告管理页面：
 获取所有广告
