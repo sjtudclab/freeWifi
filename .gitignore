@@ -28,3 +28,7 @@ proguard/
 out/
 
 server/target
+
+# intelliJ
+*.iml
+.idea/
