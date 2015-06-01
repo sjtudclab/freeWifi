@@ -1,40 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Welcome to Free Wifi</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="keywords" content="opensource rich wysiwyg text editor jquery bootstrap execCommand html5" />
-    <meta name="description" content="This tiny jQuery Bootstrap WYSIWYG plugin turns any DIV into a HTML5 rich text editor" />
-    <link rel="apple-touch-icon" href="//mindmup.s3.amazonaws.com/lib/img/apple-touch-icon.png" />
-    <link rel="shortcut icon" href="http://mindmup.s3.amazonaws.com/lib/img/favicon.ico" >
-    <link href="./css/prettify.css" rel="stylesheet">
-    <link href="./css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+	<head>
+		<title>FreeWifi</title>
+		<meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/bootstrap2.min.css" />
+		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
+		<link rel="stylesheet" href="css/unicorn.main.css" />
+		<link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" />
+	<meta http-equiv="Content-Type" content="text/html;
+		charset=utf-8" />
+
+<link rel="apple-touch-icon" href="//mindmup.s3.amazonaws.com/lib/img/apple-touch-icon.png" />
+    <link rel="shortcut icon"
+          href="http://mindmup.s3.amazonaws.com/lib/img/favicon.ico" >
+<link href="./css/prettify.css" rel="stylesheet">
     <link href="./css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="./css/font-awesome.css" rel="stylesheet">
-    <link href="./css/bootstrap2.min.css" rel="stylesheet">
-    <link href="./css/bootstrap-multiselect.css" rel="stylesheet">
+<link href="./css/font-awesome.css" rel="stylesheet">
+<link href="./css/bootstrap-multiselect.css" rel="stylesheet">
+<link href="./css/index.css" rel="stylesheet">
+    <link href="./css/editor.css" rel="stylesheet">
+    <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <script src="./js/jquery.min.js"></script>
 		<script src="js/jquery.hotkeys.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/prettify.js"></script>
     <script src="./js/bootstrap-datetimepicker.min.js"></script>
-    <script src="./js/editor.js"></script>
     <script src="./js/bootstrap-multiselect.js"></script>
-    <link href="./css/index.css" rel="stylesheet">
-    <link href="./css/editor.css" rel="stylesheet">
-    <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <script src="./js/editor.js"></script>
     <script src="js/bootstrap-wysiwyg.js"></script>
 
-  </head>
-  <body>
+</head>
+	<body>
 
-<div class="container">
-  <div class="hero-unit">
-	<h1>Free Wifi <br/> <small>edit your ADs fast and beautiful</small></h1>
-	<hr/>
-	<div id="alerts"></div>
-    <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+
+		<div id="header">
+			<h1><a href="./dashboard.html">FreeWifiAdmin</a></h1>
+		</div>
+
+		<div id="user-nav" class="navbar navbar-inverse">
+            <ul class="nav btn-group">
+                <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-user"></i> <span class="text">个人资料</span></a></li>
+                <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">设置</span></a></li>
+                <li class="btn btn-inverse"><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">退出</span></a></li>
+            </ul>
+        </div>
+
+		<div id="sidebar">
+			<a href="#" class="visible-phone"><i class="icon icon-home"></i> 首页</a>
+			<ul>
+				<li ><a href="index.html"><i class="icon
+				icon-home"></i> <span>Home Page</span></a></li>
+				<li class="active"><a href="index.html"><i class="icon
+				icon-edit"></i> <span>Edit</span></a></li>
+				<li>
+					<a href="widgets.html"><i class="icon icon-dashboard"></i> <span>Manage</span></a>
+				</li>
+			</ul>
+
+		</div>
+
+
+		<div id="content">
+			<div id="content-header">
+				<h1>Manage</h1>
+			</div>
+			<div id="breadcrumb">
+				<a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+				<a href="#" class="current">Manage</a>
+			</div>
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="widget-box">
+
+
+
+<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
       <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -87,7 +129,7 @@
       <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
     </div>
 
-    <div id="editor">
+<div id="editor">
     </div>
     <div>
       <p class="text-center btn-toolbar">
@@ -202,8 +244,25 @@
   </div>
 </div>
 
-  </div>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 <script>
   $(function(){
     function initToolbarBootstrapBindings() {
@@ -247,5 +306,5 @@
   });
 </script>
 
-  </body>
+	</body>
 </html>
