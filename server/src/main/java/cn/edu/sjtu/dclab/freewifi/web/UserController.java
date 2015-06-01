@@ -54,7 +54,7 @@ public class UserController {
         return map;
     }
 
-    @RequestMapping(value = "/notification", method = RequestMethod.POST)
+    @RequestMapping(value = "/notification", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> notification(
             @RequestParam(value = "device_id") String deviceId,
@@ -62,7 +62,7 @@ public class UserController {
 
         Merchant merchant = wifiService.getWifiById(Integer.parseInt(wifiId)).getMerchant();
         User user = userService.getUserByDeviceId(deviceId);
-        pushService.pushAdByMerchantAndUser(merchant, user);
+        pushService.pushNotificationAdByMerchantAndUser(merchant, user);
 
         boolean result = true;
         Map<String, Object> map = new HashMap<String, Object>();
