@@ -282,7 +282,7 @@
         <script src="./resources/js/bootstrap.min.js"
         type="text/javascript">
         </script>
-        <script src="./resources/js/login.js"></script>
+        <script src="./resources/js/register.js"></script>
 
     </body>
 
