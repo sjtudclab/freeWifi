@@ -33,6 +33,7 @@ import java.util.logging.Logger;
 public class PushServiceImpl implements IPushService {
 	@Autowired
 	private IAdService adService;
+	// APPKEY and MASTERSECRET are copied from the app on Jpush.com
 	private final String APPKEY = "1c0bdf68225216fa3dee6be9";
 	private final String MASTERSECRET = "e3ba0726e6afb6752855c2ef";
 	public Logger LOG = Logger.getLogger("PushService");
@@ -47,11 +48,12 @@ public class PushServiceImpl implements IPushService {
 		// return;
 		//
 		// Ad ad = adList.get(0);
+		// 这些数据暂时用于测试
 		String alias = null;
 		String title = "Title";
 		String msg = "This a msg";
 		String url = "URL";
-		String urlLink = "http://www.baidu.com";
+		String urlLink = "www.baidu.com";
 		Map<String, String> extra = new HashMap<String, String>();
 		extra.put(url, urlLink);
 		PushPayload payload = PushPayload.newBuilder()
