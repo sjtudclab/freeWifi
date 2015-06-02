@@ -12,7 +12,7 @@ public List<Ad> getAdListByMerchant(Merchant merchant);
 
 public boolean updateAd(Ad ad);
 /**
- * æ ¹æ®ç”¨æˆ·çš„å•†å®¶ä¿¡æ¯è¿›è¡Œå¹¿å‘Šæ¨é€
+ * ¸ù¾İÓÃ»§µÄÉÌ¼ÒĞÅÏ¢½øĞĞ¹ã¸æÍÆËÍ
  * @param merchant
  * @param user
  * @return
