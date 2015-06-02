@@ -26,4 +26,7 @@ proguard/
 *.log
 
 out/
+
+#intelliJ
 .idea/
+*.iml
