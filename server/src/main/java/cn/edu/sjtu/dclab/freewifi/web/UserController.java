@@ -87,4 +87,24 @@ public class UserController {
         }
         return map;
     }
+    
+    @RequestMapping(value = "/collect", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> collect(
+            @RequestParam(value = "device_id") String deviceId,
+            @RequestParam(value = "wifi_id") String wifiId) {
+
+        Merchant merchant = wifiService.getWifiById(Integer.parseInt(wifiId)).getMerchant();
+        User user = userService.getUserByDeviceId(deviceId);
+        pushService.pushNotificationAdByMerchantAndUser(merchant, user);
+
+        boolean result = true;
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (result) {
+            map.put(Constants.CODE, 0);
+        } else {
+            map.put(Constants.CODE, -1);
+        }
+        return map;
+    }
 }

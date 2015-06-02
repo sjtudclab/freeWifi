@@ -46,3 +46,12 @@ ad_id：String
 返回：json
 { code：0/-1   0表示成功 }
 
+用户点击收藏广告
+user/collect
+POST
+参数：
+device_id：String
+ad_id：String
+返回：json
+{ code：0/-1   0表示成功 }
+
