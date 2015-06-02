@@ -18,6 +18,8 @@ import cn.edu.sjtu.dclab.freewifi.service.IAdService;
 public class AdServiceImpl implements IAdService {
 	@Resource(name = "adDao")
     private IAdDao dao;
+	
+	
 	@Override
 	public boolean addAd(Ad ad) {
 		return dao.addAd(ad);
