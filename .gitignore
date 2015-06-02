@@ -28,6 +28,7 @@ proguard/
 out/
 
 server/target
+server/.settings
 
 # intelliJ
 *.iml
