@@ -9,7 +9,7 @@ import cn.edu.sjtu.dclab.freewifi.domain.User;
 public interface IAdDao {
 	public boolean addAd(Ad ad);
 	/**
-	 * 鑾峰彇鎵�鏈夌殑骞垮憡
+	 * 获取所有的广告
 	 * @param merchant
 	 * @return
 	 */

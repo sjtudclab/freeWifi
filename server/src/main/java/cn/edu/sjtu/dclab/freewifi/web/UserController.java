@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
+import cn.edu.sjtu.dclab.freewifi.service.IPushService;
+import cn.edu.sjtu.dclab.freewifi.service.IWIFIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,45 +26,34 @@ import cn.edu.sjtu.dclab.freewifi.util.DateUtils;
 @RequestMapping(value = "user")
 public class UserController {
 
-	@Autowired
-	private IUserService userService;
+    @Autowired
+    private IUserService userService;
+    @Autowired
+    private IWIFIService wifiService;
+    @Autowired
+    private IPushService pushService;
 
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> register(@RequestParam(value = "device_id") String deviceId,
-			@RequestParam(value = "tel") String tel,
-			@RequestParam(value = "education") int education,
-			@RequestParam(value = "gender") int gender,
-			@RequestParam(value = "birthdate") String birthdate,
-			@RequestParam(value = "income") int income) {
-		Date date = DateUtils.parseDate(birthdate, "yyyy-MM-dd");
-		User user = new User(deviceId, Gender.get(gender), tel, date,
-				Education.get(education), IncomeType.get(income));
-		boolean result = userService.addUser(user);
-		Map<String, Object> map = new HashMap<String, Object>();
-		if (result) {
-			map.put(Constants.CODE, 0);
-		}else {
-			map.put(Constants.CODE, -1);
-		}
-		return map;
-	}
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> register(@RequestParam(value = "device_id") String deviceId,
+                                        @RequestParam(value = "tel") String tel,
+                                        @RequestParam(value = "education") int education,
+                                        @RequestParam(value = "gender") int gender,
+                                        @RequestParam(value = "birthdate") String birthdate,
+                                        @RequestParam(value = "income") int income) {
+        Date date = DateUtils.parseDate(birthdate, "yyyy-MM-dd");
+        User user = new User(deviceId, Gender.get(gender), tel, date,
+                Education.get(education), IncomeType.get(income));
+        boolean result = userService.addUser(user);
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (result) {
+            map.put(Constants.CODE, 0);
+        } else {
+            map.put(Constants.CODE, -1);
+        }
+        return map;
+    }
 
-	@RequestMapping(value = "/notification", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, Object> notification(
-			@RequestParam(value = "device_id") String deviceId,
-			@RequestParam(value = "wifi_id") String wifiId) {
-		boolean result = true;
-		Map<String, Object> map = new HashMap<String, Object>();
-		if (result) {
-			map.put(Constants.CODE, 0);
-		}else {
-			map.put(Constants.CODE, -1);
-		}
-		return map;
-	}
-	
 	@RequestMapping(value = "/click", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> clickAd(
@@ -76,4 +68,23 @@ public class UserController {
 		}
 		return map;
 	}
+    @RequestMapping(value = "/notification", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> notification(
+            @RequestParam(value = "device_id") String deviceId,
+            @RequestParam(value = "wifi_id") String wifiId) {
+
+        Merchant merchant = wifiService.getWifiById(Integer.parseInt(wifiId)).getMerchant();
+        User user = userService.getUserByDeviceId(deviceId);
+        pushService.pushNotificationAdByMerchantAndUser(merchant, user);
+
+        boolean result = true;
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (result) {
+            map.put(Constants.CODE, 0);
+        } else {
+            map.put(Constants.CODE, -1);
+        }
+        return map;
+    }
 }
