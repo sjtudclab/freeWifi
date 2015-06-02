@@ -47,7 +47,7 @@ public class UserController {
 		return map;
 	}
 
-	@RequestMapping(value = "/notification", method = RequestMethod.POST)
+	@RequestMapping(value = "/notification", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> notification(
 			@RequestParam(value = "device_id") String deviceId,

@@ -2,13 +2,13 @@ package cn.edu.sjtu.dclab.freewifi.web;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +25,6 @@ import cn.edu.sjtu.dclab.freewifi.enums.AdType;
 import cn.edu.sjtu.dclab.freewifi.service.IAdService;
 import cn.edu.sjtu.dclab.freewifi.service.IMerchantService;
 import cn.edu.sjtu.dclab.freewifi.service.IOrientationService;
-import cn.edu.sjtu.dclab.freewifi.service.impl.MerchantServiceImpl;
 import cn.edu.sjtu.dclab.freewifi.util.Constants;
 import cn.edu.sjtu.dclab.freewifi.util.DateUtils;
 
@@ -59,10 +58,11 @@ public class AdController {
 			String age,//String-8岁以下，20-35，35-50，50以上、不限
 			String education,//String-高中以下、高中、大专、本科、研究生及以上、不限
 			String income,//String-3000元以下、3000-7000元、7000-10000元、10000元以上、不限
-			boolean isLauch
+			boolean isLaunch
 			) {
+		System.out.println(startDate+"----"+endDate+"---"+startHour+"------"+endHour+"----"+name+"----"+sex+"----"+education+"----"+income+"----"+age);
 		HttpSession session = request.getSession();
-		String merchantTag = session.getAttribute(Constants.CURRENT_USER).toString();
+		String merchantTag = "5";//session.getAttribute(Constants.CURRENT_USER).toString();
 		long merchantId = Long.parseLong(merchantTag);
 		Merchant merchant = merchantService.getMerchantById(merchantId);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -71,14 +71,11 @@ public class AdController {
 			map.put(Constants.ERROR_MSG,"Login error.");
 			return map;
 		}
-		Orientation orientation = new Orientation();
-		
-		
-		
-		
+		Orientation orientation = new Orientation(sex, age, education, income);
+		orientationService.addOrientation(orientation);
 		Date _startDate = DateUtils.parseDate(startDate, "yyyy-MM-dd");
 		Date _endDate = DateUtils.parseDate(endDate, "yyyy-MM-dd");
-		AdState state = isLauch? AdState.LAUNCHING: AdState.READY;
+		AdState state = isLaunch? AdState.LAUNCHING: AdState.READY;
 		int _startHour = -1;
 		if (startDate != null && !startHour.equals("") && !startDate.equals("-1")) {
 			_startHour = transfer(startHour);
@@ -112,31 +109,80 @@ public class AdController {
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView deleteAd(@RequestParam(value = "ad_id", required = true) String adId) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index");
-		return mav;
+	public Map<String, Object> deleteAd(@RequestParam(value = "ad_id", required = true) long adId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Ad ad = adService.getAd(adId);
+		if (ad != null) {
+			boolean deleteResult = adService.deleteAd(ad);
+			if (deleteResult) {
+				map.put(Constants.CODE, 0);
+				return map;
+			}
+		}
+		
+		map.put(Constants.CODE, -1);
+		map.put(Constants.ERROR_MSG,"delete error.");
+		return map;
 	}
 
 	@RequestMapping(value = "/publish", method = RequestMethod.GET)
-	public ModelAndView publishAd(@RequestParam(value = "ad_id", required = true) String adId) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index");
-		return mav;
+	@ResponseBody
+	public Map<String, Object> publishAd(@RequestParam(value = "ad_id", required = true) long adId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Ad ad = adService.getAd(adId);
+		if (ad != null) {
+			boolean deleteResult = adService.lauchAd(ad);
+			if (deleteResult) {
+				map.put(Constants.CODE, 0);
+				return map;
+			}
+		}
+		
+		map.put(Constants.CODE, -1);
+		map.put(Constants.ERROR_MSG,"delete error.");
+		return map;
 	}
 	
 	@RequestMapping(value = "/unpublish", method = RequestMethod.GET)
-	public ModelAndView unpublishAd(@RequestParam(value = "ad_id", required = true) String adId) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index");
-		return mav;
+	@ResponseBody
+	public Map<String, Object> unpublishAd(@RequestParam(value = "ad_id", required = true) long adId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Ad ad = adService.getAd(adId);
+		if (ad != null) {
+			boolean deleteResult = adService.unlauchAd(ad);
+			if (deleteResult) {
+				map.put(Constants.CODE, 0);
+				return map;
+			}
+		}
+		
+		map.put(Constants.CODE, -1);
+		map.put(Constants.ERROR_MSG,"delete error.");
+		return map;
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public ModelAndView getList(@RequestParam(value = "merchant_id", required = false) String merchantId) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index");
-		return mav;
+	public Map<String, Object> getList(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String merchantTag = session.getAttribute(Constants.CURRENT_USER).toString();
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (merchantTag == null || merchantTag.equals("")) {
+			map.put(Constants.CODE, -1);
+			map.put(Constants.ERROR_MSG,"Login error.");
+			return map;
+		}
+		long merchantId = Long.parseLong(merchantTag);
+		Merchant merchant = merchantService.getMerchantById(merchantId);
+		if (merchant == null) {
+			map.put(Constants.CODE, -1);
+			map.put(Constants.ERROR_MSG,"Login error.");
+			return map;
+		}
+		List<Ad> list = adService.getAdListByMerchant(merchant);
+		map.put(Constants.CODE, 0);
+		map.put(Constants.DATA,list);
+		map.put(Constants.SIZE, list == null?0:list.size());
+		return map;
 	}
 	
 	@RequestMapping(value = "/mobile/{id}", method = RequestMethod.GET)

@@ -56,4 +56,9 @@ public class AdServiceImpl implements IAdService {
 		return dao.updateAd(ad);
 	}
 
+	@Override
+	public Ad getAd(long id) {
+		return dao.getAdById(id);
+	}
+
 }

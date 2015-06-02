@@ -24,4 +24,6 @@ public boolean deleteAd(Ad ad);
 public boolean lauchAd(Ad ad);
 
 public boolean unlauchAd(Ad ad);
+
+public Ad getAd(long id);
 }
