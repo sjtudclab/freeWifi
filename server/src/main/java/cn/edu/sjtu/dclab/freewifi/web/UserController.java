@@ -61,4 +61,19 @@ public class UserController {
 		}
 		return map;
 	}
+	
+	@RequestMapping(value = "/click", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> clickAd(
+			@RequestParam(value = "device_id") String deviceId,
+			@RequestParam(value = "ad_id") String adId) {
+		boolean result = true;
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (result) {
+			map.put(Constants.CODE, 0);
+		}else {
+			map.put(Constants.CODE, -1);
+		}
+		return map;
+	}
 }

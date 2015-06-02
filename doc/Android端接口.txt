@@ -34,3 +34,15 @@ code：0/-1
 size:
 data: wifilist
 }
+
+客户端收到推动的广告后，点击notification会进入广告页面，广告的url为：domain/ad/mobile/{id}
+
+用户每次点击广告后，会通知服务，服务器收集点击数据，便于进行数据分析：
+user/click
+POST
+参数：
+device_id：String
+ad_id：String
+返回：json
+{ code：0/-1   0表示成功 }
+
