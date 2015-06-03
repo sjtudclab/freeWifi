@@ -59,7 +59,7 @@ https://github.com/sjtudclab/freeWifi/blob/master/server/src/main/java/cn/edu/sj
 删除-GET：/ad/delete/{id}——>返回： json {code：0/-1}
 下线-GET：/ad/unpublish/{id}——>返回： json {code：0/-1}
 投放-GET：/ad/publish/{id}——>返回： json {code：0/-1}
-手机端预览-GET：/ad/mobile/{id}
+手机端预览-GET：URL:/ad/mobile?id=** {ajax请求广告内容，GET /ad/mobile/{id}}
 Pc段预览-GET：/ad/pc/{id}
 编辑-GET：/ad/edit/{id}跳转至编辑页面
 返回： json
