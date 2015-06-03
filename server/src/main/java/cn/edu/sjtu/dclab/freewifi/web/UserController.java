@@ -4,9 +4,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.edu.sjtu.dclab.freewifi.domain.Ad;
 import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
+import cn.edu.sjtu.dclab.freewifi.service.IAdCollectService;
+import cn.edu.sjtu.dclab.freewifi.service.IAdService;
 import cn.edu.sjtu.dclab.freewifi.service.IPushService;
 import cn.edu.sjtu.dclab.freewifi.service.IWIFIService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +23,7 @@ import cn.edu.sjtu.dclab.freewifi.enums.Education;
 import cn.edu.sjtu.dclab.freewifi.enums.Gender;
 import cn.edu.sjtu.dclab.freewifi.enums.IncomeType;
 import cn.edu.sjtu.dclab.freewifi.service.IUserService;
+import cn.edu.sjtu.dclab.freewifi.service.impl.AdServiceImpl;
 import cn.edu.sjtu.dclab.freewifi.util.Constants;
 import cn.edu.sjtu.dclab.freewifi.util.DateUtils;
 
@@ -32,6 +37,10 @@ public class UserController {
     private IWIFIService wifiService;
     @Autowired
     private IPushService pushService;
+    @Autowired
+    private IAdService adService;
+    @Autowired
+    private IAdCollectService adCollectService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
@@ -92,13 +101,19 @@ public class UserController {
     @ResponseBody
     public Map<String, Object> collect(
             @RequestParam(value = "device_id") String deviceId,
-            @RequestParam(value = "wifi_id") String wifiId) {
-
-        Merchant merchant = wifiService.getWifiById(Integer.parseInt(wifiId)).getMerchant();
-        User user = userService.getUserByDeviceId(deviceId);
-        pushService.pushNotificationAdByMerchantAndUser(merchant, user);
-
-        boolean result = true;
+            @RequestParam(value = "ad_id") Long adId) {
+    	User user = null;
+    	if (deviceId != null && !deviceId.equals("")) {
+    		user = userService.getUserByDeviceId(deviceId);
+		}
+    	Ad ad = null;
+    	if (adId != null) {
+    		ad = adService.getAd(adId);
+		}
+    	boolean result = false;
+    	if (user != null && ad != null) {
+    		result = adCollectService.addAdCollect(user, ad);
+		}
         Map<String, Object> map = new HashMap<String, Object>();
         if (result) {
             map.put(Constants.CODE, 0);
