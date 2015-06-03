@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>FreeWifi</title>
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="css/bootstrap2.min.css" />
-		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-		<link rel="stylesheet" href="css/unicorn.main.css" />
-		<link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" />
+		<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap2.min.css'/>" />
+		<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap-responsive.min.css'/>" />
+		<link rel="stylesheet" href="<c:url value='/resources/css/unicorn.main.css'/>" />
+		<link rel="stylesheet" href="<c:url value='/resources/css/unicorn.grey.css'/>"
+		class="skin-color" />
+<link href="<c:url value='/resources/css/font-awesome.css'/>" rel="stylesheet">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 	<body>
 
@@ -29,33 +32,12 @@
 		<div id="sidebar">
 			<a href="#" class="visible-phone"><i class="icon icon-home"></i> é¦é¡µ</a>
 			<ul>
-				<li ><a href="index.html"><i class="icon icon-home"></i> <span>é¦é¡µ</span></a></li>
-				<!-- <li class="submenu"> -->
-				<!-- 	<a href="#"><i class="icon icon-th-list"></i> <span>è¡¨åç»ä»¶</span> <span class="label">3</span></a> -->
-				<!-- 	<ul> -->
-				<!-- 		<li><a href="form-common.html">éç¨ç»ä»¶</a></li> -->
-				<!-- 		<li><a href="form-validation.html">è¡¨åéªè¯</a></li> -->
-				<!-- 		<li><a href="form-wizard.html">è¡¨åæç¤º</a></li> -->
-				<!-- 	</ul> -->
-				<!-- </li> -->
-				<!-- <li><a href="buttons.html"><i class="icon icon-tint"></i> <span>æé® &amp; å¾æ </span></a></li> -->
-				<!-- <li><a href="interface.html"><i class="icon icon-pencil"></i> <span>UIåç´ </span></a></li> -->
-				<!-- <li><a href="tables.html"><i class="icon icon-th"></i> <span>è¡¨æ ¼</span></a></li> -->
-				<!-- <li><a href="grid.html"><i class="icon icon-th-list"></i> <span>ç½æ ¼å¸å±</span></a></li> -->
-				<!-- <li class="submenu"> -->
-				<!-- 	<a href="#"><i class="icon icon-file"></i> <span>å¶ä»é¡µé¢</span> <span class="label">4</span></a> -->
-				<!-- 	<ul> -->
-				<!-- 		<li><a href="invoice.html">æ¸å</a></li> -->
-				<!-- 		<li><a href="chat.html">èå¤©</a></li> -->
-				<!-- 		<li><a href="calendar.html">æ¥å</a></li> -->
-				<!-- 		<li><a href="gallery.html">ç¸å</a></li> -->
-				<!-- 	</ul> -->
-				<!-- </li> -->
-				<!-- <li> -->
-				<!-- 	<a href="charts.html"><i class="icon icon-signal"></i> <span>å¾è¡¨ç»è®¡</span></a> -->
-				<!-- </li> -->
+				<li ><a href="index.html"><i class="icon
+				icon-home"></i> <span>Home Page</span></a></li>
+				<li ><a href="index.html"><i class="icon
+				icon-edit"></i> <span>Edit</span></a></li>
 				<li class="active">
-					<a href="widgets.html"><i class="icon icon-inbox"></i> <span>Manage</span></a>
+					<a href="widgets.html"><i class="icon icon-dashboard"></i> <span>Manage</span></a>
 				</li>
 			</ul>
 
@@ -129,9 +111,9 @@
 
 
 
-            <script src="js/jquery.min.js"></script>
-            <script src="js/jquery.ui.custom.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/unicorn.js"></script>
+            <script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
+            <script src="<c:url value='/resources/js/jquery.ui.custom.js'/>"></script>
+            <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
+            <script src="<c:url value='/resources/js/unicorn.js'/>"></script>
 	</body>
 </html>
