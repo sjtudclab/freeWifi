@@ -39,9 +39,8 @@ public class LoginController {
 	public ModelAndView login(HttpServletRequest request,
 			@RequestParam(value = "username", required = true) String username,
 			@RequestParam(value = "password", required = true) String password) {
-
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index");
+		mav.setViewName("login");
 		Merchant merchant = merchantService.login(username, password);
 		if (merchant != null) {
 			mav.setViewName("manage");
@@ -51,6 +50,11 @@ public class LoginController {
 			mav.addObject("msg", "username or password error");
 		}
 		return mav;
+	}
+	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String home(HttpServletRequest request) {
+		return "manage";
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
