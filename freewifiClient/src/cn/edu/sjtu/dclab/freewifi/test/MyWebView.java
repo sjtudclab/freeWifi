@@ -23,7 +23,7 @@ import cn.edu.sjtu.dclab.freewifi.R;
 public class MyWebView extends Activity{
 //	private static final String TAG = "MyWebView";
 	
-	private static final String URL = "file:///android_asset/register-info.html";
+	private static final String URL = "file:///android_asset/html/manage.html";
 	private WebView webView = null;
 //	private ProgressDialog pd = null;
 	

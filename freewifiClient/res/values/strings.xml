@@ -5,6 +5,9 @@
     <string name="btn_clickme">Click me</string>
     <string name="btn_locate">Locate</string>
     <string name="btn_changeloc">ChangLoc</string>
+    <string name="btn_sharetowechat">Share to Wechat Session</string>
+    <string name="btn_checksupformoments">Check Support of Moments</string>
+    <string name="btn_sharetowechatmoments">Share to Wechat Moments</string>
 
     <string-array name="aty_list">
         <item>Wifi</item> <!--Wifi测试页-->
@@ -12,5 +15,13 @@
         <item>Locating</item> <!--定位测试页-->
         <item>JsonTest</item> <!--Json测试页-->
         <item>PushTest</item> <!--Push测试页-->
+        <item>ServerPageTest</item>
+        <item>WechatShare</item>
     </string-array>
+
+    <string name="errcode_success">发送成功</string>
+    <string name="errcode_cancel">发送取消</string>
+    <string name="errcode_deny">发送被拒绝</string>
+    <string name="errcode_unknown">发送返回</string>
+
 </resources>

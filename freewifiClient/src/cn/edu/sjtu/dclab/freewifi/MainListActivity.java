@@ -2,7 +2,6 @@ package cn.edu.sjtu.dclab.freewifi;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,12 +9,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import android.widget.Toast;
 import cn.edu.sjtu.dclab.freewifi.geo.BDLocating;
 import cn.edu.sjtu.dclab.freewifi.push.PushAty;
 import cn.edu.sjtu.dclab.freewifi.test.JsonTestAty;
+import cn.edu.sjtu.dclab.freewifi.test.MyWebView;
 import cn.edu.sjtu.dclab.freewifi.test.WifiActivity;
 import cn.edu.sjtu.dclab.freewifi.web.WebViewInteractJS;
+import cn.edu.sjtu.dclab.freewifi.wxapi.WXEntryActivity;
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -56,6 +56,12 @@ public class MainListActivity extends ListActivity {
                         break;
                     case 4:
                         startActivity(new Intent(getApplicationContext(), PushAty.class));
+                        break;
+                    case 5:
+                        startActivity(new Intent(getApplicationContext(), MyWebView.class));
+                        break;
+                    case 6:
+                        startActivity(new Intent(getApplicationContext(), WXEntryActivity.class));
                         break;
                     default:
                         break;
