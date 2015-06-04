@@ -186,6 +186,7 @@ public class AdController {
 	}
 	
 	@RequestMapping(value = "/mobile/{id}", method = RequestMethod.GET)
+	@ResponseBody
 	public ModelAndView showAdForMobile(@PathVariable(value = "id") long id) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("index");

@@ -47,11 +47,19 @@ ad_id：String
 { code：0/-1   0表示成功 }
 
 用户点击收藏广告
-user/collect
+/ad/collect/add
 POST
 参数：
 device_id：String
 ad_id：String
 返回：json
 { code：0/-1   0表示成功 }
+
+device_id标识的用户获取所有收藏的广告
+/ad/collect/{device_id}
+GET
+返回：json
+{ code：0/-1   0表示成功
+size:
+data: adCollectlist }
 

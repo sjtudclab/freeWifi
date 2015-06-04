@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import cn.edu.sjtu.dclab.freewifi.enums.AdState;
 import cn.edu.sjtu.dclab.freewifi.enums.AdType;
 
@@ -82,7 +84,7 @@ public class Ad implements Serializable {
 	public void setOrientation(Orientation orientation) {
 		this.orientation = orientation;
 	}
-
+	@JsonIgnore
 	public Merchant getMerchant() {
 		return merchant;
 	}

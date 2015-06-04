@@ -60,6 +60,9 @@ public class User implements Serializable{
 	@Column(nullable = true)
 	private IncomeType income;
 	
+	@Column(nullable = true)
+	private int score;
+	
 	public String getDeviceId() {
 		return deviceId;
 	}
@@ -112,6 +115,13 @@ public class User implements Serializable{
 		this.birthdate = birthdate;
 		this.education = education;
 		this.income = income;
+		this.score = 0;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 }
