@@ -61,5 +61,5 @@ GET
 返回：json
 { code：0/-1   0表示成功
 size:
-data: adCollectlist }
+data: adlist }
 
