@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.sjtu.dclab.freewifi.R;
+import cn.edu.sjtu.dclab.freewifi.tool.HTTPTool;
+import cn.edu.sjtu.dclab.freewifi.tool.PhoneStateTool;
 import cn.edu.sjtu.dclab.freewifi.wifi.WifiAdmin;
 
 import java.util.List;
@@ -75,11 +77,19 @@ public class WifiActivity extends Activity {
                     wifiAdmin.cleanAll();
                     wificfgList = wifiAdmin.getWifiCfgList();
                     boolean iscon = false;
-                    for (ScanResult res:list){
-                        if (res.SSID.equals("5306")){
-                            WifiConfiguration cfg = wifiAdmin.createWifiCfg(res,"1234567890");
+                    for (ScanResult res : list) {
+                        if (res.SSID.equals("5306")) {
+                            WifiConfiguration cfg = wifiAdmin.createWifiCfg(res, "1234567890");
                             iscon = wifiAdmin.addConnection(cfg);
-                            wificfgList = wifiAdmin.getWifiCfgList();
+                            //wificfgList = wifiAdmin.getWifiCfgList();
+
+                            //TODO wifi连接成功后，通知服务器 user/notification
+                            if (iscon) {
+                                String IMEIString = PhoneStateTool.GetIMEI(getApplicationContext());
+                                String wifiID = res.BSSID.toString();
+                                HTTPTool.SendConnectedInfo(getApplicationContext(), IMEIString, wifiID);
+                            }
+
                             break;
                         }
                     }
@@ -90,18 +100,18 @@ public class WifiActivity extends Activity {
         }
     }
 
-    public void getAllNetWorkList(){
-        if(sb!=null){
-            sb=new StringBuffer();
+    public void getAllNetWorkList() {
+        if (sb != null) {
+            sb = new StringBuffer();
         }
         wifiAdmin.wifiScan();
-        list=wifiAdmin.getWifiScanResList();
-        if(list!=null){
-            for(int i=0;i<list.size();i++){
-                result =list.get(i);
-                sb=sb.append(result.BSSID+"  ").append(result.SSID+"   ")
-                        .append(result.capabilities+"   ").append(result.frequency+"   ")
-                        .append(result.level+"\n\n");
+        list = wifiAdmin.getWifiScanResList();
+        if (list != null) {
+            for (int i = 0; i < list.size(); i++) {
+                result = list.get(i);
+                sb = sb.append(result.BSSID + "  ").append(result.SSID + "   ")
+                        .append(result.capabilities + "   ").append(result.frequency + "   ")
+                        .append(result.level + "\n\n");
             }
             textView.setText("wifi列表\n" + sb.toString());
         }

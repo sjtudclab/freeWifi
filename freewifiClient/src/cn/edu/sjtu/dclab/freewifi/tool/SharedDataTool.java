@@ -21,6 +21,7 @@ public class SharedDataTool {
     public final static String WIFIID = "wifi_id";
     public final static String LONGITUDE = "longitude";
     public final static String LATITUDE = "latitude";
+    public final static String ADID = "ad_id";
 
     private static SharedPreferences mSharedPreferences;
     private static SharedPreferences.Editor mEditor;
