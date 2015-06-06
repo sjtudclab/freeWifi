@@ -111,5 +111,20 @@ public class UserController {
         return map;
     }
     
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> loginFromMObile(
+            @RequestParam(value = "account") String account,
+            @RequestParam(value = "password") String password) {
+    	Map<String, Object> map = new HashMap<String, Object>();
+        User user = userService.getUserByTel(account);
+        if (user != null && user.getPassword().equals(password)) {
+        	map.put(Constants.CODE, 0);
+        	return map;
+		}
+        map.put(Constants.CODE, -1);
+        return map;
+    }
+    
     
 }

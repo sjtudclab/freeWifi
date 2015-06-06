@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import cn.edu.sjtu.dclab.freewifi.enums.BusinessType;
 
 /**
@@ -49,7 +51,7 @@ public class Merchant implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
-
+	@JsonIgnore
 	public String getLoginname() {
 		return loginname;
 	}
@@ -57,7 +59,7 @@ public class Merchant implements Serializable {
 	public void setLoginname(String loginname) {
 		this.loginname = loginname;
 	}
-
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -65,7 +67,7 @@ public class Merchant implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	@JsonIgnore
 	public String getName() {
 		return name;
 	}
