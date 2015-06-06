@@ -89,11 +89,12 @@ public class JsonTool {
 	 */
 	public static String ParseWifiListJson(JSONObject root){
 		int code = -404;
-		String size = "";
+		String size = "", data = "";
 		JSONArray wifiArray = null;
 		try {
 			code = root.getInt("code");
 			size = root.getString("size");
+			data = root.getString("data");
 			wifiArray = root.getJSONArray("data");
 			for(int i = 0; i < wifiArray.length(); i++){
 				//TODO
@@ -101,7 +102,7 @@ public class JsonTool {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return "code = " + code + " size = " + size + " data = ";
+		return "code = " + code + " size = " + size + " data = " + data;
 	}
 
 //	public static LatLng ParseJsonForLocation(JSONObject root){

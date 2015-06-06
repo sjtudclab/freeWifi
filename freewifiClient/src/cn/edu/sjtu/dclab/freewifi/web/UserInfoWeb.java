@@ -3,6 +3,7 @@ package cn.edu.sjtu.dclab.freewifi.web;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -137,6 +138,11 @@ public class UserInfoWeb extends Activity{
 		}, "javaSender");//the name used to expose the object in JavaScript
 	}
 
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+	}
+
 	/**调用系统相机拍照
 	 */
 //	private String takePhoto(String fileName){
@@ -167,7 +173,8 @@ public class UserInfoWeb extends Activity{
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if(keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()){
-			webView.goBack();
+			//webView.goBack();
+			finish();
 			return true;//已经处理完，返回true，无需系统再处理
 		}
 		return super.onKeyDown(keyCode, event);

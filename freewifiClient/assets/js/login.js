@@ -12,3 +12,6 @@ function sendLoginInfo(){
 	return true;
 }
 
+function register(){
+	window.javaSender.callRegister();
+}

@@ -3,6 +3,7 @@ package cn.edu.sjtu.dclab.freewifi.web;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -44,6 +45,7 @@ import cn.edu.sjtu.dclab.freewifi.tool.SharedDataTool;
  */
 public class LoginWeb extends Activity{
 	private static final String TAG = "LoginWeb";
+
 	static final int REQUEST_CODE = 100;
 	private static final String URL_LOCAL_LOGIN = "file:///android_asset/login.html";
 
@@ -76,6 +78,17 @@ public class LoginWeb extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.aty_mywebview);
+
+		//仅供测试
+//		HTTPTool.SendRequestForWifiList(getApplicationContext(), "116.31347892381", "39.989511138466");
+//		HTTPTool.SetHandler(new Handler(){
+//			@Override
+//			public void handleMessage(Message msg) {
+//				if(msg.what == HTTPTool.RECEIVE_JSON_STRING){
+//					Log.i(TAG, (String)msg.obj);
+//				}
+//			}
+//		});
 		
 		//ProgressDialog最好于网页加载前初始化，建议show()使用handler机制调用（避免加载过程中空指针问题）
 		pd = new ProgressDialog(getApplicationContext());
@@ -128,6 +141,19 @@ public class LoginWeb extends Activity{
 	            });
 	        }
 		}, "javaSender");//the name used to expose the object in JavaScript
+		webView.addJavascriptInterface(new Object(){
+			@JavascriptInterface//将被js调用
+			public void callRegister() {
+				handler.post(new Runnable() {
+					public void run() {
+						Log.i(TAG, "callRegister()");
+						//跳到注册界面
+						startActivity(new Intent(getApplicationContext(), UserInfoWeb.class));
+						//finish();
+					}
+				});
+			}
+		}, "javaSender");//the name used to expose the object in JavaScript
 	}
 
 	/**调用系统相机拍照
@@ -160,10 +186,17 @@ public class LoginWeb extends Activity{
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if(keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()){
-			webView.goBack();
+//			webView.goBack();
+			finish();
 			return true;//已经处理完，返回true，无需系统再处理
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+
 	}
 	
 	//创建菜单
