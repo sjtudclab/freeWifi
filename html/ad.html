@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FreeWifi</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/bootstrap2.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="css/unicorn.main.css" />
+    <link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" />
+    <meta http-equiv="Content-Type" content="text/html;
+		                             charset=utf-8" />
+    <link rel="apple-touch-icon" href="//mindmup.s3.amazonaws.com/lib/img/apple-touch-icon.png" />
+    <link rel="shortcut icon"
+          href="http://mindmup.s3.amazonaws.com/lib/img/favicon.ico" >
+    <link href="./css/prettify.css" rel="stylesheet">
+    <link href="./css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="./css/font-awesome.css" rel="stylesheet">
+    <link href="./css/bootstrap-multiselect.css" rel="stylesheet">
+    <link href="./css/index.css" rel="stylesheet">
+    <link href="./css/editor.css" rel="stylesheet">
+    <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <script src="./js/jquery.min.js"></script>
+    <script src="js/jquery.hotkeys.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/prettify.js"></script>
+    <script src="js/bootstrap-wysiwyg.js"></script>
+  </head>
+  <body>
+  </body>
+<script>
+  function getUrlParameter(sParam)
+  {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++)
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam)
+        {
+            return sParameterName[1];
+        }
+    }
+  }
+  $(function(){
+      var id = getUrlParameter('id');
+      $.get({
+          url: '/ad/mobile/',
+          data: id,
+          function(responseText) {
+              if (responseText.code == 0) {
+                  $('body').html(responseText.data);
+              } else {
+                  console.log('error');
+              }
+          }
+      });
+  });
+</script>
+</html>
