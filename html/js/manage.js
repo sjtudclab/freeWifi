@@ -23,6 +23,9 @@ $(function() {
                     var aEdit = document.createElement('a');
                     $(aEdit).addClass('btn btn-primary btn-mini');
                     $(aEdit).text('Edit');
+                    $(aEdit).click(function(){
+                        location.href = document.location.hostname + '?id=' + ad.id;
+                    });
                     var aPublish = document.createElement('a');
                     $(aPublish).addClass('btn btn-success btn-mini');
                     $(aPublish).text('Publish');
