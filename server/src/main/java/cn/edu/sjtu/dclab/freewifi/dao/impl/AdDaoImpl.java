@@ -47,7 +47,7 @@ public class AdDaoImpl implements IAdDao {
 	@Override
 	public List<Ad> getAdByMerchant(Merchant merchant) {
 		Criteria criteria = getSession().createCriteria(Ad.class);
-		criteria.add(Restrictions.eq("merchant.id", ""+merchant.getId()));
+		criteria.add(Restrictions.eq("merchant.id", merchant.getId()));
 		criteria.add(Restrictions.ne("state", AdState.DELETE));
 		return criteria.list();
 	}

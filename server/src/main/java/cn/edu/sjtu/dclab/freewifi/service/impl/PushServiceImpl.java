@@ -1,6 +1,14 @@
 package cn.edu.sjtu.dclab.freewifi.service.impl;
 
-import cn.edu.sjtu.dclab.freewifi.domain.Ad;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
 import cn.edu.sjtu.dclab.freewifi.domain.User;
 import cn.edu.sjtu.dclab.freewifi.service.IAdService;
@@ -13,16 +21,6 @@ import cn.jpush.api.push.model.Platform;
 import cn.jpush.api.push.model.PushPayload;
 import cn.jpush.api.push.model.audience.Audience;
 import cn.jpush.api.push.model.notification.Notification;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
 
 /**
  * Created by Yang on 2015/5/31.
@@ -48,7 +46,7 @@ public class PushServiceImpl implements IPushService {
 		// return;
 		//
 		// Ad ad = adList.get(0);
-		// ÕâÐ©Êý¾ÝÔÝÊ±ÓÃÓÚ²âÊÔ
+		// ï¿½ï¿½Ð©ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½
 		String alias = null;
 		String title = "Title";
 		String msg = "This a msg";

@@ -111,6 +111,16 @@ public class AdController {
 		}
 	}
 	
+	private int deTransfer(int hour){
+		int h = hour/3600;
+		hour = hour % 3600;
+		int m = hour/60;
+		hour = hour %60;
+		int s = hour;
+		return h*10000+m*100+s;
+		
+	}
+	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> deleteAd(@RequestParam(value = "ad_id", required = true) long adId) {
@@ -166,6 +176,7 @@ public class AdController {
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
+	@ResponseBody
 	public Map<String, Object> getList(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String merchantTag = session.getAttribute(Constants.CURRENT_USER).toString();
@@ -183,6 +194,12 @@ public class AdController {
 			return map;
 		}
 		List<Ad> list = adService.getAdListByMerchant(merchant);
+		if (list != null) {
+			for (Ad ad : list) {
+				ad.setStartHour(deTransfer(ad.getStartHour()));
+				ad.setEndHour(deTransfer(ad.getEndHour()));
+			}
+		}
 		map.put(Constants.CODE, 0);
 		map.put(Constants.DATA,list);
 		map.put(Constants.SIZE, list == null?0:list.size());

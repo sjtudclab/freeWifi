@@ -14,17 +14,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.edu.sjtu.dclab.freewifi.domain.Ad;
 import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
 import cn.edu.sjtu.dclab.freewifi.domain.User;
-import cn.edu.sjtu.dclab.freewifi.enums.AgeType;
+import cn.edu.sjtu.dclab.freewifi.enums.BabyState;
 import cn.edu.sjtu.dclab.freewifi.enums.Education;
+import cn.edu.sjtu.dclab.freewifi.enums.EngageState;
 import cn.edu.sjtu.dclab.freewifi.enums.Gender;
 import cn.edu.sjtu.dclab.freewifi.enums.IncomeType;
+import cn.edu.sjtu.dclab.freewifi.enums.Job;
 import cn.edu.sjtu.dclab.freewifi.service.IAdCollectService;
 import cn.edu.sjtu.dclab.freewifi.service.IAdService;
 import cn.edu.sjtu.dclab.freewifi.service.IAdStatsService;
 import cn.edu.sjtu.dclab.freewifi.service.IPushService;
 import cn.edu.sjtu.dclab.freewifi.service.IUserService;
 import cn.edu.sjtu.dclab.freewifi.service.IWIFIService;
-import cn.edu.sjtu.dclab.freewifi.service.impl.AdStatsServiceImpl;
 import cn.edu.sjtu.dclab.freewifi.util.Constants;
 import cn.edu.sjtu.dclab.freewifi.util.DateUtils;
 
@@ -53,10 +54,14 @@ public class UserController {
                                         @RequestParam(value = "gender") int gender,
                                         @RequestParam(value = "password") String password,
                                         @RequestParam(value = "birthdate") String birthdate,
-                                        @RequestParam(value = "income") int income) {
+                                        @RequestParam(value = "income") int income,
+                                        @RequestParam(value = "engage") int engage,
+                                        @RequestParam(value = "baby") int baby,
+                                        @RequestParam(value = "job") int job
+                                        ) {
         Date date = DateUtils.parseDate(birthdate, "yyyy-MM-dd");
-        User user = new User(deviceId, Gender.get(gender), tel, date,
-                Education.get(education), IncomeType.get(income), password);
+        User user = new User(deviceId, Gender.get(gender), EngageState.get(engage), Job.get(job), 
+        		BabyState.get(baby), password, tel, date, Education.get(education), IncomeType.get(income), 0);
         boolean result = userService.addUser(user);
         Map<String, Object> map = new HashMap<String, Object>();
         if (result) {

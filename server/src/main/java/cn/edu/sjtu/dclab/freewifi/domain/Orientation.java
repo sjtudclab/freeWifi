@@ -31,6 +31,17 @@ public class Orientation implements Serializable {
 	@Column(nullable = true)
 	private String income;
 	
+	@Column(nullable = true)
+	private String engage;
+	
+	@Column(nullable = true)
+	private String job;
+	
+	@Column(nullable = true)
+	private String baby;
+	
+	
+	
 	public Orientation() {
 		super();
 	}
@@ -73,6 +84,22 @@ public class Orientation implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-
+	public String getEngage() {
+		return engage;
+	}
+	public void setEngage(String engage) {
+		this.engage = engage;
+	}
+	public String getJob() {
+		return job;
+	}
+	public void setJob(String job) {
+		this.job = job;
+	}
+	public String getBaby() {
+		return baby;
+	}
+	public void setBaby(String baby) {
+		this.baby = baby;
+	}
 }
