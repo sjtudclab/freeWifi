@@ -22,6 +22,11 @@ public class SharedDataTool {
     public final static String LONGITUDE = "longitude";
     public final static String LATITUDE = "latitude";
     public final static String ADID = "ad_id";
+    public final static String ENGAGE = "engage";
+    public final static String BABY = "baby";
+    public final static String JOB = "job";
+    public final static String ACCOUNT = "account";
+    public final static String PASSWORD = "password";
 
     private static SharedPreferences mSharedPreferences;
     private static SharedPreferences.Editor mEditor;
@@ -44,14 +49,27 @@ public class SharedDataTool {
     }
 
     public static boolean WriteRegisterInfo(Context context, String gender, String birthday,
-                                            String tel, String education, String income){
+                                            String tel, String pwd, String education, String income,
+                                            String engage, String baby, String job){
         initSharedData(context);
         WriteIMEI(context);
         mEditor.putString(GENDER, gender);
         mEditor.putString(BIRTHDAY, birthday);
         mEditor.putString(TEL, tel);
+        mEditor.putString(PASSWORD, pwd);
         mEditor.putString(EDUCATION, education);
         mEditor.putString(INCOME, income);
+        mEditor.putString(ENGAGE, engage);
+        mEditor.putString(BABY, baby);
+        mEditor.putString(JOB, job);
+        return mEditor.commit();
+    }
+
+    public static boolean WriteLoginInfo(Context context, String account, String password){
+        initSharedData(context);
+        WriteIMEI(context);
+        mEditor.putString(ACCOUNT, account);
+        mEditor.putString(PASSWORD, password);
         return mEditor.commit();
     }
 
@@ -60,6 +78,15 @@ public class SharedDataTool {
         switch (gender){
             case "男": index = 0; break;
             case "女": index = 1; break;
+            default: break;
+        }
+        return index;
+    }
+    public static int GetEngageIndex(String engage){
+        int index = -1;
+        switch (engage){
+            case "已婚": index = 0; break;
+            case "未婚": index = 1; break;
             default: break;
         }
         return index;
@@ -76,6 +103,19 @@ public class SharedDataTool {
         }
         return index;
     }
+    public static int GetJobIndex(String job){
+        int index = -1;
+        switch (job){
+            case "学生": index = 0; break;
+            case "工业": index = 1; break;
+            case "服务业": index = 2; break;
+            case "IT技术": index = 3; break;
+            case "教育行业": index = 4; break;
+            case "中小企业主": index = 5; break;
+            default: break;
+        }
+        return index;
+    }
     public static int GetIncomeIndex(String income){
         int index = -1;
         switch (income){
@@ -83,6 +123,17 @@ public class SharedDataTool {
             case "3000-7000元": index = 1; break;
             case "7000-10000元": index = 2; break;
             case "10000元以上": index = 3; break;
+            default: break;
+        }
+        return index;
+    }
+    public static int GetBabyIndex(String baby){
+        int index = -1;
+        switch (baby){
+            case "无": index = 0; break;
+            case "孕期": index = 1; break;
+            case "0-3岁": index = 2; break;
+            case "3-6岁": index = 3; break;
             default: break;
         }
         return index;

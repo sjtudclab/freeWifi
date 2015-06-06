@@ -15,7 +15,8 @@ import cn.edu.sjtu.dclab.freewifi.push.PushAty;
 import cn.edu.sjtu.dclab.freewifi.test.JsonTestAty;
 import cn.edu.sjtu.dclab.freewifi.test.MyWebView;
 import cn.edu.sjtu.dclab.freewifi.test.WifiActivity;
-import cn.edu.sjtu.dclab.freewifi.web.WebViewInteractJS;
+import cn.edu.sjtu.dclab.freewifi.web.LoginWeb;
+import cn.edu.sjtu.dclab.freewifi.web.UserInfoWeb;
 import cn.edu.sjtu.dclab.freewifi.wxapi.WXEntryActivity;
 import cn.jpush.android.api.JPushInterface;
 
@@ -47,7 +48,7 @@ public class MainListActivity extends ListActivity {
                         startActivity(new Intent(getApplicationContext(), WifiActivity.class));
                         break;
                     case 1:
-                        startActivity(new Intent(getApplicationContext(), WebViewInteractJS.class));
+                        startActivity(new Intent(getApplicationContext(), UserInfoWeb.class));
                         break;
                     case 2:
                         startActivity(new Intent(getApplicationContext(), BDLocating.class));
@@ -66,6 +67,9 @@ public class MainListActivity extends ListActivity {
                         break;
                     case 7:
                         startActivity(new Intent(getApplicationContext(), BDMapFragmentAty.class));
+                        break;
+                    case 8:
+                        startActivity(new Intent(getApplicationContext(), LoginWeb.class));
                         break;
                     default:
                         break;

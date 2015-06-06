@@ -22,7 +22,7 @@ import cn.edu.sjtu.dclab.freewifi.R;
 import cn.edu.sjtu.dclab.freewifi.tool.HTTPTool;
 import cn.edu.sjtu.dclab.freewifi.tool.SharedDataTool;
 
-/**WebViewInteractJS extends Activity
+/**UserInfoWeb extends Activity
  * WebView测试：与本地资源（系统照相机）的交互；创建菜单示例；按键事件处理；ProgressDialog示例；
  * 
  * 改善浏览器用户体验可以调用setWebViewClient和setWebChromeClient，
@@ -42,10 +42,10 @@ import cn.edu.sjtu.dclab.freewifi.tool.SharedDataTool;
  * @author Eugene
  * @data 2015-1-23
  */
-public class WebViewInteractJS extends Activity{
-	private static final String TAG = "WebViewInteractJS";
+public class LoginWeb extends Activity{
+	private static final String TAG = "LoginWeb";
 	static final int REQUEST_CODE = 100;
-	private static final String URL_LOCAL_REG = "file:///android_asset/register-info.html";
+	private static final String URL_LOCAL_LOGIN = "file:///android_asset/login.html";
 
 	boolean isFromCamera = false;//是否是从系统拍照界面返回
 	private File file = null;
@@ -109,25 +109,21 @@ public class WebViewInteractJS extends Activity{
 		//webView.setWebViewClient(new WebViewClient());
 		
 		//获取assets绝对路径的格式"file:///android_asset/filename"
-		webView.loadUrl(URL_LOCAL_REG);
+		webView.loadUrl(URL_LOCAL_LOGIN);
 		
 		//添加js需调用执行的java函数
 		//如果将targetSdkVersion 设置为17或者更高，必须给暴露的js接口加@JavascriptInterface注释
 		webView.addJavascriptInterface(new Object(){
 			//如果将targetSdkVersion 设置为17或者更高，必须给暴露的js接口加@JavascriptInterface注释
 			@JavascriptInterface//将被js调用
-			public void sendRegInfo(final String gender, final String birthday, final String tel,
-									final String education, final String income) {
+			public void sendLoginInfo(final String account, final String password) {
 	            handler.post(new Runnable() {
 	                public void run() {
-	                	Log.i(TAG, "sendRegInfo()");
-						Log.i(TAG, gender + " " + birthday + " " + tel + " " + education + " " + income);
-						SharedDataTool.WriteRegisterInfo(getApplicationContext(), gender, birthday,
-								tel, education, income);//先保存一份到本地
-						String imei = SharedDataTool.GetIMEI(getApplicationContext());//从本地获取imei
-						Log.i(TAG, "imei: " + imei);
+	                	Log.i(TAG, "sendLoginInfo()");
+						Log.i(TAG, account + " " + password + " ");
+						SharedDataTool.WriteLoginInfo(getApplicationContext(), account, password);//先保存一份到本地
 						//发送注册信息到服务器
-						HTTPTool.SendRegisterInfo(getApplicationContext(), imei, gender, birthday, tel, education, income);
+						HTTPTool.SendLoginInfo(getApplicationContext(), account, password);
 	                }
 	            });
 	        }

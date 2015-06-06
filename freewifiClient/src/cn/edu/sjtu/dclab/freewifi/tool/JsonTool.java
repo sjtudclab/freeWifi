@@ -2,6 +2,7 @@ package cn.edu.sjtu.dclab.freewifi.tool;
 
 import android.os.Handler;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,17 +39,25 @@ public class JsonTool {
 	/**创建json；
 	 * json示例：{
 	 code：0/-1
-	 size:
-	 data: wifilist
+	 size: 8
+	 data: [{"id":1,"ssid":"sun","longitude":122,"latitude":31,"password":"18702107120"}]
 	 }
 	 * @return
 	 */
 	public static JSONObject CreateWifiListJson(){
 		JSONObject root = new JSONObject();
+		JSONObject wifiElement1 = new JSONObject();
+		JSONArray data = new JSONArray();
 		try {
 			root.put("code", "0");
-			root.put("size", "2kb");
-			root.put("data", "wifi1, wifi2, wifi3, wifi4, ...");
+			root.put("size", 8);
+			wifiElement1.put("id", 1);
+			wifiElement1.put("ssid", "sun");
+			wifiElement1.put("longitude", 122);
+			wifiElement1.put("latitude", 31);
+			wifiElement1.put("password", "18702107120");
+			data.put(wifiElement1);
+			root.put("data", data);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -74,21 +83,25 @@ public class JsonTool {
 	 * 格式示例： {
 	 code：0/-1
 	 size:
-	 data: wifilist
+	 data: [{"id":1,"ssid":"sun","longitude":122,"latitude":31,"password":"18702107120"}]
 	 }
 	 * @param root
 	 */
 	public static String ParseWifiListJson(JSONObject root){
 		int code = -404;
-		String size = "", wifilist = "";
+		String size = "";
+		JSONArray wifiArray = null;
 		try {
 			code = root.getInt("code");
 			size = root.getString("size");
-			wifilist = root.getString("data");
+			wifiArray = root.getJSONArray("data");
+			for(int i = 0; i < wifiArray.length(); i++){
+				//TODO
+			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return "code = " + code + " size = " + size + " data = " + wifilist;
+		return "code = " + code + " size = " + size + " data = ";
 	}
 
 //	public static LatLng ParseJsonForLocation(JSONObject root){

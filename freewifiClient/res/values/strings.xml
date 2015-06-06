@@ -18,6 +18,7 @@
         <item>ServerPageTest</item>
         <item>WechatShare</item>
         <item>BDMap</item>
+        <item>Login</item>
     </string-array>
 
     <string name="errcode_success">发送成功</string>

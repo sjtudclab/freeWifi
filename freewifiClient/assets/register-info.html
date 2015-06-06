@@ -29,6 +29,24 @@
 	        <input type="text" id="inputName" class="form-control" placeholder="NIck Name" required autofocus>
     	</div>
         <br />-->
+        <!--手机-->
+        <div class="input-group">
+        	<span class="input-group-addon">手机</span>
+	        <label for="inputCellphone" class="sr-only">手机</label>
+	        <input type="text" id="inputCellphone" class="form-control" placeholder="请输入11位手机号" 
+	        	required onfocus="focusTel()" onblur="blurTel()">
+        </div>
+        <h4 id="warningTel" style="display:none;">
+        	<span id="msgTel" class="label label-warning">请按格式输入11位手机号 <br /></span>
+        </h4>
+        <br />
+        <!--密码-->
+        <div class="input-group">
+        	<span class="input-group-addon">密码</span>
+	        <label for="inputPassword" class="sr-only">密码</label>
+	        <input type="text" id="inputPassword" class="form-control" placeholder="密码" required >
+        </div>
+        <br />
         <!--性别-->
 		<div class="input-group">
 			<span class="input-group-addon">性别</span>
@@ -39,28 +57,62 @@
       		</label>
 		</div>
 		<br />
+		<!--婚姻-->
+		<div class="input-group">
+			<span class="input-group-addon">婚姻</span>
+      		<label class="form-control">
+      			<input type="radio" id="radio_engage" name="engage" value="engage" aria-label="engage"  checked="checked"> 已婚
+      			&nbsp;&nbsp;&nbsp;
+      			<input type="radio" id="radio_unengage" name="engage" value="unengage" aria-label="unengage"> 未婚
+      		</label>
+		</div>
+		<br />
         <!--生日-->
         <div class="input-group">
         	<span class="input-group-addon">生日</span>
 	        <label for="inputBirthday" class="sr-only">生日</label>
-	        <input type="text" id="inputBirthday" class="form-control" placeholder="格式：1990-01-01" 
+	        <input type="text" id="inputBirthday" class="form-control" placeholder="生日格式如1990-01-01" 
 	        	required onfocus="focusBirthday()" onblur="blurBirthday()">
     	</div>
     	<h4 id="warningBirthday" style="display:none;">
     		<span id="msgBirthday" class="label label-warning">请按格式输入，例如 1990-01-01 <br /></span>
     	</h4>
         <br />
-        <!--手机-->
-        <div class="input-group">
-        	<span class="input-group-addon">手机</span>
-	        <label for="inputCellphone" class="sr-only">手机</label>
-	        <input type="text" id="inputCellphone" class="form-control" placeholder="格式：11位数字" 
-	        	required onfocus="focusTel()" onblur="blurTel()">
-        </div>
-        <h4 id="warningTel" style="display:none;">
-        	<span id="msgTel" class="label label-warning">请按格式输入11位手机号 <br /></span>
-        </h4>
-        <br />
+        
+        <!--育儿状态-->
+		<div class="input-group">
+        	<span class="input-group-addon"> 育儿状态</span>
+        	<div class="dropdown">
+			  <button id="btn_baby" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuBaby" data-toggle="dropdown" aria-expanded="true">
+			    	无&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span>
+			  </button>
+			  <ul id="ul_baby" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuBaby">
+			    <li role="presentation"><a role="menuitem" tabindex="0" href="#">无</a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="1" href="#">孕期</a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="2" href="#">0-3岁</a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="3" href="#">3-6岁</a></li>
+			  </ul>
+			</div>
+    	</div>
+		<br />
+		<!--职位角色-->
+		<div class="input-group">
+        	<span class="input-group-addon"> 职位角色</span>
+        	<div class="dropdown">
+			  <button id="btn_job" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuJob" data-toggle="dropdown" aria-expanded="true">
+			    	学生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span>
+			  </button>
+			  <ul id="ul_job" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuJob">
+			    <li role="presentation"><a role="menuitem" tabindex="0" href="#">学生</a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="1" href="#">工业</a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="2" href="#">服务业</a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="3" href="#">IT技术</a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="4" href="#">教育行业</a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="5" href="#">中小企业主</a></li>
+			  </ul>
+			</div>
+    	</div>
+		<br />
         <!--教育水平-->
         <div class="input-group">
         	<span class="input-group-addon"> 教育水平</span>
@@ -94,6 +146,7 @@
 			</div>
     	</div>
 		<br />
+		
         
         <button class="btn btn-lg btn-primary btn-block" type="submit">提交</button>
       </form>

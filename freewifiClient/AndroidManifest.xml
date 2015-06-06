@@ -88,7 +88,8 @@
         </activity>
 
         <activity android:name=".test.MyWebView"/>
-        <activity android:name=".web.WebViewInteractJS"/>
+        <activity android:name=".web.UserInfoWeb"/>
+        <activity android:name=".web.LoginWeb"/>
         <activity android:name=".geo.BDLocating"/>
         <activity android:name=".test.JsonTestAty"/>
         <activity android:name=".test.WXLogin"/>
