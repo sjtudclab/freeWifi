@@ -1,15 +1,17 @@
 package cn.edu.sjtu.dclab.freewifi.tool;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
-
+import cn.edu.sjtu.dclab.freewifi.view.MainTest;
+import cn.edu.sjtu.dclab.freewifi.web.LoginWeb;
+import cn.edu.sjtu.dclab.freewifi.web.UserInfoWeb;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
 import org.apache.http.Header;
 import org.json.JSONObject;
 
@@ -21,10 +23,20 @@ public class HTTPTool {
     static final String TAG = "HTTPTool";
 
     private static final String URL_REG = "http://172.16.5.22:8080/freewifiserver/user/register";
+//    public static  Handler wifiListHandler;
+    
+//    public static void setWifiListHandler(Handler handler){
+//        wifiListHandler = handler;
+//    }
+    
+    //private static final String URL_REG = "http://dclab.mybluemix.net/freewifiserver/user/register";
     private static final String URL_NOTIFY = "http://dclab.mybluemix.net/freewifiserver/user/notification";
-    private static final String URL_GETWIFILIST = "http://dclab.mybluemix.net/freewifiserver/wifi/get";
+//    private static final String URL_GETWIFILIST = "http://dclab.mybluemix.net/freewifiserver/wifi/get";
+    private static final String URL_GETWIFILIST = "http://172.16.5.22:8080/freewifiserver/wifi/get";
     private static final String URL_ADCLIECKED = "http://dclab.mybluemix.net/freewifiserver/user/click";
-    private static final String URL_ADCOLLECTED = "http://dclab.mybluemix.net/freewifiserver/user/collect";
+    //private static final String URL_ADCOLLECTED = "http://dclab.mybluemix.net/freewifiserver/user/collect";
+    private static final String URL_ADCOLLECTED = "http://172.16.5.22:8080/freewifiserver/ad/collect";
+    private static final String URL_MERCHANTCOLLECTED = "http://172.16.5.22:8080/freewifiserver/merchant/collect";
     private static final String URL_LOGIN = "http://172.16.5.22:8080/freewifiserver/user/login";
 
     public static final int RECEIVE_JSON_STRING = 101;
@@ -34,6 +46,8 @@ public class HTTPTool {
         HTTPTool.handler = handler;
     }
 
+    public static final int MSG_WIFILIST = 100;
+    
     /**
      * 发送注册信息(POST)
      */
@@ -60,6 +74,11 @@ public class HTTPTool {
                 super.onSuccess(statusCode, headers, response);
                 if (statusCode == 200) {
                     int status = JsonTool.ParseStatusCodeJson(response);
+                    if (status == 0){
+                        Intent intent = new Intent(context,LoginWeb.class);
+                        context.startActivity(intent);
+                        ((UserInfoWeb)context).finish();
+                    }
                     Log.i(TAG, "Received status: " + status);
                 }
             }
@@ -122,6 +141,7 @@ public class HTTPTool {
      * @param imei    PhoneStateTool.GetIMEI()获取
      * @param wifiID
      */
+    //TODO
     public static void SendConnectedInfo(final Context context, String imei, String wifiID) {
         RequestParams params = new RequestParams();
         params.put(SharedDataTool.IMEI, imei);
@@ -170,14 +190,14 @@ public class HTTPTool {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 if (statusCode == 200) {
-                    String result = JsonTool.ParseWifiListJson(response);
+                    //String result = JsonTool.ParseWifiListJson(response);
                     if (handler != null) {
                         Message msg = new Message();
                         msg.what = RECEIVE_JSON_STRING;
-                        msg.obj = result;
+                        msg.obj = response;
                         handler.sendMessage(msg);
                     }
-                    Log.i(TAG, "Received results: " + result);
+                    //Log.i(TAG, "Received results: " + result);
                 }
             }
             @Override
@@ -204,8 +224,14 @@ public class HTTPTool {
             @Override//返回JSONArray对象 | JSONObject对象
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
+                Log.i(TAG, "Received status: " + response.toString());
                 if (statusCode == 200) {
                     int status = JsonTool.ParseStatusCodeJson(response);
+                    if (status == 0){
+                        Intent intent = new Intent(c, MainTest.class);
+                        c.startActivity(intent);
+                        ((LoginWeb)c).finish();
+                    }
                     Log.i(TAG, "Received status: " + status);
                 }
             }
@@ -220,6 +246,20 @@ public class HTTPTool {
                 Log.i(TAG, "onFailure statusCode: " + statusCode);
             }
         });
+    }
+    public static String sendRequestForWifiList(final Context context, String longitude, String latitude) {
+        String resStr = new WIFIService(context,URL_GETWIFILIST).getWifiList(longitude,latitude);
+        return resStr;
+    }
+
+    public static String sendRequestForAdList(final Context context, String deviceId) {
+        String resStr = new AdService(context,URL_ADCOLLECTED).getAdList(deviceId);
+        return resStr;
+    }
+
+    public static String sendRequestForMerchantList(final Context context, String deviceId) {
+        String resStr = new AdService(context,URL_MERCHANTCOLLECTED).getAdList(deviceId);
+        return resStr;
     }
 
     /**
@@ -268,8 +308,8 @@ public class HTTPTool {
         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
             super.onSuccess(statusCode, headers, response);
             if (statusCode == 200) {
-                //int status = JsonTool.ParseStatusCodeJson(response);
-                String status = "OK";
+                int status = JsonTool.ParseStatusCodeJson(response);
+                //String status = "OK";
                 Log.i(TAG, "Received status: " + status);
             }
         }

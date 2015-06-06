@@ -16,12 +16,11 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
-
-import java.io.File;
-
 import cn.edu.sjtu.dclab.freewifi.R;
 import cn.edu.sjtu.dclab.freewifi.tool.HTTPTool;
 import cn.edu.sjtu.dclab.freewifi.tool.SharedDataTool;
+
+import java.io.File;
 
 /**UserInfoWeb extends Activity
  * WebView测试：与本地资源（系统照相机）的交互；创建菜单示例；按键事件处理；ProgressDialog示例；
@@ -130,7 +129,7 @@ public class UserInfoWeb extends Activity{
 						String imei = SharedDataTool.GetIMEI(getApplicationContext());//从本地获取imei
 						Log.i(TAG, "imei: " + imei);
 						//发送注册信息到服务器
-						HTTPTool.SendRegisterInfo(getApplicationContext(), imei, gender, birthday, tel, pwd,
+						HTTPTool.SendRegisterInfo(UserInfoWeb.this, imei, gender, birthday, tel, pwd,
 								education, income, engage, baby, job);
 	                }
 	            });

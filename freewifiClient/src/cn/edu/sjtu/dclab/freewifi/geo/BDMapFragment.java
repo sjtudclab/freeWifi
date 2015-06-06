@@ -159,7 +159,7 @@ public class BDMapFragment extends Fragment implements View.OnClickListener{
 		mMapController.animateMapStatus(u);//animateMapStatus以动画方式更新地图状态，动画耗时 300 ms
 	}
 
-	private void naviByBDMap(BDLocation startLocation, LatLng endPoint, Context context){
+	public static void naviByBDMap(BDLocation startLocation, LatLng endPoint, Context context){
 		LatLng pt1 = new LatLng(startLocation.getLatitude(), startLocation.getLongitude());
 
 		// 构建 导航参数
@@ -171,7 +171,23 @@ public class BDMapFragment extends Fragment implements View.OnClickListener{
 			BaiduMapNavigation.openBaiduMapNavi(para, context);
 		} catch (BaiduMapAppNotSupportNaviException e) {
 			e.printStackTrace();
-			showDialog(context);
+			//showDialog(context);
+		}
+	}
+
+	public static void naviByBDMap(LatLng startLocation, LatLng endPoint, Context context){
+		LatLng pt1 = startLocation;
+
+		// 构建 导航参数
+		NaviParaOption para = new NaviParaOption()
+				.startPoint(pt1).endPoint(endPoint)
+				.startName("起点").endName("终点");
+
+		try {
+			BaiduMapNavigation.openBaiduMapNavi(para, context);
+		} catch (BaiduMapAppNotSupportNaviException e) {
+			e.printStackTrace();
+			//showDialog(context);
 		}
 	}
 

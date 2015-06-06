@@ -16,12 +16,11 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
-
-import java.io.File;
-
 import cn.edu.sjtu.dclab.freewifi.R;
 import cn.edu.sjtu.dclab.freewifi.tool.HTTPTool;
 import cn.edu.sjtu.dclab.freewifi.tool.SharedDataTool;
+
+import java.io.File;
 
 /**UserInfoWeb extends Activity
  * WebView测试：与本地资源（系统照相机）的交互；创建菜单示例；按键事件处理；ProgressDialog示例；
@@ -136,11 +135,11 @@ public class LoginWeb extends Activity{
 						Log.i(TAG, account + " " + password + " ");
 						SharedDataTool.WriteLoginInfo(getApplicationContext(), account, password);//先保存一份到本地
 						//发送注册信息到服务器
-						HTTPTool.SendLoginInfo(getApplicationContext(), account, password);
+						HTTPTool.SendLoginInfo(LoginWeb.this, account, password);
 	                }
 	            });
 	        }
-		}, "javaSender");//the name used to expose the object in JavaScript
+		}, "javaSend");//the name used to expose the object in JavaScript
 		webView.addJavascriptInterface(new Object(){
 			@JavascriptInterface//将被js调用
 			public void callRegister() {

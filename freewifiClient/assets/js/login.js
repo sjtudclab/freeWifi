@@ -8,7 +8,7 @@ function sendLoginInfo(){
 	var password = inputPassword.value.trim();
 
 //js调用java方法，调用格式window.objectName.functionName()
-	window.javaSender.sendLoginInfo(account, password);
+	window.javaSend.sendLoginInfo(account, password);
 	return true;
 }
 

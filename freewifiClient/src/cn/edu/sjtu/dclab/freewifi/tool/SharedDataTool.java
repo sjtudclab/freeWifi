@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.telephony.TelephonyManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**SharedDataTool
  * Created by Ernest on 2015/5/29.
  */
@@ -47,6 +50,21 @@ public class SharedDataTool {
         initSharedData(context);
         return mSharedPreferences.getString(IMEI, null);
     }
+
+    public static List<String> GetAllInfoList(Context context){
+        List<String> list = new ArrayList<String>();
+        initSharedData(context);
+        list.add("手机号" + ":" + mSharedPreferences.getString(TEL, null));
+        list.add("性别" + ":" + mSharedPreferences.getString(GENDER, null));
+        list.add("婚姻" + ":" + mSharedPreferences.getString(ENGAGE, null));
+        list.add("生日" + ":" + mSharedPreferences.getString(BIRTHDAY, null));
+        list.add("育儿状态" + ":" + mSharedPreferences.getString(BABY, null));
+        list.add("职位角色" + ":" + mSharedPreferences.getString(JOB, null));
+        list.add("教育水平" + ":" + mSharedPreferences.getString(EDUCATION, null));
+        list.add("收入水平" + ":" + mSharedPreferences.getString(INCOME, null));
+        return list;
+    }
+
 
     public static boolean WriteRegisterInfo(Context context, String gender, String birthday,
                                             String tel, String pwd, String education, String income,
