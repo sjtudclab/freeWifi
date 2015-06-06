@@ -12,6 +12,9 @@ $(function() {
                 if (data.code == -1) {
                     console.log('error');
                 } else {
+                    bootbox.alert("Publish Successfully!", function() {
+                        console.log("Publish Successfully");
+                    });
                     console.log('succeed');
                 }
             });
@@ -32,6 +35,9 @@ $(function() {
                 if (data.code == -1) {
                     console.log('error');
                 } else {
+                    bootbox.alert("unpublish Successfully!", function() {
+                        console.log("unpublish Successfully");
+                    });
                     console.log('succeed');
                 }
             })                        
