@@ -1,5 +1,7 @@
 package cn.edu.sjtu.dclab.freewifi.tool;
 
+import cn.edu.sjtu.dclab.freewifi.domain.Ad;
+import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
 import cn.edu.sjtu.dclab.freewifi.domain.WIFI;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,6 +31,78 @@ public class ClassParse {
 			}.getType();
 			if (content != null) {
 				List<WIFI> record = gson.fromJson(content, type);
+				return record;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	public List<Ad> string2AdList(String content) {
+		try {
+			Type type = new TypeToken<List<Ad>>() {
+			}.getType();
+			if (content != null) {
+				List<Ad> record = gson.fromJson(content, type);
+				return record;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	public List<Merchant> stringMerList(String content) {
+		try {
+			Type type = new TypeToken<List<Merchant>>() {
+			}.getType();
+			if (content != null) {
+				List<Merchant> record = gson.fromJson(content, type);
+				return record;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	public List<String> string2StringList(String content) {
+		try {
+			Type type = new TypeToken<List<String>>() {
+			}.getType();
+			if (content != null) {
+				List<String> record = gson.fromJson(content, type);
+				return record;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	public Ad string2Ad(String content) {
+		try {
+			Type type = new TypeToken<Ad>() {
+			}.getType();
+			if (content != null) {
+				Ad record = gson.fromJson(content, type);
 				return record;
 			} else {
 				return null;

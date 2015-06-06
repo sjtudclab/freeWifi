@@ -11,16 +11,19 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AbsListView;
 import android.widget.ImageView;
+import android.widget.Toast;
 import cn.edu.sjtu.dclab.freewifi.MainApplication;
 import cn.edu.sjtu.dclab.freewifi.R;
-import cn.edu.sjtu.dclab.freewifi.tool.ClassParse;
-import cn.edu.sjtu.dclab.freewifi.tool.HTTPTool;
-import cn.edu.sjtu.dclab.freewifi.tool.SharedDataTool;
+import cn.edu.sjtu.dclab.freewifi.tool.*;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
@@ -28,8 +31,10 @@ import com.baidu.mapapi.model.LatLng;
 import com.nineoldandroids.view.ViewHelper;
 
 import java.util.Map;
+import java.util.Set;
 
 public class MainTest extends ActionBarActivity implements ScrollTabHolder, ViewPager.OnPageChangeListener {
+    private final String TAG="tagtest";
 
     private static AccelerateDecelerateInterpolator sSmoothInterpolator = new AccelerateDecelerateInterpolator();
 
@@ -53,7 +58,7 @@ public class MainTest extends ActionBarActivity implements ScrollTabHolder, View
     private SpannableString mSpannableString;
     private AlphaForegroundColorSpan mAlphaForegroundColorSpan;
     ////////////////////////////////////////////////////////////
-    private AsyncTask<String, Void, String[]> getWifiTask;
+    private AsyncTask<String, Void, Object[]> getWifiTask;
 
     MainApplication mApplication;//全局应用
     LocationClient mLocationClient;//定位服务的客户端
@@ -138,30 +143,77 @@ public class MainTest extends ActionBarActivity implements ScrollTabHolder, View
 
 
     private void initTask(){
-        getWifiTask = new AsyncTask<String, Void, String[]>() {
+        getWifiTask = new AsyncTask<String, Void, Object[]>() {
             @Override
-            protected String[] doInBackground(String... params) {
-                String[]  datas = new String[4];
+            protected Object[] doInBackground(String... params) {
+                Object[]  datas = new Object[4];
                 mLocationClient.requestLocation();
                 while(mCurLocation == null){}
-                datas[0] = HTTPTool.sendRequestForWifiList(MainTest.this, ""+mCurLocation.getLongitude(),""+mCurLocation.getLatitude());
-                String deviceId = SharedDataTool.GetIMEI(MainTest.this);
-                datas[1] = HTTPTool.sendRequestForAdList(MainTest.this,deviceId);
-                datas[2] = HTTPTool.sendRequestForMerchantList(MainTest.this,deviceId);
-                datas[3] = new ClassParse().obj2String(SharedDataTool.GetAllInfoList(MainTest.this));
-                return datas;
-            }
+                String res1 = HTTPTool.sendRequestForWifiList(MainTest.this, ""+mCurLocation.getLongitude(),""+mCurLocation.getLatitude());
 
-            @Override
-            protected void onPostExecute( String[] args) {
                 ClassParse parser = new ClassParse();
-                Map<String,Object> map = parser.string2Map(args[0]);
+                Map<String,Object> map = parser.string2Map(res1);
                 Object data = null;
                 if (map != null && map.get("data") != null){
                     data = map.get("data");
                 }
-                Object[] datas = new Object[]{data,data,data,data};
-                mPagerAdapter = new PagerAdapter(getSupportFragmentManager(),datas);
+                datas[0] = data;
+                String deviceId = SharedDataTool.GetIMEI(MainTest.this);
+
+                String device_Id = deviceId;
+                String wifi_Id = "9";
+                setAlias(device_Id);
+
+                UserService userService = new UserService(MainTest.this,getResources().getString(R.string.server)+"/user/notification");
+                userService.notification(deviceId,wifi_Id);
+
+                String res2 = HTTPTool.sendRequestForAdList(MainTest.this,deviceId);
+                Map<String,Object> adMap = parser.string2Map(res2);
+                Object adData = null;
+                if (adMap != null && adMap.get("data") != null){
+                    adData = adMap.get("data");
+                }
+                datas[1] = adData;
+
+
+                String res3 = HTTPTool.sendRequestForMerchantList(MainTest.this,deviceId);
+                Map<String,Object> merMap = parser.string2Map(res3);
+                Object merData = null;
+                if (merMap != null && merMap.get("data") != null){
+                    merData = merMap.get("data");
+                }
+                datas[2] = merData;
+
+                datas[3] = SharedDataTool.GetAllInfoList(MainTest.this);
+
+                return datas;
+            }
+
+            @Override
+            protected void onPostExecute( Object[] args) {
+                /*ClassParse parser = new ClassParse();
+                Map<String,Object> map = parser.string2Map(args[0]);
+                Object data = null;
+                if (map != null && map.get("data") != null){
+                    data = map.get("data");
+                }*/
+
+                /*Map<String,Object> adMap = parser.string2Map(args[1]);
+                Object adData = null;
+                if (adMap != null && adMap.get("data") != null){
+                    adData = adMap.get("data");
+                }
+
+                Map<String,Object> merMap = parser.string2Map(args[2]);
+                Object merData = null;
+                if (merMap != null && merMap.get("data") != null){
+                    merData = merMap.get("data");
+                }*/
+
+                //List<String> info = parser.string2StringList(args[2]);
+
+                //Object[] datas = new Object[]{data,args[1],args[2],args[3]};
+                mPagerAdapter = new PagerAdapter(getSupportFragmentManager(),args);
                 mPagerAdapter.setTabHolderScrollingContent(MainTest.this);
                 mViewPager.setAdapter(mPagerAdapter);
                 mPagerSlidingTabStrip.setViewPager(mViewPager);
@@ -283,7 +335,7 @@ public class MainTest extends ActionBarActivity implements ScrollTabHolder, View
     public class PagerAdapter extends FragmentPagerAdapter {
 
         private SparseArrayCompat<ScrollTabHolder> mScrollTabHolders;
-        private final String[] TITLES = {"Wifi列表", "商家", "广告", "个人信息"};
+        private final String[] TITLES = {"Wifi列表", "广告","商家",  "个人信息"};
         private ScrollTabHolder mListener;
         private Object[] contents;
 
@@ -322,4 +374,69 @@ public class MainTest extends ActionBarActivity implements ScrollTabHolder, View
         }
 
     }
+
+    private void setAlias(String alias){
+        if (TextUtils.isEmpty(alias)) {
+            return;
+        }
+        boolean debug = Boolean.parseBoolean(getResources().getString(R.string.debug));
+        if (!ExampleUtil.isValidTagAndAlias(alias)) {
+            if (debug) {
+                Toast.makeText(MainTest.this, R.string.error_tag_gs_empty, Toast.LENGTH_SHORT).show();
+            }
+            return;
+        }
+
+        //调用JPush API设置Alias
+        mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, alias));
+    }
+
+    private static final int MSG_SET_ALIAS = 1001;
+
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Log.d(TAG, "Set alias in handler.");
+                    JPushInterface.setAliasAndTags(getApplicationContext(), (String) msg.obj, null, mAliasCallback);
+                    break;
+                default:
+                    Log.i(TAG, "Unhandled msg - " + msg.what);
+            }
+        }
+    };
+
+    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            String logs ;
+            switch (code) {
+                case 0:
+                    logs = "Set tag and alias success";
+                    Log.i(TAG, logs);
+                    break;
+
+                case 6002:
+                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+                    Log.i(TAG, logs);
+                    if (ExampleUtil.isConnected(getApplicationContext())) {
+                        mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
+                    } else {
+                        Log.i(TAG, "No network");
+                    }
+                    break;
+
+                default:
+                    logs = "Failed with errorCode = " + code;
+                    Log.e(TAG, logs);
+            }
+
+            ExampleUtil.showToast(logs, getApplicationContext());
+        }
+
+    };
+
 }

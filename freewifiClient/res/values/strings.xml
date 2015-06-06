@@ -27,5 +27,10 @@
     <string name="errcode_cancel">发送取消</string>
     <string name="errcode_deny">发送被拒绝</string>
     <string name="errcode_unknown">发送返回</string>
+    <string name="server">http://172.16.5.22:8080/freewifiserver</string>
+    <string name="collectbtn">收藏</string>
+
+    <string name="error_tag_gs_empty">error_tag_gs_empty</string>
+    <string name="debug">debug</string>
 
 </resources>

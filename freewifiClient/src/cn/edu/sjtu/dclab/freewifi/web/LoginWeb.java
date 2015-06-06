@@ -19,6 +19,7 @@ import android.widget.Toast;
 import cn.edu.sjtu.dclab.freewifi.R;
 import cn.edu.sjtu.dclab.freewifi.tool.HTTPTool;
 import cn.edu.sjtu.dclab.freewifi.tool.SharedDataTool;
+import cn.jpush.android.api.JPushInterface;
 
 import java.io.File;
 
@@ -229,4 +230,15 @@ public class LoginWeb extends Activity{
 		return super.onOptionsItemSelected(item);
 	}
 
+	@Override
+	protected void onResume() {
+		JPushInterface.onResume(this);
+		super.onResume();
+	}
+
+	@Override
+	protected void onPause() {
+		JPushInterface.onPause(this);
+		super.onPause();
+	}
 }

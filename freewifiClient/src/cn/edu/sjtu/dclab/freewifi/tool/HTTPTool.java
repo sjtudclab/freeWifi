@@ -35,8 +35,10 @@ public class HTTPTool {
     private static final String URL_GETWIFILIST = "http://172.16.5.22:8080/freewifiserver/wifi/get";
     private static final String URL_ADCLIECKED = "http://dclab.mybluemix.net/freewifiserver/user/click";
     //private static final String URL_ADCOLLECTED = "http://dclab.mybluemix.net/freewifiserver/user/collect";
-    private static final String URL_ADCOLLECTED = "http://172.16.5.22:8080/freewifiserver/ad/collect";
-    private static final String URL_MERCHANTCOLLECTED = "http://172.16.5.22:8080/freewifiserver/merchant/collect";
+    private static final String URL_ADCOLLECTED = "http://172.16.5.22:8080/freewifiserver/ad/collect/all";
+    private static final String URL_ADCOLLECT_ADD= "http://172.16.5.22:8080/freewifiserver/ad/collect/add";
+    private static final String URL_MERCOLLECT_ADD= "http://172.16.5.22:8080/freewifiserver/merchant/collect/add";
+    private static final String URL_MERCHANTCOLLECTED = "http://172.16.5.22:8080/freewifiserver/merchant/collect/all";
     private static final String URL_LOGIN = "http://172.16.5.22:8080/freewifiserver/user/login";
 
     public static final int RECEIVE_JSON_STRING = 101;
@@ -147,7 +149,7 @@ public class HTTPTool {
         params.put(SharedDataTool.IMEI, imei);
         params.put(SharedDataTool.WIFIID, wifiID);
 
-        Toast.makeText(context, "Sending Connected Info...", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "Sending Connected Info...", Toast.LENGTH_SHORT).show();
         AsyncHttpClient client = new AsyncHttpClient();//创建客户端对象
         client.post(URL_NOTIFY, params, new JsonHttpResponseHandler() {
             @Override//返回JSONArray对象 | JSONObject对象
@@ -293,14 +295,23 @@ public class HTTPTool {
      * { code：0/-1   0表示成功 }
      */
     public static void SendAdCollectedInfo(final Context c, String deviceId, String adId) {
-        //TODO
         RequestParams params = new RequestParams();
         params.put(SharedDataTool.IMEI, deviceId);
         params.put(SharedDataTool.ADID, adId);
 
-        Toast.makeText(c, "Sending AdCollected Info...", Toast.LENGTH_SHORT).show();
         AsyncHttpClient client = new AsyncHttpClient();//创建客户端对象
-        client.post(URL_ADCOLLECTED, params, new RespHandler());
+        client.post(URL_ADCOLLECT_ADD, params, new RespHandler());
+        Toast.makeText(c, "广告收藏成功", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void SendMerCollectedInfo(final Context c, String deviceId, String adId) {
+        RequestParams params = new RequestParams();
+        params.put(SharedDataTool.IMEI, deviceId);
+        params.put(SharedDataTool.ADID, adId);
+
+        AsyncHttpClient client = new AsyncHttpClient();//创建客户端对象
+        client.post(URL_MERCHANTCOLLECTED, params, new RespHandler());
+        Toast.makeText(c, "商户收藏成功", Toast.LENGTH_SHORT).show();
     }
 
     private static class RespHandler extends JsonHttpResponseHandler {

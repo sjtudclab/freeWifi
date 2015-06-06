@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import cn.edu.sjtu.dclab.freewifi.R;
+import cn.edu.sjtu.dclab.freewifi.domain.Ad;
+import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
 import cn.edu.sjtu.dclab.freewifi.domain.WIFI;
 import cn.edu.sjtu.dclab.freewifi.geo.BDMapFragment;
 import cn.edu.sjtu.dclab.freewifi.tool.ClassParse;
@@ -28,17 +31,19 @@ public class SampleListFragment extends ScrollTabHolderFragment implements OnScr
     private static final String ARG_LAT = "lat";
 
     private ListView mListView;
-
     private List<WIFI> wifiList;
+    private List<Ad> adList;
+    private List<Merchant> merchantList;
+    private List<String> infoList;
     private double lat;
     private double lon;
 
     private int mPosition;
 
-    public static Fragment newInstance(Object wifiList,int position,double lat,double lon) {
+    public static Fragment newInstance(Object content,int position,double lat,double lon) {
         SampleListFragment f = new SampleListFragment();
         Bundle b = new Bundle();
-        b.putString(ARG_LIST, new ClassParse().obj2String(wifiList));
+        b.putString(ARG_LIST, new ClassParse().obj2String(content));
         b.putInt(ARG_POSITION, position);
         b.putDouble(ARG_LON, lon);
         b.putDouble(ARG_LAT, lat);
@@ -57,43 +62,66 @@ public class SampleListFragment extends ScrollTabHolderFragment implements OnScr
         mPosition = getArguments().getInt(ARG_POSITION);
         lon = getArguments().getDouble(ARG_LON);
         lat = getArguments().getDouble(ARG_LAT);
-        wifiList = new ClassParse().string2WifiList(content);
+        ClassParse parser = new ClassParse();
+        if (mPosition == 0){
+            wifiList = parser.string2WifiList(content);
+        }else if (mPosition == 1){
+//            Map<String,Object> adMap = parser.string2Map(content);
+//            Object adData = null;
+//            if (adMap != null && adMap.get("data") != null){
+//                adData = adMap.get("data");
+//            }
 
+
+            adList = parser.string2AdList(content);
+        } else if (mPosition == 2){
+            /*Map<String,Object> merMap = parser.string2Map(content);
+            Object merData = null;
+            if (merMap != null && merMap.get("data") != null){
+                merData = merMap.get("data");
+            }*/
+            merchantList =parser.stringMerList(content);
+        }else if (mPosition == 3){
+            infoList = parser.string2StringList(content);
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_list, null);
-
         mListView = (ListView) v.findViewById(R.id.listView);
-
         View placeHolderView = inflater.inflate(R.layout.view_header_placeholder, mListView, false);
         mListView.addHeaderView(placeHolderView);
-
         return v;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         mListView.setOnScrollListener(this);
+        if (mPosition == 0){
+            List<Bitmap> picList = new ArrayList<Bitmap>();
+            for (WIFI wifi : wifiList) {
+                if (wifi.getMerchant().getIcon() != null){
+                    byte[] icon = wifi.getMerchant().getIcon().getBytes();
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(icon, 0, icon.length);
+                    picList.add(bitmap);
+                }else {
+                    picList.add(null);
+                }
+            }
+            mListView.setAdapter(new WifiItemAdapter(getActivity(), wifiList,picList));
+        }else if (mPosition == 1){
+            mListView.setAdapter(new AdItemAdapter(getActivity(), adList));
+        } else if (mPosition == 2){
+            mListView.setAdapter(new MerchantItemAdapter(getActivity(), merchantList));
+        }else if (mPosition == 3){
+            mListView.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_item, android.R.id.text1, infoList));
+        }
+
 //        mListView.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_item, android.R.id.text1, mListItems));
 
-        List<Bitmap> picList = new ArrayList<Bitmap>();
-        for (WIFI wifi : wifiList) {
-            if (wifi.getMerchant().getIcon() != null){
-                byte[] icon = wifi.getMerchant().getIcon().getBytes();
-                Bitmap bitmap = BitmapFactory.decodeByteArray(icon, 0, icon.length);
-                picList.add(bitmap);
-            }else{
-                picList.add(null);
-            }
 
-
-
-        }
-        mListView.setAdapter(new WifiItemAdapter(getActivity(), wifiList, picList));
         mListView.setOnItemClickListener(new ItemClickListner());
 
 

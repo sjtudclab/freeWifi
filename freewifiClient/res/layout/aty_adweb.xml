@@ -2,9 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+        android:background="#ffffff">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="5dp"
+            android:gravity="right">
+    <ImageView android:layout_width="45dp"
+            android:layout_height="45dp"
+               android:src="@drawable/collect_ad"
+               android:layout_marginRight="25dp"
+            android:id="@+id/collectAdbtn"/>
+        <ImageView android:layout_width="45dp"
+                   android:layout_height="45dp"
+                   android:src="@drawable/collect_mer"
+                   android:layout_marginRight="25dp"
+                   android:id="@+id/collectMerbtn"/>
+        <ImageView android:layout_width="45dp"
+                   android:layout_height="45dp"
+                   android:src="@drawable/share"
+                   android:layout_marginRight="25dp"
+                   android:id="@+id/imgShare"/>
+        </LinearLayout>
     <WebView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="576dp"
+            android:layout_marginTop="30dp"
             android:id="@+id/adweb"/>
 </LinearLayout>

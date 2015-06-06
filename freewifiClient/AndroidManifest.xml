@@ -103,7 +103,9 @@
         <activity android:name=".test.WXLogin"/>
         <activity android:name=".test.WifiActivity"/>
         <activity android:name=".push.PushAty"/>
-        <activity android:name=".push.MsgShowAty"/>
+        <activity android:name=".push.MsgShowAty"
+                  android:theme="@android:style/Theme.NoTitleBar"
+                ></activity>
         <activity android:name=".wxapi.WXEntryActivity"
                   android:exported="true"
                   android:launchMode="singleTop"/>
