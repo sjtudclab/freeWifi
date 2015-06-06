@@ -15,6 +15,18 @@ $(function() {
         nonSelectedText: 'Income'
     });
 
+    $('#marry').multiselect({
+        nonSelectedText: 'Marry'
+    });
+
+    $('#child').multiselect({
+        nonSelectedText: 'Child'
+    });
+
+    $('#career').multiselect({
+        nonSelectedText: 'Career'
+    });
+
     $('#datetimepicker1').datetimepicker({
         language: 'pt-BR',
         pickTime: false
@@ -72,6 +84,30 @@ $(function() {
             income = income.substr(0, income.length - 1);
         }        
 
+        var marry = '';
+        $('#marry option:selected').each(function() {
+            marry += $(this).val() + ',';
+        });
+        if (marry) {
+            marry = marry.substr(0, marry.length - 1);
+        }        
+
+        var child = '';
+        $('#child option:selected').each(function() {
+            child += $(this).val() + ',';
+        });
+        if (child) {
+            child = child.substr(0, child.length - 1);
+        }        
+
+        var career = '';
+        $('#career option:selected').each(function() {
+            career += $(this).val() + ',';
+        });
+        if (career) {
+            career = career.substr(0, career.length - 1);
+        }        
+
         if ($('#isLaunch').val() == 'on') {
             var isLaunch = true;
         } else {
@@ -88,6 +124,9 @@ $(function() {
             age: age,
             education: edu,
             income: income,
+            marry: marry,
+            child: child,
+            career: career,
             isLaunch: isLaunch
         }
         $.ajax({
