@@ -61,6 +61,9 @@ $(function() {
                     var aPreview = document.createElement('a');
                     $(aPreview).addClass('btn btn-success btn-mini');
                     $(aPreview).text('Preview');
+                    $(aPreview).click(function(){
+                        location.href = document.location.hostname + '/ad/mobile?id=' + ad.id; 
+                    });
                     var aDelete = document.createElement('a');
                     $(aDelete).addClass('btn btn-danger btn-mini');
                     $(aDelete).text('Delete');
