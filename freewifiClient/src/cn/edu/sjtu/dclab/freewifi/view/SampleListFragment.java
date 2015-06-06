@@ -1,5 +1,7 @@
 package cn.edu.sjtu.dclab.freewifi.view;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,36 +9,45 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import cn.edu.sjtu.dclab.freewifi.R;
+import cn.edu.sjtu.dclab.freewifi.domain.WIFI;
+import cn.edu.sjtu.dclab.freewifi.tool.ClassParse;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SampleListFragment extends ScrollTabHolderFragment implements OnScrollListener {
 
+    private static final String ARG_LIST = "wifiList";
     private static final String ARG_POSITION = "position";
 
     private ListView mListView;
-    //private ArrayList<String> mListItems;
+
+    private List<WIFI> wifiList;
 
     private int mPosition;
 
-    public static Fragment newInstance(int position) {
+    public static Fragment newInstance(String wifiList,int position) {
         SampleListFragment f = new SampleListFragment();
         Bundle b = new Bundle();
+        b.putString(ARG_LIST, wifiList);
         b.putInt(ARG_POSITION, position);
         f.setArguments(b);
         return f;
     }
 
+    public SampleListFragment() {
+    }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String content  = getArguments().getString(ARG_LIST);
         mPosition = getArguments().getInt(ARG_POSITION);
-
-//        mListItems = new ArrayList<String>();
-//
-//        for (int i = 1; i <= 100; i++) {
-//            mListItems.add(i + ". item - currnet page: " + (mPosition + 1));
-//        }
+        wifiList = new ClassParse().string2WifiList(content);
 
     }
 
@@ -58,22 +69,17 @@ public class SampleListFragment extends ScrollTabHolderFragment implements OnScr
 
         mListView.setOnScrollListener(this);
 //        mListView.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_item, android.R.id.text1, mListItems));
-        //TODO
 
-//        HTTPTool httpTool = new HTTPTool();
+        List<Bitmap> picList = new ArrayList<Bitmap>();
+        for (WIFI wifi : wifiList) {
+            byte[] icon = wifi.getMerchant().getIcon().getBytes();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(icon, 0, icon.length);
+            picList.add(bitmap);
+        }
+        mListView.setAdapter(new WifiItemAdapter(getActivity(), wifiList, picList));
+        mListView.setOnItemClickListener(new ItemClickListner());
 
-//        String lon = "116.31347892381";
-//        String lat = "39.989511138466";
-////        httpTool.SendRequestForWifiList(getActivity(), lon, lat);
-//        List<WIFI> wifiList = httpTool.SendRequestForWifiList(getActivity(), lon, lat);
-//        List<Bitmap> picList = new ArrayList<Bitmap>();
-//        for (WIFI wifi : wifiList) {
-//            byte[] icon = wifi.getMerchant().getIcon().getBytes();
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(icon, 0, icon.length);
-//            picList.add(bitmap);
-//        }
-//        mListView.setAdapter(new WifiItemAdapter(getActivity(), wifiList, picList));
-//        mListView.setOnItemClickListener(new ItemClickListner());
+
     }
 
     @Override
@@ -97,12 +103,11 @@ public class SampleListFragment extends ScrollTabHolderFragment implements OnScr
         // nothing
     }
 
-//    // 点击项监听
-//    private class ItemClickListner implements AdapterView.OnItemClickListener{
-//        @Override
-//        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//            //TODO
-//            Toast.makeText(getActivity(),"Click: "+i, Toast.LENGTH_SHORT);
-//        }
-//    }
+    // 点击项监听
+    private class ItemClickListner implements AdapterView.OnItemClickListener{
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            //Intent intent = new Intent(this,)
+        }
+    }
 }

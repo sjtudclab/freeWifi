@@ -31,6 +31,11 @@ public class MainApplication extends Application {
 
     public TextView mLocationResult;
 
+    public static Handler GetNewHandler(){
+        return new Handler();
+    }
+
+
     @Override
     public void onCreate() {
         super.onCreate();

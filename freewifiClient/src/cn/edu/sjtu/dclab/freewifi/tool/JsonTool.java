@@ -92,9 +92,9 @@ public class JsonTool {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return "code = " + code + " size = " + size + " data = " + wifilist;
-//		String str = wifilist.substring(1,wifilist.length()-2);
-//		return str;
+//		return "code = " + code + " size = " + size + " data = " + wifilist;
+		String str = wifilist.substring(1,wifilist.length()-2);
+		return str;
 	}
 
 	/**

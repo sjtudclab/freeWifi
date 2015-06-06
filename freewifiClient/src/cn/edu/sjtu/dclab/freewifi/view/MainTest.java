@@ -2,6 +2,7 @@ package cn.edu.sjtu.dclab.freewifi.view;
 
 import android.annotation.TargetApi;
 import android.graphics.RectF;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,13 +13,18 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import cn.edu.sjtu.dclab.freewifi.R;
+import cn.edu.sjtu.dclab.freewifi.tool.ClassParse;
+import cn.edu.sjtu.dclab.freewifi.tool.HTTPTool;
 import com.nineoldandroids.view.ViewHelper;
+
+import java.util.Map;
 
 public class MainTest extends ActionBarActivity implements ScrollTabHolder, ViewPager.OnPageChangeListener {
 
@@ -44,6 +50,8 @@ public class MainTest extends ActionBarActivity implements ScrollTabHolder, View
     private SpannableString mSpannableString;
     private AlphaForegroundColorSpan mAlphaForegroundColorSpan;
 
+
+    private AsyncTask<String, Void, String> getWifiTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +71,7 @@ public class MainTest extends ActionBarActivity implements ScrollTabHolder, View
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setOffscreenPageLimit(4);
 
-        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
-        mPagerAdapter.setTabHolderScrollingContent(this);
 
-        mViewPager.setAdapter(mPagerAdapter);
-
-        mPagerSlidingTabStrip.setViewPager(mViewPager);
         mPagerSlidingTabStrip.setOnPageChangeListener(this);
         mSpannableString = new SpannableString(getString(R.string.actionbar_title));
         mAlphaForegroundColorSpan = new AlphaForegroundColorSpan(0xffffffff);
@@ -76,6 +79,38 @@ public class MainTest extends ActionBarActivity implements ScrollTabHolder, View
         ViewHelper.setAlpha(getActionBarIconView(), 0f);
 
         getSupportActionBar().setBackgroundDrawable(null);
+        initTask();
+        getWifiTask.execute(lon,lat);
+    }
+
+    private String lon = "116.31347892381";
+    private String lat = "39.989511138466";
+    private String wifiStr;
+
+
+    private void initTask(){
+        getWifiTask = new AsyncTask<String, Void, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                return HTTPTool.SendRequestForWifiList(MainTest.this,params[0],params[1]);
+            }
+
+            @Override
+            protected void onPostExecute(String args) {
+                ClassParse parser = new ClassParse();
+                Map<String,String> map = parser.string2Map(args.substring(1, args.length() - 1));
+                if (map != null && map.get("data") != null){
+                    wifiStr = map.get("data");
+                }
+                Log.e("wifi",wifiStr);
+                String[] contents = new String[]{wifiStr,wifiStr,wifiStr,wifiStr};
+                mPagerAdapter = new PagerAdapter(getSupportFragmentManager(),contents);
+                mPagerAdapter.setTabHolderScrollingContent(MainTest.this);
+                mViewPager.setAdapter(mPagerAdapter);
+                mPagerSlidingTabStrip.setViewPager(mViewPager);
+            }
+        };
+
     }
 
     @Override
@@ -193,10 +228,12 @@ public class MainTest extends ActionBarActivity implements ScrollTabHolder, View
         private SparseArrayCompat<ScrollTabHolder> mScrollTabHolders;
         private final String[] TITLES = {"Wifi列表", "商家", "广告", "个人信息"};
         private ScrollTabHolder mListener;
+        private String[] contents;
 
-        public PagerAdapter(FragmentManager fm) {
+        public PagerAdapter(FragmentManager fm,String[] contents) {
             super(fm);
             mScrollTabHolders = new SparseArrayCompat<ScrollTabHolder>();
+            this.contents = contents;
         }
 
         public void setTabHolderScrollingContent(ScrollTabHolder listener) {
@@ -215,17 +252,11 @@ public class MainTest extends ActionBarActivity implements ScrollTabHolder, View
 
         @Override
         public Fragment getItem(int position) {
-            ScrollTabHolderFragment fragment = (ScrollTabHolderFragment) SampleListFragment.newInstance(position);
+            ScrollTabHolderFragment fragment = (ScrollTabHolderFragment) SampleListFragment.newInstance(contents[position],position);
             mScrollTabHolders.put(position, fragment);
             if (mListener != null) {
                 fragment.setScrollTabHolder(mListener);
             }
-
-//            // 非listview
-//            android.app.FragmentManager fm = getFragmentManager();
-//            FragmentTransaction ft = fm.beginTransaction();
-//            ft.add(R.id.,fm);
-
             return fragment;
         }
 
