@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -40,6 +41,10 @@ public class Merchant implements Serializable {
 	@Column(nullable = true)
 	private String tel;
 
+	@Lob
+	@Column(nullable = true,columnDefinition="BLOB")
+	private String icon;
+	
 	@Enumerated(EnumType.ORDINAL)
 	@Column(nullable = true)
 	private BusinessType business;
@@ -103,15 +108,27 @@ public class Merchant implements Serializable {
 	public Merchant() {
 		super();
 	}
+	
+	
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 
 	public Merchant(String loginname, String password, String name,
-			String address, String tel) {
+			String address, String tel,BusinessType business,String icon) {
 		super();
 		this.loginname = loginname;
 		this.password = password;
 		this.name = name;
 		this.address = address;
 		this.tel = tel;
+		this.business = business;
+		this.icon = icon;
 	}
+	
 	
 }
