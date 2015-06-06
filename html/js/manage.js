@@ -42,6 +42,19 @@ $(function() {
                     var aUnpublish = document.createElement('a');
                     $(aUnpublish).addClass('btn btn-success btn-mini');
                     $(aUnpublish).text('Unpublish');
+                    $(aUnpublish).click(function(){
+                        $.ajax({
+                            url: "ad/unpublish",
+                            method: 'GET',
+                            data: ad.id,
+                        }).done(function( data ) {
+                            if (data.code == -1) {
+                                console.log('error');
+                            } else {
+                                console.log('succeed');
+                            }
+                        })                        
+                    });
                     var aPreview = document.createElement('a');
                     $(aPreview).addClass('btn btn-success btn-mini');
                     $(aPreview).text('Preview');
