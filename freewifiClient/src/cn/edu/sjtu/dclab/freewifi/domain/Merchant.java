@@ -1,10 +1,10 @@
 package cn.edu.sjtu.dclab.freewifi.domain;
 
 import java.io.Serializable;
-
 /**
- * Created by Yang on 2015/6/6.
+ * 商家
  */
+
 public class Merchant implements Serializable {
 
     /**
@@ -17,11 +17,14 @@ public class Merchant implements Serializable {
     private String loginname;
 
     private String password;
+
     private String name;
 
     private String address;
 
     private String tel;
+
+    private String icon;
 
     public long getId() {
         return id;
@@ -75,14 +78,12 @@ public class Merchant implements Serializable {
         super();
     }
 
-    public Merchant(String loginname, String password, String name,
-                    String address, String tel) {
-        super();
-        this.loginname = loginname;
-        this.password = password;
-        this.name = name;
-        this.address = address;
-        this.tel = tel;
+
+    public String getIcon() {
+        return icon;
     }
 
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 }

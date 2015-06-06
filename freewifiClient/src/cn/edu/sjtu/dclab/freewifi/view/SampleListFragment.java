@@ -7,18 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import cn.edu.sjtu.dclab.freewifi.R;
-
-import java.util.ArrayList;
 
 public class SampleListFragment extends ScrollTabHolderFragment implements OnScrollListener {
 
     private static final String ARG_POSITION = "position";
 
     private ListView mListView;
-    private ArrayList<String> mListItems;
+    //private ArrayList<String> mListItems;
 
     private int mPosition;
 
@@ -35,11 +32,11 @@ public class SampleListFragment extends ScrollTabHolderFragment implements OnScr
         super.onCreate(savedInstanceState);
         mPosition = getArguments().getInt(ARG_POSITION);
 
-        mListItems = new ArrayList<String>();
-
-        for (int i = 1; i <= 100; i++) {
-            mListItems.add(i + ". item - currnet page: " + (mPosition + 1));
-        }
+//        mListItems = new ArrayList<String>();
+//
+//        for (int i = 1; i <= 100; i++) {
+//            mListItems.add(i + ". item - currnet page: " + (mPosition + 1));
+//        }
 
     }
 
@@ -60,9 +57,23 @@ public class SampleListFragment extends ScrollTabHolderFragment implements OnScr
         super.onActivityCreated(savedInstanceState);
 
         mListView.setOnScrollListener(this);
-        mListView.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_item, android.R.id.text1, mListItems));
+//        mListView.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_item, android.R.id.text1, mListItems));
         //TODO
-        //mListView.setAdapter(new WifiItemAdapter(getActivity(),null,null));
+
+//        HTTPTool httpTool = new HTTPTool();
+
+//        String lon = "116.31347892381";
+//        String lat = "39.989511138466";
+////        httpTool.SendRequestForWifiList(getActivity(), lon, lat);
+//        List<WIFI> wifiList = httpTool.SendRequestForWifiList(getActivity(), lon, lat);
+//        List<Bitmap> picList = new ArrayList<Bitmap>();
+//        for (WIFI wifi : wifiList) {
+//            byte[] icon = wifi.getMerchant().getIcon().getBytes();
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(icon, 0, icon.length);
+//            picList.add(bitmap);
+//        }
+//        mListView.setAdapter(new WifiItemAdapter(getActivity(), wifiList, picList));
+//        mListView.setOnItemClickListener(new ItemClickListner());
     }
 
     @Override
@@ -85,4 +96,13 @@ public class SampleListFragment extends ScrollTabHolderFragment implements OnScr
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         // nothing
     }
+
+//    // 点击项监听
+//    private class ItemClickListner implements AdapterView.OnItemClickListener{
+//        @Override
+//        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//            //TODO
+//            Toast.makeText(getActivity(),"Click: "+i, Toast.LENGTH_SHORT);
+//        }
+//    }
 }

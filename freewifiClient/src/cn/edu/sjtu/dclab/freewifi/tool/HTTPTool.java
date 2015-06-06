@@ -3,11 +3,9 @@ package cn.edu.sjtu.dclab.freewifi.tool;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
 import org.apache.http.Header;
 import org.json.JSONObject;
 
@@ -20,7 +18,8 @@ public class HTTPTool {
 
     private static final String URL_REG = "http://dclab.mybluemix.net/freewifiserver/user/register";
     private static final String URL_NOTIFY = "http://dclab.mybluemix.net/freewifiserver/user/notification";
-    private static final String URL_GETWIFILIST = "http://dclab.mybluemix.net/freewifiserver/wifi/get";
+//    private static final String URL_GETWIFILIST = "http://dclab.mybluemix.net/freewifiserver/wifi/get";
+    private static final String URL_GETWIFILIST = "http://172.16.5.22:8080/freewifiserver/wifi/get";
     private static final String URL_ADCLIECKED = "http://dclab.mybluemix.net/freewifiserver/user/click";
     private static final String URL_ADCOLLECTED = "http://dclab.mybluemix.net/freewifiserver/user/collect";
 
@@ -70,6 +69,7 @@ public class HTTPTool {
      * @param imei    PhoneStateTool.GetIMEI()获取
      * @param wifiID
      */
+    //TODO
     public static void SendConnectedInfo(final Context context, String imei, String wifiID) {
         RequestParams params = new RequestParams();
         params.put(SharedDataTool.IMEI, imei);
@@ -124,13 +124,11 @@ public class HTTPTool {
                     Log.i(TAG, "Received results: " + result);
                 }
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 Log.i(TAG, "onFailure statusCode: " + statusCode);
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
@@ -138,6 +136,8 @@ public class HTTPTool {
             }
         });
     }
+
+
 
     /**
      * 用户每次点击广告后，会通知服务，服务器收集点击数据，便于进行数据分析：
@@ -185,8 +185,8 @@ public class HTTPTool {
         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
             super.onSuccess(statusCode, headers, response);
             if (statusCode == 200) {
-                //int status = JsonTool.ParseStatusCodeJson(response);
-                String status = "OK";
+                int status = JsonTool.ParseStatusCodeJson(response);
+                //String status = "OK";
                 Log.i(TAG, "Received status: " + status);
             }
         }
