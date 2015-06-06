@@ -63,3 +63,13 @@ GET
 size:
 data: adlist }
 
+
+用户登录：
+
+/user/login
+POST
+参数：
+account:String
+password：String
+返回：json
+{ code：0/-1   0表示成功 }

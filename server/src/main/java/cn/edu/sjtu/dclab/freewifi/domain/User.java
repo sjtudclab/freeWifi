@@ -14,9 +14,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import cn.edu.sjtu.dclab.freewifi.enums.BabyState;
 import cn.edu.sjtu.dclab.freewifi.enums.Education;
+import cn.edu.sjtu.dclab.freewifi.enums.EngageState;
 import cn.edu.sjtu.dclab.freewifi.enums.Gender;
 import cn.edu.sjtu.dclab.freewifi.enums.IncomeType;
+import cn.edu.sjtu.dclab.freewifi.enums.Job;
 
 @Entity
 @Table(name = "user")
@@ -39,6 +42,18 @@ public class User implements Serializable{
 	@Enumerated(EnumType.ORDINAL)
 	@Column(nullable = true)
 	private Gender sex;
+	
+	@Enumerated(EnumType.ORDINAL)
+	@Column(nullable = true)
+	private EngageState engage;
+	
+	@Enumerated(EnumType.ORDINAL)
+	@Column(nullable = true)
+	private Job job;
+	
+	@Enumerated(EnumType.ORDINAL)
+	@Column(nullable = true)
+	private BabyState baby;
 	
 	@Column(nullable = false)
 	private String password;
@@ -109,18 +124,7 @@ public class User implements Serializable{
 	public void setIncome(IncomeType income) {
 		this.income = income;
 	}
-	public User(String deviceId, Gender sex, String tel, Date birthdate,
-			Education education, IncomeType income, String password) {
-		super();
-		this.deviceId = deviceId;
-		this.sex = sex;
-		this.tel = tel;
-		this.birthdate = birthdate;
-		this.education = education;
-		this.income = income;
-		this.score = 0;
-		this.password = password;
-	}
+	
 	
 	public String getPassword() {
 		return password;
@@ -134,5 +138,38 @@ public class User implements Serializable{
 	public void setScore(int score) {
 		this.score = score;
 	}
-
+	public EngageState getEngage() {
+		return engage;
+	}
+	public void setEngage(EngageState engage) {
+		this.engage = engage;
+	}
+	public Job getJob() {
+		return job;
+	}
+	public void setJob(Job job) {
+		this.job = job;
+	}
+	public BabyState getBaby() {
+		return baby;
+	}
+	public void setBaby(BabyState baby) {
+		this.baby = baby;
+	}
+	public User(String deviceId, Gender sex, EngageState engage, Job job,
+			BabyState baby, String password, String tel, Date birthdate,
+			Education education, IncomeType income, int score) {
+		super();
+		this.deviceId = deviceId;
+		this.sex = sex;
+		this.engage = engage;
+		this.job = job;
+		this.baby = baby;
+		this.password = password;
+		this.tel = tel;
+		this.birthdate = birthdate;
+		this.education = education;
+		this.income = income;
+		this.score = score;
+	}
 }

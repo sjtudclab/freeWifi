@@ -4,10 +4,16 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+import cn.edu.sjtu.dclab.freewifi.enums.BusinessType;
 
 /**
  * 商家
@@ -34,7 +40,9 @@ public class Merchant implements Serializable {
 	@Column(nullable = true)
 	private String tel;
 
-
+	@Enumerated(EnumType.ORDINAL)
+	@Column(nullable = true)
+	private BusinessType business;
 
 	public long getId() {
 		return id;
@@ -43,7 +51,7 @@ public class Merchant implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
-
+	@JsonIgnore
 	public String getLoginname() {
 		return loginname;
 	}
@@ -51,7 +59,7 @@ public class Merchant implements Serializable {
 	public void setLoginname(String loginname) {
 		this.loginname = loginname;
 	}
-
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -59,7 +67,7 @@ public class Merchant implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	@JsonIgnore
 	public String getName() {
 		return name;
 	}
@@ -78,6 +86,14 @@ public class Merchant implements Serializable {
 
 	public String getTel() {
 		return tel;
+	}
+
+	public BusinessType getBusiness() {
+		return business;
+	}
+
+	public void setBusiness(BusinessType business) {
+		this.business = business;
 	}
 
 	public void setTel(String tel) {

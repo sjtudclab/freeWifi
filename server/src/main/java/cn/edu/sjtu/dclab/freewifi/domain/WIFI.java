@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 @Entity
 @Table(name = "wifi")
 public class WIFI implements Serializable {
@@ -43,7 +41,7 @@ public class WIFI implements Serializable {
 	@Column(nullable = true)
 	private double latitude;
 
-	@JsonIgnore
+
 	public Merchant getMerchant() {
 		return merchant;
 	}

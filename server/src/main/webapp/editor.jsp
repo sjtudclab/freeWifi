@@ -30,9 +30,10 @@
     <script src="<c:url value='/resources/js/prettify.js'/>"></script>
     <script src="<c:url value='/resources/js/bootstrap-datetimepicker.min.js'/>"></script>
     <script src="<c:url value='/resources/js/bootstrap-multiselect.js'/>"></script>
+    <script src="<c:url value='/resources/js/utility.js'/>"></script>
     <script src="<c:url value='/resources/js/editor.js'/>"></script>
     <script src="<c:url value='/resources/js/bootstrap-wysiwyg.js'/>"></script>
-
+	
 </head>
 	<body>
 

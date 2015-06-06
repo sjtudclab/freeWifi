@@ -28,28 +28,16 @@
     <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
     <script src="<c:url value='/resources/js/prettify.js'/>"></script>
     <script src="<c:url value='/resources/js/bootstrap-wysiwyg.js'/>"></script>
+    <script src="<c:url value='/resources/js/utility.js'/>"></script>
   </head>
   <body>
   </body>
 <script>
-  function getUrlParameter(sParam)
-  {
-    var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('&');
-    for (var i = 0; i < sURLVariables.length; i++)
-    {
-        var sParameterName = sURLVariables[i].split('=');
-        if (sParameterName[0] == sParam)
-        {
-            return sParameterName[1];
-        }
-    }
-  }
   $(function(){
       var id = getUrlParameter('id');
       $.ajax({
           method: "GET",
-          url: "/freewifiserver/ad/show",
+          url: "ad/show",
           data: {id: id}
       }).done(function(result) {
           if (result.code == 0) {

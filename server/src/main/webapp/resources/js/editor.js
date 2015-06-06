@@ -91,7 +91,7 @@ $(function() {
             isLaunch: isLaunch
         }
         $.ajax({
-            url: 'save',
+            url: 'add/save',
             method: 'post',
             data: data
         }).done(function(data) {
@@ -101,4 +101,18 @@ $(function() {
         })
         
     });
+    
+    var id = getUrlParameter('id');
+    if (id) {
+        $.ajax({
+            url: 'ad/mobile',
+            method: 'get',
+            data: id,
+        }).done(function(data) {
+            console.log('done');
+            $('#editor').html(data.data);
+        }).fail(function(){
+            console.log('error');
+        })
+    }
 });

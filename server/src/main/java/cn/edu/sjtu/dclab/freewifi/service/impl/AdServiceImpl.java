@@ -50,7 +50,8 @@ public class AdServiceImpl implements IAdService {
 			int index = 0;
 			double max = 0.0d;
 			for (int i = 0; i < ads.size(); i++) {
-				AdStats adStats = adStatsDao.getAdStats(user.getSex(), user.getEducation(), user.getIncome(), AgeType.getByBirthDate(user.getBirthdate()), ads.get(i));
+				AdStats adStats = adStatsDao.getAdStats(user.getSex(), user.getEducation(), user.getIncome(), AgeType.getByBirthDate(user.getBirthdate()),
+						merchant.getBusiness(), user.getEngage(), user.getJob(), user.getBaby(), ads.get(i));
 				if (adStats !=  null && adStats.getImpression() != 0) {
 					double clickRate = adStats.getClick() / adStats.getImpression();
 					if (clickRate > max ) {

@@ -62,6 +62,9 @@ public class AdController {
 			String age,//String-8岁以下，20-35，35-50，50以上、不限
 			String education,//String-高中以下、高中、大专、本科、研究生及以上、不限
 			String income,//String-3000元以下、3000-7000元、7000-10000元、10000元以上、不限
+			String engage,
+			String baby,
+			String job,
 			boolean isLaunch
 			) {
 		//System.out.println(startDate+"----"+endDate+"---"+startHour+"------"+endHour+"----"+name+"----"+sex+"----"+education+"----"+income+"----"+age);
@@ -75,7 +78,7 @@ public class AdController {
 			map.put(Constants.ERROR_MSG,"Login error.");
 			return map;
 		}
-		Orientation orientation = new Orientation(sex, age, education, income);
+		Orientation orientation = new Orientation(sex, age, education, income, engage, job, baby);
 		orientationService.addOrientation(orientation);
 		Date _startDate = DateUtils.parseDate(startDate, "yyyy-MM-dd");
 		Date _endDate = DateUtils.parseDate(endDate, "yyyy-MM-dd");
@@ -109,6 +112,16 @@ public class AdController {
 		}else {
 			return Integer.parseInt(part[0]) * 3600 +Integer.parseInt(part[1])*60 +Integer.parseInt(part[2]);
 		}
+	}
+	
+	private int deTransfer(int hour){
+		int h = hour/3600;
+		hour = hour % 3600;
+		int m = hour/60;
+		hour = hour %60;
+		int s = hour;
+		return h*10000+m*100+s;
+		
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -166,6 +179,7 @@ public class AdController {
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
+	@ResponseBody
 	public Map<String, Object> getList(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String merchantTag = session.getAttribute(Constants.CURRENT_USER).toString();
@@ -183,6 +197,12 @@ public class AdController {
 			return map;
 		}
 		List<Ad> list = adService.getAdListByMerchant(merchant);
+		if (list != null) {
+			for (Ad ad : list) {
+				ad.setStartHour(deTransfer(ad.getStartHour()));
+				ad.setEndHour(deTransfer(ad.getEndHour()));
+			}
+		}
 		map.put(Constants.CODE, 0);
 		map.put(Constants.DATA,list);
 		map.put(Constants.SIZE, list == null?0:list.size());

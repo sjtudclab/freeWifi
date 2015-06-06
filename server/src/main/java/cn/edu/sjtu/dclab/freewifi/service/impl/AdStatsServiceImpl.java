@@ -10,9 +10,13 @@ import cn.edu.sjtu.dclab.freewifi.domain.Ad;
 import cn.edu.sjtu.dclab.freewifi.domain.AdStats;
 import cn.edu.sjtu.dclab.freewifi.domain.User;
 import cn.edu.sjtu.dclab.freewifi.enums.AgeType;
+import cn.edu.sjtu.dclab.freewifi.enums.BabyState;
+import cn.edu.sjtu.dclab.freewifi.enums.BusinessType;
 import cn.edu.sjtu.dclab.freewifi.enums.Education;
+import cn.edu.sjtu.dclab.freewifi.enums.EngageState;
 import cn.edu.sjtu.dclab.freewifi.enums.Gender;
 import cn.edu.sjtu.dclab.freewifi.enums.IncomeType;
+import cn.edu.sjtu.dclab.freewifi.enums.Job;
 import cn.edu.sjtu.dclab.freewifi.service.IAdStatsService;
 @Service("adStatsService")
 @Transactional
@@ -27,10 +31,15 @@ public class AdStatsServiceImpl implements IAdStatsService {
 		AgeType age = AgeType.getByBirthDate(user.getBirthdate());
 		IncomeType income = user.getIncome();
 		Education education = user.getEducation();
+		BusinessType business = ad.getMerchant().getBusiness();
+		EngageState engage = user.getEngage();
+		Job job = user.getJob();
+		BabyState baby = user.getBaby();
 		
-		AdStats adStats = dao.getAdStats(sex, education, income, age, ad);
+		
+		AdStats adStats = dao.getAdStats(sex, education, income, age, business, engage, job, baby, ad);
 		if(adStats == null){
-			adStats = new AdStats(ad, sex, income, education, age);
+			adStats = new AdStats(ad, sex, income, education, age, business, engage, job, baby);
 			adStats.setClick(1);
 			dao.addAdStats(adStats);
 		}else {
@@ -46,10 +55,14 @@ public class AdStatsServiceImpl implements IAdStatsService {
 		AgeType age = AgeType.getByBirthDate(user.getBirthdate());
 		IncomeType income = user.getIncome();
 		Education education = user.getEducation();
+		BusinessType business = ad.getMerchant().getBusiness();
+		EngageState engage = user.getEngage();
+		Job job = user.getJob();
+		BabyState baby = user.getBaby();
 		
-		AdStats adStats = dao.getAdStats(sex, education, income, age, ad);
+		AdStats adStats = dao.getAdStats(sex, education, income, age, business, engage, job, baby, ad);
 		if(adStats == null){
-			adStats = new AdStats(ad, sex, income, education, age);
+			adStats = new AdStats(ad, sex, income, education, age, business, engage, job, baby);
 			adStats.setImpression(1);
 			dao.addAdStats(adStats);
 		}else {

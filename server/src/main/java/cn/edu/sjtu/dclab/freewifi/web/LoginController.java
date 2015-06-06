@@ -36,20 +36,17 @@ public class LoginController {
 	
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(HttpServletRequest request,
+	public String login(HttpServletRequest request,
 			@RequestParam(value = "username", required = true) String username,
 			@RequestParam(value = "password", required = true) String password) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("login");
 		Merchant merchant = merchantService.login(username, password);
 		if (merchant != null) {
-			mav.setViewName("manage");
 			HttpSession session = request.getSession();
 			session.setAttribute(Constants.CURRENT_USER, merchant.getId());
 		}else {
-			mav.addObject("msg", "username or password error");
+			return "redirect:/login";
 		}
-		return mav;
+		return "redirect:/home";
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
