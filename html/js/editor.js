@@ -15,6 +15,18 @@ $(function() {
         nonSelectedText: 'Income'
     });
 
+    $('#marry').multiselect({
+        nonSelectedText: 'Marry'
+    });
+
+    $('#child').multiselect({
+        nonSelectedText: 'Child'
+    });
+
+    $('#career').multiselect({
+        nonSelectedText: 'Career'
+    });
+
     $('#datetimepicker1').datetimepicker({
         language: 'pt-BR',
         pickTime: false
