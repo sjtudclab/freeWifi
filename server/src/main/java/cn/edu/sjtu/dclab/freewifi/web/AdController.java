@@ -19,11 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.edu.sjtu.dclab.freewifi.domain.Ad;
 import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
 import cn.edu.sjtu.dclab.freewifi.domain.Orientation;
+import cn.edu.sjtu.dclab.freewifi.domain.User;
 import cn.edu.sjtu.dclab.freewifi.enums.AdState;
 import cn.edu.sjtu.dclab.freewifi.enums.AdType;
 import cn.edu.sjtu.dclab.freewifi.service.IAdService;
 import cn.edu.sjtu.dclab.freewifi.service.IMerchantService;
 import cn.edu.sjtu.dclab.freewifi.service.IOrientationService;
+import cn.edu.sjtu.dclab.freewifi.service.IUserService;
 import cn.edu.sjtu.dclab.freewifi.util.Constants;
 import cn.edu.sjtu.dclab.freewifi.util.DateUtils;
 
@@ -39,6 +41,9 @@ public class AdController {
 	
 	@Autowired 
 	private IOrientationService orientationService;
+	
+	@Autowired
+	private IUserService userService;
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView addAdView() {
@@ -200,7 +205,13 @@ public class AdController {
 	}
 	
 	@RequestMapping(value = "/mobile", method = RequestMethod.GET)
-	public ModelAndView showAdForMobile(@RequestParam(value = "id",required = true) long id) {
+	public ModelAndView showAdForMobile(@RequestParam(value = "id",required = true) long id, 
+			@RequestParam(value = "tel",required = false) String tel) {
+		if (tel != null && !tel.equals("")) {
+			User user = userService.getUserByTel(tel);
+			user.setScore(user.getScore()+1);
+			userService.updateUser(user);
+		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("ad");
 		return mav;

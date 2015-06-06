@@ -110,7 +110,7 @@ public class User implements Serializable{
 		this.income = income;
 	}
 	public User(String deviceId, Gender sex, String tel, Date birthdate,
-			Education education, IncomeType income) {
+			Education education, IncomeType income, String password) {
 		super();
 		this.deviceId = deviceId;
 		this.sex = sex;
@@ -119,6 +119,7 @@ public class User implements Serializable{
 		this.education = education;
 		this.income = income;
 		this.score = 0;
+		this.password = password;
 	}
 	
 	public String getPassword() {

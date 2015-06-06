@@ -51,11 +51,12 @@ public class UserController {
                                         @RequestParam(value = "tel") String tel,
                                         @RequestParam(value = "education") int education,
                                         @RequestParam(value = "gender") int gender,
+                                        @RequestParam(value = "password") String password,
                                         @RequestParam(value = "birthdate") String birthdate,
                                         @RequestParam(value = "income") int income) {
         Date date = DateUtils.parseDate(birthdate, "yyyy-MM-dd");
         User user = new User(deviceId, Gender.get(gender), tel, date,
-                Education.get(education), IncomeType.get(income));
+                Education.get(education), IncomeType.get(income), password);
         boolean result = userService.addUser(user);
         Map<String, Object> map = new HashMap<String, Object>();
         if (result) {
