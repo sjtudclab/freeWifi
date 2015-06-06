@@ -20,6 +20,21 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- 百度地图所需权限 -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 百度定位所需权限 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <!-- 这个权限用于进行网络定位-->
@@ -60,7 +75,7 @@
                  android:allowBackup="true">
         <!-- 这里替换百度地图的AK -->
         <meta-data android:name="com.baidu.lbsapi.API_KEY"
-                   android:value="SqFYEiMjW3oV4rfoHic0kh59"/>
+                   android:value="caW7COhOf2QzhTqkem1Mcdvu"/>
         <!-- 百度定位：在application标签中声明service组件,每个app拥有自己单独的定位service -->
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"></service>
 
@@ -83,6 +98,10 @@
         <activity android:name=".wxapi.WXEntryActivity"
             android:exported="true"
             android:launchMode="singleTop" />
+        <activity android:name=".geo.BDMapFragmentAty"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
 
         <!-- JPush Required SDK核心功能-->
         <activity

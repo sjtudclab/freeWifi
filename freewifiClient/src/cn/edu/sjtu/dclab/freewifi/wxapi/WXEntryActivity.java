@@ -39,7 +39,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
 //	private static final String TAG = "WXEntryActivity";
 
     private static final int TIMELINE_SUPPORTED_VERSION = 0x21020001;
-    private static final String MSG_DEFAULT = "Message from 3nd app.";
+    private static final String MSG_DEFAULT = "Message from 3rd app.";
     private static final int THUMB_SIZE = 150;
 
 //    private Context context = WXEntryActivity.this;

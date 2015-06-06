@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import cn.edu.sjtu.dclab.freewifi.geo.BDLocating;
+import cn.edu.sjtu.dclab.freewifi.geo.BDMapFragmentAty;
 import cn.edu.sjtu.dclab.freewifi.push.PushAty;
 import cn.edu.sjtu.dclab.freewifi.test.JsonTestAty;
 import cn.edu.sjtu.dclab.freewifi.test.MyWebView;
@@ -62,6 +63,9 @@ public class MainListActivity extends ListActivity {
                         break;
                     case 6:
                         startActivity(new Intent(getApplicationContext(), WXEntryActivity.class));
+                        break;
+                    case 7:
+                        startActivity(new Intent(getApplicationContext(), BDMapFragmentAty.class));
                         break;
                     default:
                         break;

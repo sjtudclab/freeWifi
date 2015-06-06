@@ -17,6 +17,7 @@
         <item>PushTest</item> <!--Push测试页-->
         <item>ServerPageTest</item>
         <item>WechatShare</item>
+        <item>BDMap</item>
     </string-array>
 
     <string name="errcode_success">发送成功</string>

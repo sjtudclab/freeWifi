@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="my_edittext_style" parent="@android:style/Widget.EditText">
+        <item name="android:background">@drawable/selector_edittext_bg</item>
+    </style>
+</resources>
