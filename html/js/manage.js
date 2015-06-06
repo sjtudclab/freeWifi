@@ -15,10 +15,18 @@ $(function() {
                     $(span).text(ad.name + ' Add date:' + ad.addDate)
                     var p = document.createElement('p');
                     var a = document.createElement('a');
-                    var startHour = ad.startHour.substr(0, 2) + ':' + ad.startHour.substr(2, 4) +
-                        ':' + ad.startHour.substr(4, 6);
-                    var endHour = ad.endHour.substr(0, 2) + ':' + ad.endHour.substr(2, 4) +
-                        ':' + ad.endHour.substr(4, 6);
+                    var startHour = ad.startHour.toString();
+                    if (startHour.length == 5) {
+                        startHour = '0' + startHour;
+                    }
+                    startHour = startHour.substr(0, 2) + ':' + startHour.substr(2, 4) +
+                        ':' + startHour.substr(4, 6);
+                    var endHour = ad.endHour.toString();
+                    if (endHour.length == 5) {
+                        endHour = '0' + endHour;
+                    }
+                    endHour = endHour.substr(0, 2) + ':' + endHour.substr(2, 4) +
+                        ':' + endHour.substr(4, 6);
                     $(a).text(ad.startDate + '--' + ad.endDate + '    ' + startHour + '--' + endHour);
                     var aEdit = document.createElement('a');
                     $(aEdit).addClass('btn btn-primary btn-mini');
