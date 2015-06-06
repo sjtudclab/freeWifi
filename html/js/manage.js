@@ -41,7 +41,7 @@ $(function() {
                         $.ajax({
                             url: "ad/publish",
                             method: 'GET',
-                            data: ad.id,
+                            data: {id:ad.id},
                         }).done(function( data ) {
                             if (data.code == -1) {
                                 console.log('error');
@@ -57,7 +57,7 @@ $(function() {
                         $.ajax({
                             url: "ad/unpublish",
                             method: 'GET',
-                            data: ad.id,
+                            data: {id:ad.id},
                         }).done(function( data ) {
                             if (data.code == -1) {
                                 console.log('error');
@@ -72,6 +72,15 @@ $(function() {
                     $(aPreview).click(function(){
                         location.href = document.location.hostname + '/ad/mobile?id=' + ad.id; 
                     });
+
+                    var aReport = document.createElement('a');
+                    $(aReport).addClass('btn btn-danger btn-mini');
+                    $(aReport).text('Delete');
+                    $(aReport).click(function(){
+                        location.href = '/freewifiserver/ad/stats?id=' + ad.id;
+                    });
+                    
+
                     var aDelete = document.createElement('a');
                     $(aDelete).addClass('btn btn-danger btn-mini');
                     $(aDelete).text('Delete');
@@ -79,7 +88,7 @@ $(function() {
                         $.ajax({
                             url: "ad/delete",
                             method: 'GET',
-                            data: ad.id,
+                            data: {id: ad.id},
                         }).done(function( data ) {
                             if (data.code == -1) {
                                 console.log('error');
@@ -87,20 +96,21 @@ $(function() {
                                 $('#recent-posts').empty();
                                 getADs();
                             }
-                        })                        
+                        })                 
                     });
                     $(li).append(div);
                     $(div).append(span);
                     $(div).append(p);
 
                     $(p).append(a);
-                    $(div).append('<a href="#" class="btn btn-primary btn-mini">Edit</a> <a href="#" class="btn btn-success btn-mini">Publish</a> <a href="#" class="btn btn-success btn-mini">Unpublish</a>  <a href="#" class="btn btn-success btn-mini">Preview</a> <a href="#" class="btn btn-danger btn-mini">Delete</a>');
+                    
                     $('#recent-posts').append(li);
-                    // $(div).append(aEdit);
-                    // $(div).append(aPublish);
-                    // $(div).append(aUnpublish);
-                    // $(div).append(aPreview);
-                    // $(div).append(aDelete);
+                    $(div).append(aEdit);
+                    $(div).append(aPublish);
+                    $(div).append(aUnpublish);
+                    $(div).append(aPreview);
+                    $(div).append(aDelete);
+                    $(div).append(aReport);
                     
                 }
             } else {
