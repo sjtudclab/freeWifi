@@ -17,7 +17,7 @@ import cn.edu.sjtu.dclab.freewifi.service.IAdCollectService;
 @Transactional
 public class AdCollectServiceImpl implements IAdCollectService{
 
-	@Resource(name = "adDao")
+	@Resource(name = "adCollectDao")
 	private IAdCollectDao adDao;
 	
 	@Override

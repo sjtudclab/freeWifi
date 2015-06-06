@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,9 +59,9 @@ public class AdController {
 			String income,//String-3000元以下、3000-7000元、7000-10000元、10000元以上、不限
 			boolean isLaunch
 			) {
-		System.out.println(startDate+"----"+endDate+"---"+startHour+"------"+endHour+"----"+name+"----"+sex+"----"+education+"----"+income+"----"+age);
+		//System.out.println(startDate+"----"+endDate+"---"+startHour+"------"+endHour+"----"+name+"----"+sex+"----"+education+"----"+income+"----"+age);
 		HttpSession session = request.getSession();
-		String merchantTag = "5";//session.getAttribute(Constants.CURRENT_USER).toString();
+		String merchantTag = session.getAttribute(Constants.CURRENT_USER).toString();
 		long merchantId = Long.parseLong(merchantTag);
 		Merchant merchant = merchantService.getMerchantById(merchantId);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -185,18 +184,25 @@ public class AdController {
 		return map;
 	}
 	
-	@RequestMapping(value = "/mobile/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	@ResponseBody
-	public ModelAndView showAdForMobile(@PathVariable(value = "id") long id) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index");
-		return mav;
+	public Map<String, Object> getAdContent(@RequestParam(value = "id") long id) {
+		Ad ad = adService.getAd(id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (ad != null) {
+			map.put(Constants.CODE, 0);
+			map.put(Constants.DATA,ad.getContent());
+		}else {
+			map.put(Constants.CODE, -1);
+			map.put(Constants.ERROR_MSG,"can not get ad by id:"+id);
+		}
+		return map;
 	}
 	
-	@RequestMapping(value = "/pc/{id}", method = RequestMethod.GET)
-	public ModelAndView showAdForPC(@PathVariable(value = "id") long id) {
+	@RequestMapping(value = "/mobile", method = RequestMethod.GET)
+	public ModelAndView showAdForMobile(@RequestParam(value = "id",required = true) long id) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index");
+		mav.setViewName("ad");
 		return mav;
 	}
 

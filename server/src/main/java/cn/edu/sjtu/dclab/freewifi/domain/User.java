@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 import cn.edu.sjtu.dclab.freewifi.enums.Education;
 import cn.edu.sjtu.dclab.freewifi.enums.Gender;
 import cn.edu.sjtu.dclab.freewifi.enums.IncomeType;
+
 @Entity
 @Table(name = "user")
 public class User implements Serializable{
@@ -38,7 +39,9 @@ public class User implements Serializable{
 	@Enumerated(EnumType.ORDINAL)
 	@Column(nullable = true)
 	private Gender sex;
-	//private String username;
+	
+	@Column(nullable = false)
+	private String password;
 	
 	public User() {
 		super();
@@ -116,6 +119,13 @@ public class User implements Serializable{
 		this.education = education;
 		this.income = income;
 		this.score = 0;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public int getScore() {
 		return score;
