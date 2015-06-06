@@ -68,3 +68,13 @@ code：0/-1  -- 0表示成功
 data: ad
 }
 编辑-POST：/ad/edit/{id}参数，同添加广告
+
+
+预览-GET：URL:/ad/mobile?id=** {ajax请求广告内容，GET /ad/mobile/{id}
+
+{
+code：0/-1  -- 0表示成功
+data: ad
+}
+
+}
