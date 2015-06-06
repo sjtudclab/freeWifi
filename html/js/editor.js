@@ -134,6 +134,7 @@ $(function() {
             method: 'post',
             data: data
         }).done(function(data) {
+            location.href = location.host + '/freewifiserver/home';
             console.log('done');
         }).fail(function(){
             console.log('error');
