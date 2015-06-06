@@ -14,27 +14,27 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
 
     <!-- 微信分享所需權限 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <!-- 百度地图所需权限 -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!-- 百度定位所需权限 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <!-- 这个权限用于进行网络定位-->
@@ -71,7 +71,7 @@
     <application android:name=".MainApplication"
                  android:label="@string/app_name"
                  android:icon="@drawable/ic_launcher"
-                 android:theme="@android:style/Theme.Light.NoTitleBar"
+                 android:theme="@style/AppTheme"
                  android:allowBackup="true">
         <!-- 这里替换百度地图的AK -->
         <meta-data android:name="com.baidu.lbsapi.API_KEY"
@@ -81,12 +81,16 @@
 
         <activity android:name="MainActivity" android:label="@string/app_name"></activity>
         <activity android:name=".MainListActivity">
+
+        </activity>
+
+        <activity android:name=".view.MainTest"
+                  android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".test.MyWebView"/>
         <activity android:name=".web.WebViewInteractJS"/>
         <activity android:name=".geo.BDLocating"/>
@@ -96,11 +100,11 @@
         <activity android:name=".push.PushAty"/>
         <activity android:name=".push.MsgShowAty"/>
         <activity android:name=".wxapi.WXEntryActivity"
-            android:exported="true"
-            android:launchMode="singleTop" />
+                  android:exported="true"
+                  android:launchMode="singleTop"/>
         <activity android:name=".geo.BDMapFragmentAty"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait" >
+                  android:configChanges="orientation|keyboardHidden"
+                  android:screenOrientation="portrait">
         </activity>
 
         <!-- JPush Required SDK核心功能-->
@@ -114,6 +118,8 @@
                 <category android:name="cn.edu.sjtu.dclab.freewifi"/>
             </intent-filter>
         </activity>
+
+
         <!-- Required  SDK核心功能-->
         <service
                 android:name="cn.jpush.android.service.DownloadService"

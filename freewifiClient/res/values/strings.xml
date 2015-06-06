@@ -9,6 +9,8 @@
     <string name="btn_checksupformoments">Check Support of Moments</string>
     <string name="btn_sharetowechatmoments">Share to Wechat Moments</string>
 
+    <string name="actionbar_title">TestMainPage</string>
+
     <string-array name="aty_list">
         <item>Wifi</item> <!--Wifi测试页-->
         <item>SendUserInfo</item> <!--注册测试页-->
