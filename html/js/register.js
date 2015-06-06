@@ -33,7 +33,8 @@ $('#start').click(function() {
         ssid: $('#ssid').val(),
         wifiPassword: $('#wifiPassword').val(),
         longitude: longitude,
-        latitude: latitude
+        latitude: latitude,
+        icon: $('#blah').attr('src')
     }
     $.ajax({
         url: 'merchant/register',
@@ -47,4 +48,24 @@ $('#start').click(function() {
     });
     
     
+});
+
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$('#blah').hide();
+$("#imgInp").change(function(){
+    readURL(this);
+    $('#blah').width(42);
+    $('#blah').height(42);
+    $('#blah').show();
 });
