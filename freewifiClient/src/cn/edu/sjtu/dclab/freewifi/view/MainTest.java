@@ -161,7 +161,7 @@ public class MainTest extends ActionBarActivity implements ScrollTabHolder, View
                 String deviceId = SharedDataTool.GetIMEI(MainTest.this);
 
                 String device_Id = deviceId;
-                String wifi_Id = "9";
+                String wifi_Id = "19";
                 setAlias(device_Id);
 
                 UserService userService = new UserService(MainTest.this,getResources().getString(R.string.server)+"/user/notification");
