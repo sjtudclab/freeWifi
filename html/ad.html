@@ -44,17 +44,17 @@
   }
   $(function(){
       var id = getUrlParameter('id');
-      $.get({
-          url: '/ad/mobile/',
-          data: id,
-          function(responseText) {
-              if (responseText.code == 0) {
-                  $('body').html(responseText.data);
-              } else {
-                  console.log('error');
-              }
+      $.ajax({
+          method: "GET",
+          url: "ad/show",
+          data: {id: id}
+      }).done(function(result) {
+          if (result.code == 0) {
+              $('body').html(result.data);
+          } else {
+              console.log('error');
           }
-      });
+      })
   });
 </script>
 </html>
