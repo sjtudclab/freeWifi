@@ -15,13 +15,30 @@ $(function() {
                     $(span).text(ad.name + ' Add date:' + ad.addDate)
                     var p = document.createElement('p');
                     var a = document.createElement('a');
-                    $(a).text(ad.startDate + '--' + ad.endDate + '    ' + ad.startHour + '--' + ad.endHour);
+                    var startHour = ad.startHour.substr(0, 2) + ':' + ad.startHour.substr(2, 4) +
+                        ':' + ad.startHour.substr(4, 6);
+                    var endHour = ad.endHour.substr(0, 2) + ':' + ad.endHour.substr(2, 4) +
+                        ':' + ad.endHour.substr(4, 6);
+                    $(a).text(ad.startDate + '--' + ad.endDate + '    ' + startHour + '--' + endHour);
                     var aEdit = document.createElement('a');
                     $(aEdit).addClass('btn btn-primary btn-mini');
                     $(aEdit).text('Edit');
                     var aPublish = document.createElement('a');
                     $(aPublish).addClass('btn btn-success btn-mini');
                     $(aPublish).text('Publish');
+                    $(aPublish).click(function(){
+                        $.ajax({
+                            url: "ad/publish",
+                            method: 'GET',
+                            data: ad.id,
+                        }).done(function( data ) {
+                            if (data.code == -1) {
+                                console.log('error');
+                            } else {
+                                console.log('succeed');
+                            }
+                        });
+                    });
                     var aUnpublish = document.createElement('a');
                     $(aUnpublish).addClass('btn btn-success btn-mini');
                     $(aUnpublish).text('Unpublish');
