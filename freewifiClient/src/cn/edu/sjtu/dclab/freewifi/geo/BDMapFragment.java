@@ -1,7 +1,10 @@
 package cn.edu.sjtu.dclab.freewifi.geo;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -26,6 +29,10 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.navi.BaiduMapAppNotSupportNaviException;
+import com.baidu.mapapi.navi.BaiduMapNavigation;
+import com.baidu.mapapi.navi.NaviParaOption;
+import com.baidu.mapapi.utils.OpenClientUtil;
 
 import cn.edu.sjtu.dclab.freewifi.MainApplication;
 import cn.edu.sjtu.dclab.freewifi.R;
@@ -44,7 +51,7 @@ public class BDMapFragment extends Fragment implements View.OnClickListener{
 	
 	View view = null;
 //	TextView tvPetName, tvDistance, tvBattery;
-	Button locateBtn;
+	Button locateBtn, naviBtn;
 
 	int radius  = 100;
 
@@ -62,16 +69,16 @@ public class BDMapFragment extends Fragment implements View.OnClickListener{
 		/**全局Application初始化，尽量在setContentView之前初始化 */
 		mApplication = MainApplication.GetInstance();
 		//设置LoactionHandler
-		mApplication.setLoactionHandler(new Handler(){
+		mApplication.setLoactionHandler(new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
-				if(msg.what == MainApplication.NEW_LOC_MSG){
+				if (msg.what == MainApplication.NEW_LOC_MSG) {
 					mCurLocation = (BDLocation) msg.obj;
 //					if(mMapController != null){
 //						mMapController.clear();
 //					}
 					locatingOnReceiveLocation();
-					drawCircleOnReceiveLocation(radius);
+//					drawCircleOnReceiveLocation(radius);
 //					drawPetIcon(petLocation);
 				}
 			}
@@ -80,6 +87,8 @@ public class BDMapFragment extends Fragment implements View.OnClickListener{
 		/**UI初始化*/
 		locateBtn = (Button) view.findViewById(R.id.btn_locate);
 		locateBtn.setOnClickListener(this);
+		naviBtn = (Button) view.findViewById(R.id.btn_navi);
+		naviBtn.setOnClickListener(this);
 
 		/**地图视图、控制器初始化 */
 		mMapView = (MapView) view.findViewById(R.id.mapView);//百度地图视图控件
@@ -105,6 +114,9 @@ public class BDMapFragment extends Fragment implements View.OnClickListener{
 		if (v.getId() == R.id.btn_locate) {
 			//请求定位，异步返回，结果在locationListener中获取
 			mLocationClient.requestLocation();
+		} else if (v.getId() == R.id.btn_navi) {
+			LatLng defaltPoint = new LatLng(40.056858, 116.308194);
+			naviByBDMap(mCurLocation, defaltPoint, getActivity());
 		}
 	}
 	
@@ -114,7 +126,7 @@ public class BDMapFragment extends Fragment implements View.OnClickListener{
 		mMapView.showZoomControls(false);//取消缩放控件
 		
 		//MapStatusUpdateFactory生成地图状态将要发生的变化
-		MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);//设置缩放级别
+		MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(17.0f);//设置缩放级别
 		//setMapStatus更新地图状态
 		mMapController.setMapStatus(msu);
 		
@@ -138,13 +150,56 @@ public class BDMapFragment extends Fragment implements View.OnClickListener{
 		//MyLocationConfiguration配置定位图层显示方式
 		mMapController.setMyLocationConfigeration(
 				new MyLocationConfiguration(
-					MyLocationConfiguration.LocationMode.NORMAL, //定位图层显示方式
-					false, //是否允许显示方向信息
-					BitmapDescriptorFactory.fromResource(R.drawable.me_small)));//用户自定义定位图标
+						MyLocationConfiguration.LocationMode.NORMAL, //定位图层显示方式
+						false, //是否允许显示方向信息
+						BitmapDescriptorFactory.fromResource(R.drawable.me_small)));//用户自定义定位图标
 		//以动画方式更新地图状态到当前位置
 		LatLng ll = new LatLng(mCurLocation.getLatitude(), mCurLocation.getLongitude());
 		MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);//newLatLng设置地图新中心点
 		mMapController.animateMapStatus(u);//animateMapStatus以动画方式更新地图状态，动画耗时 300 ms
+	}
+
+	private void naviByBDMap(BDLocation startLocation, LatLng endPoint, Context context){
+		LatLng pt1 = new LatLng(startLocation.getLatitude(), startLocation.getLongitude());
+
+		// 构建 导航参数
+		NaviParaOption para = new NaviParaOption()
+				.startPoint(pt1).endPoint(endPoint)
+				.startName("起点").endName("终点");
+
+		try {
+			BaiduMapNavigation.openBaiduMapNavi(para, context);
+		} catch (BaiduMapAppNotSupportNaviException e) {
+			e.printStackTrace();
+			showDialog(context);
+		}
+	}
+
+	/**
+	 * 提示未安装百度地图app或app版本过低
+	 *
+	 */
+	public void showDialog(final Context context) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setMessage("您尚未安装百度地图app或app版本过低，点击确认安装？");
+		builder.setTitle("提示");
+		builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				OpenClientUtil.getLatestBaiduMapApp(context);
+			}
+		});
+
+		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+
+		builder.create().show();
+
 	}
 	
 	/**绘制以当前位置为圆心的圆

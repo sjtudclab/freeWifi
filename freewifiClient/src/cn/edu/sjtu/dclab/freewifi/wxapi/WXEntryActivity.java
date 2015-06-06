@@ -15,6 +15,7 @@ import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.WXImageObject;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.sdk.modelmsg.WXTextObject;
+import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
@@ -40,6 +41,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
 
     private static final int TIMELINE_SUPPORTED_VERSION = 0x21020001;
     private static final String MSG_DEFAULT = "Message from 3rd app.";
+    private static final String URL_DEFAULT = "http://www.baidu.com";
     private static final int THUMB_SIZE = 150;
 
 //    private Context context = WXEntryActivity.this;
@@ -76,9 +78,11 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
      */
     public void onClickProcess(View v) {
         if (v.getId() == R.id.btn_shareToWechatSession) {
-            sendTextToWechat(MSG_DEFAULT, false);
+//            sendTextToWechat(MSG_DEFAULT, false);
+            sendWebToWechat(URL_DEFAULT, false);
         } else if(v.getId() == R.id.btn_shareToWechatMoments){
-            sendTextToWechat(MSG_DEFAULT, true);
+//            sendTextToWechat(MSG_DEFAULT, true);
+            sendWebToWechat(URL_DEFAULT, true);
         } else if(v.getId() == R.id.btn_checkWechatMoments){
             int wxSdkVersion = api.getWXAppSupportAPI();
             if (wxSdkVersion >= TIMELINE_SUPPORTED_VERSION) {
@@ -121,6 +125,24 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction("img");
+        req.message = msg;
+        req.scene = toMoments ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
+        api.sendReq(req);
+
+        this.finish();
+    }
+
+    private void sendWebToWechat(String url, Boolean toMoments){
+        WXWebpageObject webpage = new WXWebpageObject();
+        webpage.webpageUrl = url;
+        WXMediaMessage msg = new WXMediaMessage(webpage);
+        msg.title = "WebPage Title Very Long";
+        msg.description = "WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description WebPage Description Very Long Very Long Very Long Very Long Very Long Very Long Very Long";
+        Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+        msg.thumbData = Tools.bmpToByteArray(thumb, true);
+
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = buildTransaction("webpage");
         req.message = msg;
         req.scene = toMoments ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
         api.sendReq(req);
