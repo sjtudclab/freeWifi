@@ -31,6 +31,20 @@ public class UserDaoImpl implements IUserDao {
 			return null;
 		}
 	}
+	@Override
+	public User getUserByTel(String tel) {
+		List<User> users = baseDao.queryByProperty(User.class, "tel", tel);
+		if (users != null && users.size() > 0) {
+			return users.get(0);
+		}else {
+			return null;
+		}
+	}
+	@Override
+	public boolean updateUser(User user) {
+		baseDao.update(user);
+		return true;
+	}
 
 
 }

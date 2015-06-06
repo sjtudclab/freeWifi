@@ -28,4 +28,14 @@ public class UserServiceImpl implements IUserService {
 		return dao.getUserByDeviceId(deviceId);
 	}
 
+	@Override
+	public User getUserByTel(String tel) {
+		return dao.getUserByTel(tel);
+	}
+
+	@Override
+	public boolean updateUser(User user) {
+		return dao.updateUser(user);
+	}
+
 }

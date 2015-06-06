@@ -12,6 +12,7 @@ import cn.edu.sjtu.dclab.freewifi.domain.AdCollect;
 import cn.edu.sjtu.dclab.freewifi.domain.User;
 @Repository("adCollectDao")
 public class AdCollectDaoImpl implements IAdCollectDao {
+	
 	@Resource(name = "baseDao")
 	private IBaseDao<AdCollect> baseDao;
 

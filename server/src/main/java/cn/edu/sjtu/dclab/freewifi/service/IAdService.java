@@ -14,7 +14,7 @@ public interface IAdService {
 	 * @param user
 	 * @return
 	 */
-	public List<Ad> getAdListByMerchantAndUser(Merchant merchant, User user);
+	public Ad getAdByMerchantAndUser(Merchant merchant, User user);
 
 	public boolean deleteAd(Ad ad);
 

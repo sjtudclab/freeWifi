@@ -62,6 +62,7 @@ public class AdDaoImpl implements IAdDao {
 	public Ad getAdById(long id) {
 		return baseDao.queryById(Ad.class, id);
 	}
+	
 	@Override
 	public List<Ad> getLaunchingAdByMerchantAndUser(Merchant merchant, User user) {
 		Criteria criteria = getSession().createCriteria(Ad.class);
