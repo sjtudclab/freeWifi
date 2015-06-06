@@ -87,3 +87,22 @@ data: ad
 GET
 /ad/stats/{ad_id}?type={age/income/education/job/engage/gender/baby}
 
+{
+data: [
+	{
+	id: 1,
+	click: 90,
+	push: 200,
+	impression: 100,
+	orientation: "男"
+	},
+	{
+	id: 2,
+	click: 40,
+	push: 120,
+	impression: 90,
+	orientation: "女"
+	}
+],
+code: 0
+}
