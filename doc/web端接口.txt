@@ -78,3 +78,12 @@ data: ad
 }
 
 }
+
+报表入口
+/ad/stats?id=***
+
+
+报表获取数据
+GET
+/ad/stats/{ad_id}?type={age/income/education/job/engage/gender/baby}
+
