@@ -86,6 +86,14 @@ public class Merchant implements Serializable {
 		return tel;
 	}
 
+	public BusinessType getBusiness() {
+		return business;
+	}
+
+	public void setBusiness(BusinessType business) {
+		this.business = business;
+	}
+
 	public void setTel(String tel) {
 		this.tel = tel;
 	}

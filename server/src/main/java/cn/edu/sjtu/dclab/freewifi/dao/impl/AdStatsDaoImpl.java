@@ -15,9 +15,13 @@ import cn.edu.sjtu.dclab.freewifi.dao.IBaseDao;
 import cn.edu.sjtu.dclab.freewifi.domain.Ad;
 import cn.edu.sjtu.dclab.freewifi.domain.AdStats;
 import cn.edu.sjtu.dclab.freewifi.enums.AgeType;
+import cn.edu.sjtu.dclab.freewifi.enums.BabyState;
+import cn.edu.sjtu.dclab.freewifi.enums.BusinessType;
 import cn.edu.sjtu.dclab.freewifi.enums.Education;
+import cn.edu.sjtu.dclab.freewifi.enums.EngageState;
 import cn.edu.sjtu.dclab.freewifi.enums.Gender;
 import cn.edu.sjtu.dclab.freewifi.enums.IncomeType;
+import cn.edu.sjtu.dclab.freewifi.enums.Job;
 
 @Repository("adStatsDao")
 public class AdStatsDaoImpl implements IAdStatsDao {
@@ -44,13 +48,17 @@ public class AdStatsDaoImpl implements IAdStatsDao {
 
 	@Override
 	public AdStats getAdStats(Gender gender, Education education,
-			IncomeType incomeType, AgeType age, Ad ad) {
+			IncomeType incomeType, AgeType age, BusinessType business,
+			EngageState engage,Job job,BabyState baby,Ad ad) {
 		Criteria criteria = getSession().createCriteria(AdStats.class);
 		criteria.add(Restrictions.eq("ad.id", ""+ad.getId()));
-		criteria.add(Restrictions.ne("sex", gender.ordinal()));
-		criteria.add(Restrictions.ne("income", incomeType.ordinal()));
-		criteria.add(Restrictions.ne("education",education.ordinal()));
-		criteria.add(Restrictions.ne("age", age.ordinal()));
+		criteria.add(Restrictions.eq("sex", gender.ordinal()));
+		criteria.add(Restrictions.eq("income", incomeType.ordinal()));
+		criteria.add(Restrictions.eq("education",education.ordinal()));
+		criteria.add(Restrictions.eq("engage", engage.ordinal()));
+		criteria.add(Restrictions.eq("job", job.ordinal()));
+		criteria.add(Restrictions.eq("baby", baby.ordinal()));
+		criteria.add(Restrictions.eq("business", business.ordinal()));
 		List<AdStats> result = criteria.list();
 		if (result != null ) {	
 			return result.get(0);

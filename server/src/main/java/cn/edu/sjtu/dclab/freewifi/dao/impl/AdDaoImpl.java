@@ -68,11 +68,14 @@ public class AdDaoImpl implements IAdDao {
 		Criteria criteria = getSession().createCriteria(Ad.class);
 		criteria.add(Restrictions.eq("merchant.id", ""+merchant.getId()));
 		criteria.add(Restrictions.eq("state", AdState.LAUNCHING));
-		//添加四个定向方案
+		//添加七个定向方案
 		criteria.add(Restrictions.like("orientation.sex", ""+user.getSex().getValue(), MatchMode.ANYWHERE));
 		criteria.add(Restrictions.like("orientation.income", ""+user.getIncome().getValue(), MatchMode.ANYWHERE));
 		criteria.add(Restrictions.like("orientation.education", ""+user.getEducation().getValue(), MatchMode.ANYWHERE));	
 		criteria.add(Restrictions.like("orientation.age", ""+AgeType.getByBirthDate(user.getBirthdate()).getValue(), MatchMode.ANYWHERE));
+		criteria.add(Restrictions.like("orientation.engage", ""+user.getEngage().getValue(), MatchMode.ANYWHERE));
+		criteria.add(Restrictions.like("orientation.baby", ""+user.getBaby().getValue(), MatchMode.ANYWHERE));
+		criteria.add(Restrictions.like("orientation.job", ""+user.getJob().getValue(), MatchMode.ANYWHERE));
 		//时间配置
 		criteria.add(Restrictions.le("startDate", new Date()));
 		criteria.add(Restrictions.ge("endDate", new Date()));

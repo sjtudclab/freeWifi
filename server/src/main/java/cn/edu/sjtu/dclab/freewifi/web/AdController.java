@@ -62,6 +62,9 @@ public class AdController {
 			String age,//String-8岁以下，20-35，35-50，50以上、不限
 			String education,//String-高中以下、高中、大专、本科、研究生及以上、不限
 			String income,//String-3000元以下、3000-7000元、7000-10000元、10000元以上、不限
+			String engage,
+			String baby,
+			String job,
 			boolean isLaunch
 			) {
 		//System.out.println(startDate+"----"+endDate+"---"+startHour+"------"+endHour+"----"+name+"----"+sex+"----"+education+"----"+income+"----"+age);
@@ -75,7 +78,7 @@ public class AdController {
 			map.put(Constants.ERROR_MSG,"Login error.");
 			return map;
 		}
-		Orientation orientation = new Orientation(sex, age, education, income);
+		Orientation orientation = new Orientation(sex, age, education, income, engage, job, baby);
 		orientationService.addOrientation(orientation);
 		Date _startDate = DateUtils.parseDate(startDate, "yyyy-MM-dd");
 		Date _endDate = DateUtils.parseDate(endDate, "yyyy-MM-dd");

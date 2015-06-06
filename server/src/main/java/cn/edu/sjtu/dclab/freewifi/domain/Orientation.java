@@ -45,14 +45,7 @@ public class Orientation implements Serializable {
 	public Orientation() {
 		super();
 	}
-	public Orientation(String sex, String age, String education,
-			String income) {
-		super();
-		this.sex = sex;
-		this.age = age;
-		this.education = education;
-		this.income = income;
-	}
+	
 	public String getSex() {
 		return sex;
 	}
@@ -102,4 +95,18 @@ public class Orientation implements Serializable {
 	public void setBaby(String baby) {
 		this.baby = baby;
 	}
+
+	public Orientation(String sex, String age, String education, String income,
+			String engage, String job, String baby) {
+		super();
+		this.sex = sex;
+		this.age = age;
+		this.education = education;
+		this.income = income;
+		this.engage = engage;
+		this.job = job;
+		this.baby = baby;
+	}
+	
+	
 }
