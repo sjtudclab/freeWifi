@@ -84,7 +84,7 @@ public class Ad implements Serializable {
 	public void setOrientation(Orientation orientation) {
 		this.orientation = orientation;
 	}
-	@JsonIgnore
+	
 	public Merchant getMerchant() {
 		return merchant;
 	}
@@ -93,6 +93,7 @@ public class Ad implements Serializable {
 		this.merchant = merchant;
 	}
 
+	@JsonIgnore
 	public Date getAddDate() {
 		return addDate;
 	}

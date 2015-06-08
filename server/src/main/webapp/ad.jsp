@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap2.min.css'/>" />
     <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap-responsive.min.css'/>" />
     <link rel="stylesheet" href="<c:url value='/resources/css/unicorn.main.css'/>" />
-    <link rel="stylesheet" href="<c:url value='/resources/css/unicorn.grey.css'/>" class="skin-color" />
+<%--     <link rel="stylesheet" href="<c:url value='/resources/css/unicorn.grey.css'/>" class="skin-color" /> --%>
     <meta http-equiv="Content-Type" content="text/html;
 		                             charset=utf-8" />
     <link rel="apple-touch-icon" href="//mindmup.s3.amazonaws.com/lib/img/apple-touch-icon.png" />
@@ -37,7 +37,7 @@
       var id = getUrlParameter('id');
       $.ajax({
           method: "GET",
-          url: "ad/show",
+          url: "/freewifiserver/ad/show",
           data: {id: id}
       }).done(function(result) {
           if (result.code == 0) {

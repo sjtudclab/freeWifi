@@ -29,4 +29,13 @@ public enum Gender {
 		}
 		return ALL;
 	}
+	
+	public static String[] getTypes(){
+		Gender[] genderTypes = Gender.values();
+		String[] types = new String[genderTypes.length];
+		for (int i = 0; i < types.length; i++) {
+			types[i] = genderTypes[i].getName();
+		}
+		return types;
+	}
 }

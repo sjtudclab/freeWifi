@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
 import cn.edu.sjtu.dclab.freewifi.domain.WIFI;
+import cn.edu.sjtu.dclab.freewifi.enums.BusinessType;
 import cn.edu.sjtu.dclab.freewifi.service.IMerchantService;
 import cn.edu.sjtu.dclab.freewifi.service.IWIFIService;
 import cn.edu.sjtu.dclab.freewifi.util.Constants;
@@ -34,6 +35,12 @@ public class LoginController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/editor.html", method = RequestMethod.GET)
+	public ModelAndView addAdView() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("editor");
+		return mav;
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request,
@@ -63,9 +70,10 @@ public class LoginController {
 	public Map<String, Object> registerSubmit(String loginname, //登录名
 			String tel, String password, String name, //真实姓名
 			String address,	double longitude, //经度
-			double latitude, String ssid, String wifiPassword){
+			double latitude, String ssid, String wifiPassword,String business,String icon){
 		Map<String, Object> map = new HashMap<String, Object>();
-		Merchant merchant = new Merchant(loginname, password, name, address, tel);
+		Merchant merchant = new Merchant(loginname, password, name, 
+				address, tel,BusinessType.get(Integer.parseInt(business)),icon);
 		boolean result = merchantService.addMerchant(merchant);
 		if (result) {
 			WIFI wifi = new WIFI(ssid, wifiPassword, merchant, longitude, latitude);

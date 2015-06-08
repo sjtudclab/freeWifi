@@ -1,6 +1,7 @@
 package cn.edu.sjtu.dclab.freewifi.web;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,51 +22,60 @@ import cn.edu.sjtu.dclab.freewifi.util.Constants;
 @Controller
 @RequestMapping(value = "/ad/collect")
 public class AdCollectController {
-	
+
 	@Autowired
-    private IUserService userService;
-    @Autowired
-    private IAdService adService;
-    @Autowired
-    private IAdCollectService adCollectService;
-	
+	private IUserService userService;
+	@Autowired
+	private IAdService adService;
+	@Autowired
+	private IAdCollectService adCollectService;
+
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String, Object> collect(
-            @RequestParam(value = "device_id") String deviceId,
-            @RequestParam(value = "ad_id") Long adId) {
-    	User user = null;
-    	if (deviceId != null && !deviceId.equals("")) {
-    		user = userService.getUserByDeviceId(deviceId);
+	@ResponseBody
+	public Map<String, Object> collect(
+			@RequestParam(value = "device_id") String deviceId,
+			@RequestParam(value = "ad_id") Long adId) {
+		User user = null;
+		if (deviceId != null && !deviceId.equals("")) {
+			user = userService.getUserByDeviceId(deviceId);
 		}
-    	Ad ad = null;
-    	if (adId != null) {
-    		ad = adService.getAd(adId);
+		Ad ad = null;
+		if (adId != null) {
+			ad = adService.getAd(adId);
 		}
-    	boolean result = false;
-    	if (user != null && ad != null) {
-    		result = adCollectService.addAdCollect(user, ad);
+		boolean result = false;
+		if (user != null && ad != null) {
+			result = adCollectService.addAdCollect(user, ad);
 		}
-        Map<String, Object> map = new HashMap<String, Object>();
-        if (result) {
-            map.put(Constants.CODE, 0);
-        } else {
-            map.put(Constants.CODE, -1);
-        }
-        return map;
-    }
-	
-	
-	@RequestMapping(value = "/{device_id}", method = RequestMethod.GET)
-    @ResponseBody
-    public Map<String, Object> getAdCollects(@PathVariable(value="device_id") String device ) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        boolean result = true;
-        if (result) {
-            map.put(Constants.CODE, 0);
-        } else {
-            map.put(Constants.CODE, -1);
-        }
-        return map;
-    }
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (result) {
+			map.put(Constants.CODE, 0);
+		} else {
+			map.put(Constants.CODE, -1);
+		}
+		return map;
+	}
+
+	@RequestMapping(value = "/all/{device_id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAdCollects(
+			@PathVariable(value = "device_id") String deviceId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		User user = null;
+		if (deviceId != null && !deviceId.equals("")) {
+			user = userService.getUserByDeviceId(deviceId);
+		}
+		if (user != null) {
+			List<Ad> ads = adCollectService.getAdsByUser(user);
+			if (ads != null) {
+				map.put(Constants.CODE, 0);
+				map.put(Constants.DATA, ads);
+			} else {
+				map.put(Constants.CODE, -1);
+			}
+		} else {
+			map.put(Constants.CODE, -1);
+		}
+		return map;
+	}
 }

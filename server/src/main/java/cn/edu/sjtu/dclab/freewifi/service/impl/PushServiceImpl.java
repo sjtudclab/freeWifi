@@ -9,9 +9,14 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import cn.edu.sjtu.dclab.freewifi.domain.Ad;
 import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
 import cn.edu.sjtu.dclab.freewifi.domain.User;
 import cn.edu.sjtu.dclab.freewifi.service.IAdService;
+import cn.edu.sjtu.dclab.freewifi.service.IAdStatsService;
 import cn.edu.sjtu.dclab.freewifi.service.IPushService;
 import cn.jpush.api.JPushClient;
 import cn.jpush.api.common.APIConnectionException;
@@ -31,6 +36,8 @@ import cn.jpush.api.push.model.notification.Notification;
 public class PushServiceImpl implements IPushService {
 	@Autowired
 	private IAdService adService;
+	@Autowired
+	private IAdStatsService adStatsService;
 	// APPKEY and MASTERSECRET are copied from the app on Jpush.com
 	private final String APPKEY = "1c0bdf68225216fa3dee6be9";
 	private final String MASTERSECRET = "e3ba0726e6afb6752855c2ef";
@@ -39,28 +46,37 @@ public class PushServiceImpl implements IPushService {
 	@Override
 	@Async
 	public void pushNotificationAdByMerchantAndUser(Merchant merchant, User user) {
-		// List<Ad> adList = adService.getAdListByMerchantAndUser(merchant, user);
-
-		// TODO sth to do here
-		// if (0 == adList.size())
-		// return;
-		//
-		// Ad ad = adList.get(0);
-		// ��Щ�����ʱ���ڲ���
-		String alias = null;
-		String title = "Title";
-		String msg = "This a msg";
+		Ad ad = adService.getAdByMerchantAndUser(merchant, user);
+		if (ad == null) {
+			return ;
+		}
+		String alias = user.getDeviceId();
+		String title = ad.getMerchant().getName();
+		String msg = ad.getName();
 		String url = "URL";
-		String urlLink = "www.baidu.com";
+		String AD = "AD";
+		String urlLink = ""+ad.getId();
+		
 		Map<String, String> extra = new HashMap<String, String>();
 		extra.put(url, urlLink);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		
+		Merchant newMerchant = new Merchant(null, null, merchant.getName(), merchant.getAddress(), merchant.getTel()
+				, null, null);
+		newMerchant.setId(merchant.getId());
+		Ad one = new Ad(newMerchant, null, null, null, 
+				null, null, 0, ad.getName(), 0, 
+				null, null);
+		one.setId(ad.getId());
+		extra.put(AD, gson.toJson(one));
 		PushPayload payload = PushPayload.newBuilder()
 				.setPlatform(Platform.android())
-				// .setAudience(Audience.alias(alias))
+				.setAudience(Audience.alias(alias))
 				.setAudience(Audience.all())
 				// just for test
 				.setNotification(Notification.android(msg, title, extra))
 				.build();
+		adStatsService.addPush(user, ad);
 		JPushClient jpushClient = new JPushClient(MASTERSECRET, APPKEY, 3);
 		try {
 			PushResult result = jpushClient.sendPush(payload);

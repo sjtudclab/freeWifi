@@ -30,7 +30,7 @@ import cn.edu.sjtu.dclab.freewifi.util.Constants;
 import cn.edu.sjtu.dclab.freewifi.util.DateUtils;
 
 @Controller
-@RequestMapping(value = "user")
+@RequestMapping(value = "/user")
 public class UserController {
 
     @Autowired
@@ -48,20 +48,12 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> register(@RequestParam(value = "device_id") String deviceId,
-                                        @RequestParam(value = "tel") String tel,
-                                        @RequestParam(value = "education") int education,
-                                        @RequestParam(value = "gender") int gender,
-                                        @RequestParam(value = "password") String password,
-                                        @RequestParam(value = "birthdate") String birthdate,
-                                        @RequestParam(value = "income") int income,
-                                        @RequestParam(value = "engage") int engage,
-                                        @RequestParam(value = "baby") int baby,
-                                        @RequestParam(value = "job") int job
+    public Map<String, Object> register(String device_id,String tel,String education,String gender,String password,
+                                        String birthdate,String income,String engage,String baby, String job
                                         ) {
         Date date = DateUtils.parseDate(birthdate, "yyyy-MM-dd");
-        User user = new User(deviceId, Gender.get(gender), EngageState.get(engage), Job.get(job), 
-        		BabyState.get(baby), password, tel, date, Education.get(education), IncomeType.get(income), 0);
+        User user = new User(device_id, Gender.get(Integer.parseInt(gender)), EngageState.get(Integer.parseInt(engage)), Job.get(Integer.parseInt(job)), 
+        		BabyState.get(Integer.parseInt(baby)), password, tel, date, Education.get(Integer.parseInt(education)), IncomeType.get(Integer.parseInt(income)), 0);
         boolean result = userService.addUser(user);
         Map<String, Object> map = new HashMap<String, Object>();
         if (result) {
@@ -113,15 +105,23 @@ public class UserController {
     
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> loginFromMObile(
-            @RequestParam(value = "account") String account,
-            @RequestParam(value = "password") String password) {
+    public Map<String, Object> loginFromMobile(String account,String password) {
+    	System.out.println(account);
+    	System.out.println(password);
     	Map<String, Object> map = new HashMap<String, Object>();
         User user = userService.getUserByTel(account);
         if (user != null && user.getPassword().equals(password)) {
         	map.put(Constants.CODE, 0);
         	return map;
 		}
+        map.put(Constants.CODE, -1);
+        return map;
+    }
+    
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> test() {
+    	Map<String, Object> map = new HashMap<String, Object>();        
         map.put(Constants.CODE, -1);
         return map;
     }

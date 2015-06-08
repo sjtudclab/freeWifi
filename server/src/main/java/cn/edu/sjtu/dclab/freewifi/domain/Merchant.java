@@ -72,7 +72,7 @@ public class Merchant implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	@JsonIgnore
+	
 	public String getName() {
 		return name;
 	}

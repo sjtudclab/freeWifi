@@ -35,7 +35,7 @@
     <script src="<c:url value='/resources/js/bootstrap-wysiwyg.js'/>"></script>
 	
 </head>
-	<body>
+<body>
 
 
 		<div id="header">
@@ -55,10 +55,10 @@
 			<ul>
 				<li ><a href="index.html"><i class="icon
 				icon-home"></i> <span>Home Page</span></a></li>
-				<li class="active"><a href="index.html"><i class="icon
+				<li class="active"><a href="editor.html"><i class="icon
 				icon-edit"></i> <span>Edit</span></a></li>
 				<li>
-					<a href="widgets.html"><i class="icon icon-dashboard"></i> <span>Manage</span></a>
+					<a href="manage.html"><i class="icon icon-dashboard"></i> <span>Manage</span></a>
 				</li>
 			</ul>
 
@@ -215,12 +215,14 @@
               <option value="0">Male</option>
               <option value="1">Female</option>
             </select>
+
             <select id="age" multiple="multiple">
               <option value="0" >< 8</option>
               <option value="1">20-35</option>
               <option value="2">35-50</option>
               <option value="3">> 50</option>
             </select>
+
             <select id="edu" multiple="multiple">
               <option value="0" > < High School</option>
               <option value="1">High School</option>
@@ -228,11 +230,32 @@
               <option value="3">Bachelor</option>
               <option value="4"> > master</option>
             </select>
+
             <select id="income" multiple="multiple">
               <option value="0" >< 3000</option>
               <option value="1">3000-7000</option>
               <option value="2">7000-10000</option>
               <option value="3">> 10000</option>
+            </select>
+            <br>
+
+            <select id="marry" multiple="multiple">
+              <option value="0" >Married</option>
+              <option value="1">Single</option>
+            </select>
+            <select id="child" multiple="multiple">
+              <option value="0" >None</option>
+              <option value="1">Pregnancy</option>
+              <option value="2">0-3</option>
+              <option value="3">3-6</option>
+            </select>
+            <select id="career" multiple="multiple">
+              <option value="0" >Student</option>
+              <option value="1">Industry</option>
+              <option value="2">Service</option>
+              <option value="3">IT</option>
+              <option value="4">Education</option>
+              <option value="5">SMES</option>
             </select>
 
           </div>

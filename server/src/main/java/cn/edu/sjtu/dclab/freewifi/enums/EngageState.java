@@ -24,4 +24,13 @@ public enum EngageState {
 		}
 		return SINGLE;
 	}
+	
+	public static String[] getTypes(){
+		EngageState[] engageTypes = EngageState.values();
+		String[] types = new String[engageTypes.length];
+		for (int i = 0; i < types.length; i++) {
+			types[i] = engageTypes[i].getName();
+		}
+		return types;
+	}
 }

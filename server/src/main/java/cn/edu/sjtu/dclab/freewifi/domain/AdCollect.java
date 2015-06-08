@@ -80,4 +80,7 @@ public class AdCollect implements Serializable {
 		this.addDate = addDate;
 	}
 
+	public AdCollect() {
+		super();
+	}
 }

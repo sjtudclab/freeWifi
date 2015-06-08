@@ -36,4 +36,12 @@ public enum Job {
 		}
 		return STUDENT;
 	}
+	public static String[] getTypes(){
+		Job[] jobTypes = Job.values();
+		String[] types = new String[jobTypes.length];
+		for (int i = 0; i < types.length; i++) {
+			types[i] = jobTypes[i].getName();
+		}
+		return types;
+	}
 }

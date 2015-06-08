@@ -14,19 +14,23 @@
             Get Started with Desk.com | Desk.com
         </title>
 
-        <script src="./resources/js/jquery.min.js"
-        type="text/javascript">
-        </script>
+
         <!-- Bootstrap core -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
-        <link rel="stylesheet" href="./resources/css/font-awesome.css">
+        <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>">
+        <script src="<c:url value='/resources/js/jquery.min.js'/>"
+        type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/bootstrap.min.js'/>" type="text/javascript"></script>
+        <link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css'/>">
+        <link rel="stylesheet" href="<c:url value='/resources/css/register.css'/>">
         <!-- modernizer -->
-        <script type="text/javascript" src="./resources/js/modernizr.custom.32032.js">
+        <script type="text/javascript" src="<c:url value='/resources/js/modernizr.custom.32032.js'/>">
         </script>
         <!-- typekit -->
-        <script type="text/javascript" src="./resources/js/jgm1qhs.js">
-        </script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jgm1qhs.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/bootstrap-multiselect.js'/>"></script>
+        <link href="<c:url value='/resources/css/bootstrap-multiselect.css'/>" rel="stylesheet">
+        <script src="<c:url value='/resources/js/register.js'/>"></script>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media
         queries -->
         <!--[if lt IE 9]>
@@ -80,9 +84,9 @@
         <div id="stage" class="">
             <header pardot-region="header-image">
                 <div class="col-md-6 col-md-offset-5">
-                    <a href="http://www.desk.com/" title="Learn More About Customer Service from Desk.com"
+                    <a href="index.html" title="Learn More About freewifi.com"
                     id="logo">
-                        <img src="http://storage.pardot.com/26172/46474/Desk_logo_85H_sfdc_Desk_Current_logo_KO_rgb_1.0.png"
+                        <img src="<c:url value='/resources/img/Desk_logo_85H_sfdc_Desk_Current_logo_KO_rgb_1.0.png'/>"
                         alt="Customer Service from Desk.com">
                     </a>
                 </div>
@@ -232,6 +236,29 @@
                                     placeholder="Name"
                                     data-placement="top" data-title="Enter your phone number." data-error-title="">
                                 </div>
+                                <div class="form-group">
+                                    <label for="user_site_attributes_contact_phone" class="placeholder">
+                                      Name
+                                    </label>
+                                    <select id="industry" multiple="multiple">
+                                      <option value="0">Household Electrical</option>
+                                      <option value="1">IT</option>
+                                      <option value="2">Daily Commodies</option>
+                                      <option value="3">Recreation</option>
+                                      <option value="4">Gift Accessories</option>
+                                      <option value="5">Restaurant</option>
+                                      <option value="6">Clothing and Shoes</option>
+                                    </select>
+                                </div>
+                                <div class="form-group input-group">
+                                  <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">
+                                      Browse… <input type="file" id="imgInp" placeholder="Image">
+                                    </span>
+                                  </span>
+                                  <img id="blah" src="#" alt="your image" />
+                                </div>
+
                                 <div >
                                     <label for="user_site_attributes_contact_phone" class="placeholder">
                                       Location
@@ -280,10 +307,7 @@
         <!-- #regform -->
         <!-- #all -->
         <!-- JS -->
-        <script src="./resources/js/bootstrap.min.js"
-        type="text/javascript">
-        </script>
-        <script src="./resources/js/register.js"></script>
+
 
     </body>
 

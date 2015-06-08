@@ -28,4 +28,13 @@ public enum BabyState {
 		}
 		return NO;
 	}
+	
+	public static String[] getTypes(){
+		BabyState[] babyStates = BabyState.values();
+		String[] types = new String[babyStates.length];
+		for (int i = 0; i < types.length; i++) {
+			types[i] = babyStates[i].getName();
+		}
+		return types;
+	}
 }

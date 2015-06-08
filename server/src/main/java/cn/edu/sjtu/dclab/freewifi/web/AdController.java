@@ -62,9 +62,9 @@ public class AdController {
 			String age,//String-8岁以下，20-35，35-50，50以上、不限
 			String education,//String-高中以下、高中、大专、本科、研究生及以上、不限
 			String income,//String-3000元以下、3000-7000元、7000-10000元、10000元以上、不限
-			String engage,
-			String baby,
-			String job,
+			String marry,
+			String child,
+			String career,
 			boolean isLaunch
 			) {
 		//System.out.println(startDate+"----"+endDate+"---"+startHour+"------"+endHour+"----"+name+"----"+sex+"----"+education+"----"+income+"----"+age);
@@ -78,7 +78,7 @@ public class AdController {
 			map.put(Constants.ERROR_MSG,"Login error.");
 			return map;
 		}
-		Orientation orientation = new Orientation(sex, age, education, income, engage, job, baby);
+		Orientation orientation = new Orientation(sex, age, education, income, marry, career, child);
 		orientationService.addOrientation(orientation);
 		Date _startDate = DateUtils.parseDate(startDate, "yyyy-MM-dd");
 		Date _endDate = DateUtils.parseDate(endDate, "yyyy-MM-dd");
@@ -124,9 +124,9 @@ public class AdController {
 		
 	}
 	
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> deleteAd(@RequestParam(value = "ad_id", required = true) long adId) {
+	public Map<String, Object> deleteAd(@RequestParam(value = "id", required = true) long adId) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Ad ad = adService.getAd(adId);
 		if (ad != null) {
@@ -144,7 +144,7 @@ public class AdController {
 
 	@RequestMapping(value = "/publish", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> publishAd(@RequestParam(value = "ad_id", required = true) long adId) {
+	public Map<String, Object> publishAd(@RequestParam(value = "id", required = true) long adId) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Ad ad = adService.getAd(adId);
 		if (ad != null) {
@@ -162,7 +162,7 @@ public class AdController {
 	
 	@RequestMapping(value = "/unpublish", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> unpublishAd(@RequestParam(value = "ad_id", required = true) long adId) {
+	public Map<String, Object> unpublishAd(@RequestParam(value = "id", required = true) long adId) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Ad ad = adService.getAd(adId);
 		if (ad != null) {
@@ -226,9 +226,9 @@ public class AdController {
 	
 	@RequestMapping(value = "/mobile", method = RequestMethod.GET)
 	public ModelAndView showAdForMobile(@RequestParam(value = "id",required = true) long id, 
-			@RequestParam(value = "tel",required = false) String tel) {
-		if (tel != null && !tel.equals("")) {
-			User user = userService.getUserByTel(tel);
+			@RequestParam(value = "device_id",required = false) String deviceId) {
+		if (deviceId != null && !deviceId.equals("")) {
+			User user = userService.getUserByDeviceId(deviceId);
 			user.setScore(user.getScore()+1);
 			userService.updateUser(user);
 		}

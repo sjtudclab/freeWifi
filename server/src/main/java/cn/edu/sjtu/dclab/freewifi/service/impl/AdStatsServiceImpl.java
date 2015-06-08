@@ -1,5 +1,7 @@
 package cn.edu.sjtu.dclab.freewifi.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -10,13 +12,6 @@ import cn.edu.sjtu.dclab.freewifi.domain.Ad;
 import cn.edu.sjtu.dclab.freewifi.domain.AdStats;
 import cn.edu.sjtu.dclab.freewifi.domain.User;
 import cn.edu.sjtu.dclab.freewifi.enums.AgeType;
-import cn.edu.sjtu.dclab.freewifi.enums.BabyState;
-import cn.edu.sjtu.dclab.freewifi.enums.BusinessType;
-import cn.edu.sjtu.dclab.freewifi.enums.Education;
-import cn.edu.sjtu.dclab.freewifi.enums.EngageState;
-import cn.edu.sjtu.dclab.freewifi.enums.Gender;
-import cn.edu.sjtu.dclab.freewifi.enums.IncomeType;
-import cn.edu.sjtu.dclab.freewifi.enums.Job;
 import cn.edu.sjtu.dclab.freewifi.service.IAdStatsService;
 @Service("adStatsService")
 @Transactional
@@ -27,51 +22,90 @@ public class AdStatsServiceImpl implements IAdStatsService {
 	
 	@Override
 	public boolean addClick(User user, Ad ad) {
-		Gender sex = user.getSex();
-		AgeType age = AgeType.getByBirthDate(user.getBirthdate());
-		IncomeType income = user.getIncome();
-		Education education = user.getEducation();
-		BusinessType business = ad.getMerchant().getBusiness();
-		EngageState engage = user.getEngage();
-		Job job = user.getJob();
-		BabyState baby = user.getBaby();
+		String[] types = new String[7];
 		
-		
-		AdStats adStats = dao.getAdStats(sex, education, income, age, business, engage, job, baby, ad);
-		if(adStats == null){
-			adStats = new AdStats(ad, sex, income, education, age, business, engage, job, baby);
-			adStats.setClick(1);
-			dao.addAdStats(adStats);
-		}else {
-			adStats.setClick(adStats.getClick()+1);
-			dao.updateAdStats(adStats);
+		types[0] = user.getSex().getName();
+		types[1] = AgeType.getByBirthDate(user.getBirthdate()).getName();
+		types[2] = user.getIncome().getName();
+		types[3] = user.getEducation().getName();
+		types[4] = user.getEngage().getName();
+		types[5] = user.getJob().getName();
+		types[6] = user.getBaby().getName();
+		for (int i =0;i< types.length;i++) {
+			List<AdStats> result = dao.getAdStats(ad, new String[]{types[i]});
+			AdStats one = result != null ? result.get(0): null;
+			if(one == null){
+				one = new AdStats(ad,types[i]);
+				one.setClick(1);
+				dao.addAdStats(one);
+			}else {
+				one.setClick(one.getClick()+1);
+				dao.updateAdStats(one);
+			}
 		}
 		return true;
 	}
 	
 	@Override
 	public boolean addImpression(User user, Ad ad) {
-		Gender sex = user.getSex();
-		AgeType age = AgeType.getByBirthDate(user.getBirthdate());
-		IncomeType income = user.getIncome();
-		Education education = user.getEducation();
-		BusinessType business = ad.getMerchant().getBusiness();
-		EngageState engage = user.getEngage();
-		Job job = user.getJob();
-		BabyState baby = user.getBaby();
+		String[] types = new String[7];
 		
-		AdStats adStats = dao.getAdStats(sex, education, income, age, business, engage, job, baby, ad);
-		if(adStats == null){
-			adStats = new AdStats(ad, sex, income, education, age, business, engage, job, baby);
-			adStats.setImpression(1);
-			dao.addAdStats(adStats);
-		}else {
-			adStats.setImpression(adStats.getImpression()+1);
-			dao.updateAdStats(adStats);
+		types[0] = user.getSex().getName();
+		types[1] = AgeType.getByBirthDate(user.getBirthdate()).getName();
+		types[2] = user.getIncome().getName();
+		types[3] = user.getEducation().getName();
+		types[4] = user.getEngage().getName();
+		types[5] = user.getJob().getName();
+		types[6] = user.getBaby().getName();
+		for (int i =0;i< types.length;i++) {
+			List<AdStats> result = dao.getAdStats(ad, new String[]{types[i]});
+			AdStats one = (result != null)&&(result.size()>0) ? result.get(0): null;
+			if(one == null){
+				one = new AdStats(ad,types[i]);
+				one.setImpression(1);
+				dao.addAdStats(one);
+			}else {
+				one.setImpression(one.getImpression()+1);
+				dao.updateAdStats(one);
+			}
 		}
 		return true;
 	}
-	
-	
 
+	@Override
+	public boolean addPush(User user, Ad ad) {
+		String[] types = new String[7];
+		
+		types[0] = user.getSex().getName();
+		types[1] = AgeType.getByBirthDate(user.getBirthdate()).getName();
+		types[2] = user.getIncome().getName();
+		types[3] = user.getEducation().getName();
+		types[4] = user.getEngage().getName();
+		types[5] = user.getJob().getName();
+		types[6] = user.getBaby().getName();
+		for (int i =0;i< types.length;i++) {
+			List<AdStats> result = dao.getAdStats(ad, new String[]{types[i]});
+			AdStats one = result != null ? result.get(0): null;
+			if(one == null){
+				one = new AdStats(ad,types[i]);
+				one.setPush(1);
+				dao.addAdStats(one);
+			}else {
+				one.setPush(one.getPush()+1);
+				dao.updateAdStats(one);
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public List<AdStats> getAdStatsByAd(Ad ad) {
+		return dao.getAdStats(ad);
+	}
+
+	@Override
+	public List<AdStats> getAdStatsByAd(Ad ad, String[] types) {
+		return dao.getAdStats(ad, types);
+	}
+	
 }

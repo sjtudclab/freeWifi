@@ -32,5 +32,12 @@ public enum IncomeType {
 		return ALL;
 	}
 	
-	
+	public static String[] getTypes(){
+		IncomeType[] incomeTypes = IncomeType.values();
+		String[] types = new String[incomeTypes.length];
+		for (int i = 0; i < types.length; i++) {
+			types[i] = incomeTypes[i].getName();
+		}
+		return types;
+	}
 }

@@ -19,6 +19,7 @@ public class Orientation implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
 	@Column(nullable = true)
 	private String sex;
 	// 18岁以下，20-35，35-50，50以上

@@ -32,4 +32,13 @@ public enum Education {
 			}
 			return ALL;
 		}
+		
+		public static String[] getTypes(){
+			Education[] eTypes = Education.values();
+			String[] types = new String[eTypes.length];
+			for (int i = 0; i < types.length; i++) {
+				types[i] = eTypes[i].getName();
+			}
+			return types;
+		}
 }

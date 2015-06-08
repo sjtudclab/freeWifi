@@ -3,5 +3,9 @@ span.btn-group {
 }
 
 .modal-body {
-    height: 200px;
+    height: 350px;
+}
+
+div.btn-group {
+    margin-top: 10px;
 }

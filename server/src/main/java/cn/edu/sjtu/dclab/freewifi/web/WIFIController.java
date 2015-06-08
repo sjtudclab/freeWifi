@@ -16,7 +16,7 @@ import cn.edu.sjtu.dclab.freewifi.service.IWIFIService;
 import cn.edu.sjtu.dclab.freewifi.util.Constants;
 
 @Controller
-@RequestMapping(value = "wifi")
+@RequestMapping(value = "/wifi")
 public class WIFIController {
 	@Autowired
 	private IWIFIService wifiService;

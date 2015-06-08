@@ -1,5 +1,6 @@
 package cn.edu.sjtu.dclab.freewifi.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.edu.sjtu.dclab.freewifi.dao.IAdCollectDao;
 import cn.edu.sjtu.dclab.freewifi.domain.Ad;
 import cn.edu.sjtu.dclab.freewifi.domain.AdCollect;
+import cn.edu.sjtu.dclab.freewifi.domain.Merchant;
 import cn.edu.sjtu.dclab.freewifi.domain.User;
 import cn.edu.sjtu.dclab.freewifi.service.IAdCollectService;
 @Service("adCollectService")
@@ -27,8 +29,23 @@ public class AdCollectServiceImpl implements IAdCollectService{
 	}
 
 	@Override
-	public List<AdCollect> getAdCollectsByUser(User user) {
-		return adDao.getAdCollectsByUser(user);
+	public List<Ad> getAdsByUser(User user) {
+		List<AdCollect> res = adDao.getAdCollectsByUser(user);
+		List<Ad> resAds = new ArrayList<Ad>();
+		if (res!= null) {
+			for (AdCollect adCollect : res) {
+				Ad ad = adCollect.getAd();
+				
+				Merchant merchant = new Merchant(null, null, ad.getMerchant().getName(), ad.getMerchant().getAddress(), 
+						ad.getMerchant().getTel(), null, null);
+				merchant.setId(ad.getMerchant().getId());
+				Ad one = new Ad(merchant, null, null, null, null, 
+						null, 0, ad.getName(), 0, null, null);
+				one.setId(ad.getId());
+				resAds.add(one);
+			}
+		}
+		return resAds;
 	}
 
 }

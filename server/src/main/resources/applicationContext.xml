@@ -51,7 +51,7 @@
 	<!-- <beans profile="bluemix">
 		Data Source Bean -->
 
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		  destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
 		<property name="jdbcUrl"
@@ -63,23 +63,23 @@
 		<property name="minPoolSize" value="1"></property>
 		<property name="initialPoolSize" value="1"></property>
 		<property name="maxIdleTime" value="60"></property>
-	</bean>	
+	</bean>	 -->
 	<!-- </beans>
 	<beans profile="default"> 
-		Data Source Bean
+		Data Source Bean-->
 		<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 			destroy-method="close">
 			<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
 			<property name="jdbcUrl"
-				value="jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/ad_dc1fe24d47e6f81?useUnicode=true&amp;characterEncoding=utf-8">
+				value="jdbc:mysql://localhost:3306/freewifi?useUnicode=true&amp;characterEncoding=utf-8">
 			</property>
-			<property name="user" value="b48bddf66d38f5"></property>
-			<property name="password" value="eed36b7c"></property>
+			<property name="user" value="root"></property>
+			<property name="password" value="root"></property>
 			<property name="maxPoolSize" value="20"></property>
 			<property name="minPoolSize" value="1"></property>
 			<property name="initialPoolSize" value="1"></property>
 			<property name="maxIdleTime" value="60"></property>
-		</bean> -->
+		</bean> 
 	<!-- </beans> -->
 	<!-- <beans profile="cloud">
 		Data Source Bean

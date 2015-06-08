@@ -39,4 +39,13 @@ public enum AgeType {
 		return getByAge(age);
 	}
 
+	
+	public static String[] getTypes(){
+		AgeType[] ageTypes = AgeType.values();
+		String[] types = new String[ageTypes.length];
+		for (int i = 0; i < types.length; i++) {
+			types[i] = ageTypes[i].getName();
+		}
+		return types;
+	}
 }
