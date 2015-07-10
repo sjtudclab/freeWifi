@@ -153,7 +153,7 @@ public class SampleListFragment extends ScrollTabHolderFragment implements OnScr
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             if(mPosition == 0){
-                WIFI wifi = wifiList.get(i);
+                WIFI wifi = wifiList.get(i-1);
                 LatLng start = new LatLng(lat,lon);
                 LatLng latLng = new LatLng(wifi.getLatitude(),wifi.getLongitude());
                 BDMapFragment.naviByBDMap(start,latLng,getActivity());

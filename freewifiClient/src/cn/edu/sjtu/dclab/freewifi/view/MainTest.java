@@ -110,7 +110,7 @@ public class MainTest extends ActionBarActivity implements ScrollTabHolder, View
 
 
         mPagerSlidingTabStrip.setOnPageChangeListener(this);
-        mSpannableString = new SpannableString(getString(R.string.actionbar_title));
+        mSpannableString = new SpannableString(getResources().getString(R.string.app_name));
         mAlphaForegroundColorSpan = new AlphaForegroundColorSpan(0xffffffff);
 
         ViewHelper.setAlpha(getActionBarIconView(), 0f);
@@ -161,7 +161,7 @@ public class MainTest extends ActionBarActivity implements ScrollTabHolder, View
                 String deviceId = SharedDataTool.GetIMEI(MainTest.this);
 
                 String device_Id = deviceId;
-                String wifi_Id = "19";
+                String wifi_Id = "21";
                 setAlias(device_Id);
 
                 UserService userService = new UserService(MainTest.this,getResources().getString(R.string.server)+"/user/notification");

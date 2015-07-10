@@ -8,6 +8,11 @@
       <root url="jar://$PROJECT_DIR$/freewifiClient/libs/galaxy_mini.jar!/" />
       <root url="jar://$PROJECT_DIR$/freewifiClient/libs/jpush-sdk-release1.7.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/freewifiClient/libs/libammsdk.jar!/" />
+      <root url="jar://$PROJECT_DIR$/freewifiClient/libs/android-support-v7-appcompat.jar!/" />
+      <root url="jar://$PROJECT_DIR$/freewifiClient/libs/android-support-v7-gridlayout.jar!/" />
+      <root url="jar://$PROJECT_DIR$/freewifiClient/libs/android-support-v7-mediarouter.jar!/" />
+      <root url="jar://$PROJECT_DIR$/freewifiClient/libs/nineoldandroids-2.4.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/freewifiClient/libs/gson-2.2.4.jar!/" />
     </CLASSES>
     <JAVADOC />
     <NATIVE>
